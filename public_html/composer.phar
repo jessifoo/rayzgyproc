@@ -1,0 +1,11 @@
+{
+    "name": "jessifoo/rayzgyproc",
+    "description": "Your project description",
+    "require": {},
+    "require-dev": {
+        "psalm/plugin-security": "^0.7"
+    },
+    "scripts": {
+        "security-scan": "psalm --plugin=psalm/plugin-security"
+    }
+}
