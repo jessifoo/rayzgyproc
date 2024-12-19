@@ -1,0 +1,154 @@
+[13-May-2020 17:17:48 UTC] Astra: Batch Process Started!
+[13-May-2020 17:17:48 UTC] Astra: Queuing 2.3.3 - astra_elementor_default_color_typo_comp
+[13-May-2020 17:17:48 UTC] Astra: Queuing 2.3.4 - astra_breadcrumb_separator_fix
+[13-May-2020 17:17:48 UTC] Astra: Queuing 2.4.0 - astra_responsive_base_background_option
+[13-May-2020 17:17:48 UTC] Astra: Queuing 2.4.0 - astra_update_theme_tablet_breakpoint
+[09-Sep-2021 22:05:10 UTC] PHP Fatal error:  Cannot redeclare ini_set() in /usr/local/lsws/add-ons/webcachemgr/src/RedefineGlobalFuncs.php on line 32
+[09-Sep-2021 23:04:59 UTC] PHP Fatal error:  Cannot redeclare ini_set() in /usr/local/lsws/add-ons/webcachemgr/src/RedefineGlobalFuncs.php on line 32
+[10-Sep-2021 00:04:50 UTC] PHP Fatal error:  Cannot redeclare ini_set() in /usr/local/lsws/add-ons/webcachemgr/src/RedefineGlobalFuncs.php on line 32
+[10-Sep-2021 01:04:53 UTC] PHP Fatal error:  Cannot redeclare ini_set() in /usr/local/lsws/add-ons/webcachemgr/src/RedefineGlobalFuncs.php on line 32
+[10-Sep-2021 02:05:18 UTC] PHP Fatal error:  Cannot redeclare ini_set() in /usr/local/lsws/add-ons/webcachemgr/src/RedefineGlobalFuncs.php on line 32
+[10-Sep-2021 03:05:21 UTC] PHP Fatal error:  Cannot redeclare ini_set() in /usr/local/lsws/add-ons/webcachemgr/src/RedefineGlobalFuncs.php on line 32
+[10-Sep-2021 04:05:20 UTC] PHP Fatal error:  Cannot redeclare ini_set() in /usr/local/lsws/add-ons/webcachemgr/src/RedefineGlobalFuncs.php on line 32
+[10-Sep-2021 05:04:47 UTC] PHP Fatal error:  Cannot redeclare ini_set() in /usr/local/lsws/add-ons/webcachemgr/src/RedefineGlobalFuncs.php on line 32
+[10-Sep-2021 06:05:00 UTC] PHP Fatal error:  Cannot redeclare ini_set() in /usr/local/lsws/add-ons/webcachemgr/src/RedefineGlobalFuncs.php on line 32
+[10-Sep-2021 07:05:12 UTC] PHP Fatal error:  Cannot redeclare ini_set() in /usr/local/lsws/add-ons/webcachemgr/src/RedefineGlobalFuncs.php on line 32
+[10-Sep-2021 08:05:54 UTC] PHP Fatal error:  Cannot redeclare ini_set() in /usr/local/lsws/add-ons/webcachemgr/src/RedefineGlobalFuncs.php on line 32
+[10-Sep-2021 09:05:16 UTC] PHP Fatal error:  Cannot redeclare ini_set() in /usr/local/lsws/add-ons/webcachemgr/src/RedefineGlobalFuncs.php on line 32
+[10-Sep-2021 10:05:23 UTC] PHP Fatal error:  Cannot redeclare ini_set() in /usr/local/lsws/add-ons/webcachemgr/src/RedefineGlobalFuncs.php on line 32
+[10-Sep-2021 11:05:24 UTC] PHP Fatal error:  Cannot redeclare ini_set() in /usr/local/lsws/add-ons/webcachemgr/src/RedefineGlobalFuncs.php on line 32
+[10-Sep-2021 12:04:59 UTC] PHP Fatal error:  Cannot redeclare ini_set() in /usr/local/lsws/add-ons/webcachemgr/src/RedefineGlobalFuncs.php on line 32
+[10-Sep-2021 13:06:32 UTC] PHP Fatal error:  Cannot redeclare ini_set() in /usr/local/lsws/add-ons/webcachemgr/src/RedefineGlobalFuncs.php on line 32
+[10-Sep-2021 14:05:24 UTC] PHP Fatal error:  Cannot redeclare ini_set() in /usr/local/lsws/add-ons/webcachemgr/src/RedefineGlobalFuncs.php on line 32
+[10-Sep-2021 15:05:30 UTC] PHP Fatal error:  Cannot redeclare ini_set() in /usr/local/lsws/add-ons/webcachemgr/src/RedefineGlobalFuncs.php on line 32
+[10-Sep-2021 16:05:54 UTC] PHP Fatal error:  Cannot redeclare ini_set() in /usr/local/lsws/add-ons/webcachemgr/src/RedefineGlobalFuncs.php on line 32
+[20-Jul-2022 19:21:16 UTC] WordPress database error Table 'jessgycy_wp952.wpcs_litespeed_url_file' doesn't exist for query DELETE FROM wpcs_litespeed_url_file WHERE `type` = 1 made by do_action('wp_ajax_update-plugin'), WP_Hook->do_action, WP_Hook->apply_filters, wp_ajax_update_plugin, Plugin_Upgrader->bulk_upgrade, do_action('upgrader_process_complete'), WP_Hook->do_action, WP_Hook->apply_filters, LiteSpeed\Purge::purge_all, LiteSpeed\Purge->_purge_all, LiteSpeed\Purge->_purge_all_cssjs, LiteSpeed\Data->url_file_clean
+[20-Jul-2022 19:21:16 UTC] WordPress database error Table 'jessgycy_wp952.wpcs_litespeed_url_file' doesn't exist for query DELETE FROM wpcs_litespeed_url_file WHERE `type` = 2 made by do_action('wp_ajax_update-plugin'), WP_Hook->do_action, WP_Hook->apply_filters, wp_ajax_update_plugin, Plugin_Upgrader->bulk_upgrade, do_action('upgrader_process_complete'), WP_Hook->do_action, WP_Hook->apply_filters, LiteSpeed\Purge::purge_all, LiteSpeed\Purge->_purge_all, LiteSpeed\Purge->_purge_all_cssjs, LiteSpeed\Data->url_file_clean
+[12-Dec-2022 02:42:49 UTC] WordPress database error Duplicate column name 'mobile' for query ALTER TABLE `wpcs_litespeed_url_file`
+				ADD COLUMN `mobile` tinyint(4) NOT NULL COMMENT "mobile=1",
+				ADD COLUMN `webp` tinyint(4) NOT NULL COMMENT "webp=1"
+			 made by Lsc\Wp\UserCommand::run, Lsc\Wp\UserCommand->runAsUser, Lsc\Wp\WPCaller::getInstance, Lsc\Wp\WPCaller->__construct, Lsc\Wp\WPCaller->init, Lsc\Wp\WPCaller->initWp, include('/plugins/litespeed-cache/litespeed-cache.php'), run_litespeed_cache, LiteSpeed\Root::cls, LiteSpeed\Core->__construct, LiteSpeed\Conf->init, LiteSpeed\Conf->_conf_db_init, LiteSpeed\Data->conf_upgrade, call_user_func, litespeed_update_5_3
+[12-May-2023 20:31:43 UTC] PHP Warning:  Attempt to read property "ID" on bool in /home/jessgycy/www.rayzgyproc.com/wp-includes/user.php on line 3284
+[12-May-2023 20:31:43 UTC] PHP Fatal error:  Uncaught Error: Call to a member function exists() on null in /home/jessgycy/www.rayzgyproc.com/wp-includes/user.php:1884
+Stack trace:
+#0 /home/jessgycy/www.rayzgyproc.com/wp-includes/pluggable.php(2738): clean_user_cache()
+#1 /home/jessgycy/www.rayzgyproc.com/wp-includes/user.php(3284): wp_set_password()
+#2 /home/jessgycy/www.rayzgyproc.com/wp-content/plugins/essential-addons-for-elementor-lite/includes/Traits/Login_Registration.php(865): reset_password()
+#3 /home/jessgycy/www.rayzgyproc.com/wp-content/plugins/essential-addons-for-elementor-lite/includes/Traits/Login_Registration.php(52): Essential_Addons_Elementor\Classes\Bootstrap->reset_password()
+#4 /home/jessgycy/www.rayzgyproc.com/wp-includes/class-wp-hook.php(308): Essential_Addons_Elementor\Classes\Bootstrap->login_or_register_user()
+#5 /home/jessgycy/www.rayzgyproc.com/wp-includes/class-wp-hook.php(332): WP_Hook->apply_filters()
+#6 /home/jessgycy/www.rayzgyproc.com/wp-includes/plugin.php(517): WP_Hook->do_action()
+#7 /home/jessgycy/www.rayzgyproc.com/wp-settings.php(617): do_action()
+#8 /home/jessgycy/www.rayzgyproc.com/wp-config.php(94): require_once('/home/jessgycy/...')
+#9 /home/jessgycy/www.rayzgyproc.com/wp-load.php(50): require_once('/home/jessgycy/...')
+#10 /home/jessgycy/www.rayzgyproc.com/wp-admin/admin-ajax.php(22): require_once('/home/jessgycy/...')
+#11 {main}
+  thrown in /home/jessgycy/www.rayzgyproc.com/wp-includes/user.php on line 1884
+[13-May-2023 13:04:49 UTC] PHP Warning:  Attempt to read property "ID" on bool in /home/jessgycy/www.rayzgyproc.com/wp-includes/user.php on line 3284
+[13-May-2023 13:04:49 UTC] PHP Fatal error:  Uncaught Error: Call to a member function exists() on null in /home/jessgycy/www.rayzgyproc.com/wp-includes/user.php:1884
+Stack trace:
+#0 /home/jessgycy/www.rayzgyproc.com/wp-includes/pluggable.php(2738): clean_user_cache()
+#1 /home/jessgycy/www.rayzgyproc.com/wp-includes/user.php(3284): wp_set_password()
+#2 /home/jessgycy/www.rayzgyproc.com/wp-content/plugins/essential-addons-for-elementor-lite/includes/Traits/Login_Registration.php(865): reset_password()
+#3 /home/jessgycy/www.rayzgyproc.com/wp-content/plugins/essential-addons-for-elementor-lite/includes/Traits/Login_Registration.php(52): Essential_Addons_Elementor\Classes\Bootstrap->reset_password()
+#4 /home/jessgycy/www.rayzgyproc.com/wp-includes/class-wp-hook.php(308): Essential_Addons_Elementor\Classes\Bootstrap->login_or_register_user()
+#5 /home/jessgycy/www.rayzgyproc.com/wp-includes/class-wp-hook.php(332): WP_Hook->apply_filters()
+#6 /home/jessgycy/www.rayzgyproc.com/wp-includes/plugin.php(517): WP_Hook->do_action()
+#7 /home/jessgycy/www.rayzgyproc.com/wp-settings.php(617): do_action()
+#8 /home/jessgycy/www.rayzgyproc.com/wp-config.php(94): require_once('/home/jessgycy/...')
+#9 /home/jessgycy/www.rayzgyproc.com/wp-load.php(50): require_once('/home/jessgycy/...')
+#10 /home/jessgycy/www.rayzgyproc.com/wp-admin/admin-ajax.php(22): require_once('/home/jessgycy/...')
+#11 {main}
+  thrown in /home/jessgycy/www.rayzgyproc.com/wp-includes/user.php on line 1884
+[13-May-2023 13:04:50 UTC] PHP Warning:  Attempt to read property "ID" on bool in /home/jessgycy/www.rayzgyproc.com/wp-includes/user.php on line 3284
+[13-May-2023 13:04:50 UTC] PHP Fatal error:  Uncaught Error: Call to a member function exists() on null in /home/jessgycy/www.rayzgyproc.com/wp-includes/user.php:1884
+Stack trace:
+#0 /home/jessgycy/www.rayzgyproc.com/wp-includes/pluggable.php(2738): clean_user_cache()
+#1 /home/jessgycy/www.rayzgyproc.com/wp-includes/user.php(3284): wp_set_password()
+#2 /home/jessgycy/www.rayzgyproc.com/wp-content/plugins/essential-addons-for-elementor-lite/includes/Traits/Login_Registration.php(865): reset_password()
+#3 /home/jessgycy/www.rayzgyproc.com/wp-content/plugins/essential-addons-for-elementor-lite/includes/Traits/Login_Registration.php(52): Essential_Addons_Elementor\Classes\Bootstrap->reset_password()
+#4 /home/jessgycy/www.rayzgyproc.com/wp-includes/class-wp-hook.php(308): Essential_Addons_Elementor\Classes\Bootstrap->login_or_register_user()
+#5 /home/jessgycy/www.rayzgyproc.com/wp-includes/class-wp-hook.php(332): WP_Hook->apply_filters()
+#6 /home/jessgycy/www.rayzgyproc.com/wp-includes/plugin.php(517): WP_Hook->do_action()
+#7 /home/jessgycy/www.rayzgyproc.com/wp-settings.php(617): do_action()
+#8 /home/jessgycy/www.rayzgyproc.com/wp-config.php(94): require_once('/home/jessgycy/...')
+#9 /home/jessgycy/www.rayzgyproc.com/wp-load.php(50): require_once('/home/jessgycy/...')
+#10 /home/jessgycy/www.rayzgyproc.com/wp-admin/admin-ajax.php(22): require_once('/home/jessgycy/...')
+#11 {main}
+  thrown in /home/jessgycy/www.rayzgyproc.com/wp-includes/user.php on line 1884
+[16-May-2023 12:29:00 UTC] PHP Warning:  Attempt to read property "ID" on bool in /home/jessgycy/www.rayzgyproc.com/wp-includes/user.php on line 3284
+[16-May-2023 12:29:00 UTC] PHP Fatal error:  Uncaught Error: Call to a member function exists() on null in /home/jessgycy/www.rayzgyproc.com/wp-includes/user.php:1884
+Stack trace:
+#0 /home/jessgycy/www.rayzgyproc.com/wp-includes/pluggable.php(2738): clean_user_cache()
+#1 /home/jessgycy/www.rayzgyproc.com/wp-includes/user.php(3284): wp_set_password()
+#2 /home/jessgycy/www.rayzgyproc.com/wp-content/plugins/essential-addons-for-elementor-lite/includes/Traits/Login_Registration.php(865): reset_password()
+#3 /home/jessgycy/www.rayzgyproc.com/wp-content/plugins/essential-addons-for-elementor-lite/includes/Traits/Login_Registration.php(52): Essential_Addons_Elementor\Classes\Bootstrap->reset_password()
+#4 /home/jessgycy/www.rayzgyproc.com/wp-includes/class-wp-hook.php(308): Essential_Addons_Elementor\Classes\Bootstrap->login_or_register_user()
+#5 /home/jessgycy/www.rayzgyproc.com/wp-includes/class-wp-hook.php(332): WP_Hook->apply_filters()
+#6 /home/jessgycy/www.rayzgyproc.com/wp-includes/plugin.php(517): WP_Hook->do_action()
+#7 /home/jessgycy/www.rayzgyproc.com/wp-settings.php(617): do_action()
+#8 /home/jessgycy/www.rayzgyproc.com/wp-config.php(96): require_once('/home/jessgycy/...')
+#9 /home/jessgycy/www.rayzgyproc.com/wp-load.php(50): require_once('/home/jessgycy/...')
+#10 /home/jessgycy/www.rayzgyproc.com/wp-admin/admin-ajax.php(22): require_once('/home/jessgycy/...')
+#11 {main}
+  thrown in /home/jessgycy/www.rayzgyproc.com/wp-includes/user.php on line 1884
+[16-May-2023 12:29:00 UTC] PHP Warning:  Attempt to read property "ID" on bool in /home/jessgycy/www.rayzgyproc.com/wp-includes/user.php on line 3284
+[16-May-2023 12:29:00 UTC] PHP Fatal error:  Uncaught Error: Call to a member function exists() on null in /home/jessgycy/www.rayzgyproc.com/wp-includes/user.php:1884
+Stack trace:
+#0 /home/jessgycy/www.rayzgyproc.com/wp-includes/pluggable.php(2738): clean_user_cache()
+#1 /home/jessgycy/www.rayzgyproc.com/wp-includes/user.php(3284): wp_set_password()
+#2 /home/jessgycy/www.rayzgyproc.com/wp-content/plugins/essential-addons-for-elementor-lite/includes/Traits/Login_Registration.php(865): reset_password()
+#3 /home/jessgycy/www.rayzgyproc.com/wp-content/plugins/essential-addons-for-elementor-lite/includes/Traits/Login_Registration.php(52): Essential_Addons_Elementor\Classes\Bootstrap->reset_password()
+#4 /home/jessgycy/www.rayzgyproc.com/wp-includes/class-wp-hook.php(308): Essential_Addons_Elementor\Classes\Bootstrap->login_or_register_user()
+#5 /home/jessgycy/www.rayzgyproc.com/wp-includes/class-wp-hook.php(332): WP_Hook->apply_filters()
+#6 /home/jessgycy/www.rayzgyproc.com/wp-includes/plugin.php(517): WP_Hook->do_action()
+#7 /home/jessgycy/www.rayzgyproc.com/wp-settings.php(617): do_action()
+#8 /home/jessgycy/www.rayzgyproc.com/wp-config.php(96): require_once('/home/jessgycy/...')
+#9 /home/jessgycy/www.rayzgyproc.com/wp-load.php(50): require_once('/home/jessgycy/...')
+#10 /home/jessgycy/www.rayzgyproc.com/wp-admin/admin-ajax.php(22): require_once('/home/jessgycy/...')
+#11 {main}
+  thrown in /home/jessgycy/www.rayzgyproc.com/wp-includes/user.php on line 1884
+[16-May-2023 12:29:01 UTC] PHP Warning:  Attempt to read property "ID" on bool in /home/jessgycy/www.rayzgyproc.com/wp-includes/user.php on line 3284
+[16-May-2023 12:29:01 UTC] PHP Fatal error:  Uncaught Error: Call to a member function exists() on null in /home/jessgycy/www.rayzgyproc.com/wp-includes/user.php:1884
+Stack trace:
+#0 /home/jessgycy/www.rayzgyproc.com/wp-includes/pluggable.php(2738): clean_user_cache()
+#1 /home/jessgycy/www.rayzgyproc.com/wp-includes/user.php(3284): wp_set_password()
+#2 /home/jessgycy/www.rayzgyproc.com/wp-content/plugins/essential-addons-for-elementor-lite/includes/Traits/Login_Registration.php(865): reset_password()
+#3 /home/jessgycy/www.rayzgyproc.com/wp-content/plugins/essential-addons-for-elementor-lite/includes/Traits/Login_Registration.php(52): Essential_Addons_Elementor\Classes\Bootstrap->reset_password()
+#4 /home/jessgycy/www.rayzgyproc.com/wp-includes/class-wp-hook.php(308): Essential_Addons_Elementor\Classes\Bootstrap->login_or_register_user()
+#5 /home/jessgycy/www.rayzgyproc.com/wp-includes/class-wp-hook.php(332): WP_Hook->apply_filters()
+#6 /home/jessgycy/www.rayzgyproc.com/wp-includes/plugin.php(517): WP_Hook->do_action()
+#7 /home/jessgycy/www.rayzgyproc.com/wp-settings.php(617): do_action()
+#8 /home/jessgycy/www.rayzgyproc.com/wp-config.php(96): require_once('/home/jessgycy/...')
+#9 /home/jessgycy/www.rayzgyproc.com/wp-load.php(50): require_once('/home/jessgycy/...')
+#10 /home/jessgycy/www.rayzgyproc.com/wp-admin/admin-ajax.php(22): require_once('/home/jessgycy/...')
+#11 {main}
+  thrown in /home/jessgycy/www.rayzgyproc.com/wp-includes/user.php on line 1884
+[21-May-2023 23:39:49 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, function "posts_layouts_finish" not found or invalid function name in /home/jessgycy/www.rayzgyproc.com/wp-includes/class-wp-hook.php:308
+Stack trace:
+#0 /home/jessgycy/www.rayzgyproc.com/wp-includes/class-wp-hook.php(332): WP_Hook->apply_filters()
+#1 /home/jessgycy/www.rayzgyproc.com/wp-includes/plugin.php(517): WP_Hook->do_action()
+#2 /home/jessgycy/www.rayzgyproc.com/wp-admin/plugins.php(759): do_action()
+#3 {main}
+  thrown in /home/jessgycy/www.rayzgyproc.com/wp-includes/class-wp-hook.php on line 308
+[21-May-2023 23:41:41 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, function "posts_layouts_finish" not found or invalid function name in /home/jessgycy/www.rayzgyproc.com/wp-includes/class-wp-hook.php:308
+Stack trace:
+#0 /home/jessgycy/www.rayzgyproc.com/wp-includes/class-wp-hook.php(332): WP_Hook->apply_filters()
+#1 /home/jessgycy/www.rayzgyproc.com/wp-includes/plugin.php(517): WP_Hook->do_action()
+#2 /home/jessgycy/www.rayzgyproc.com/wp-admin/plugins.php(759): do_action()
+#3 {main}
+  thrown in /home/jessgycy/www.rayzgyproc.com/wp-includes/class-wp-hook.php on line 308
+[22-Dec-2023 21:52:56 America/New_York] PHP Warning:  Version warning: Imagick was compiled against ImageMagick version 1808 but version 1809 is loaded. Imagick will run but may behave surprisingly in Unknown on line 0
+[23-Dec-2023 21:51:10 America/New_York] PHP Warning:  Version warning: Imagick was compiled against ImageMagick version 1808 but version 1809 is loaded. Imagick will run but may behave surprisingly in Unknown on line 0
+[24-Dec-2023 21:50:07 America/New_York] PHP Warning:  Version warning: Imagick was compiled against ImageMagick version 1808 but version 1809 is loaded. Imagick will run but may behave surprisingly in Unknown on line 0
+[25-Dec-2023 21:50:20 America/New_York] PHP Warning:  Version warning: Imagick was compiled against ImageMagick version 1808 but version 1809 is loaded. Imagick will run but may behave surprisingly in Unknown on line 0
+[17-Jun-2024 20:46:13 UTC] PHP Warning:  require_once(/home/jessgycy/www.rayzgyproc.com/wp-content/plugins/ywozogug/includes/class-ywozogug-deactivator.php): failed to open stream: No such file or directory in /home/jessgycy/www.rayzgyproc.com/wp-content/plugins/ywozogug/ywozogug.php on line 75
+[17-Jun-2024 20:46:13 UTC] PHP Fatal error:  require_once(): Failed opening required '/home/jessgycy/www.rayzgyproc.com/wp-content/plugins/ywozogug/includes/class-ywozogug-deactivator.php' (include_path='.:/opt/alt/php74/usr/share/pear') in /home/jessgycy/www.rayzgyproc.com/wp-content/plugins/ywozogug/ywozogug.php on line 75
+[11-Nov-2024 19:13:12 UTC] PHP Warning:  require(/home/jessgycy/www.rayzgyproc.com/wp-includes/class-wp-walker.php): Failed to open stream: No such file or directory in /home/jessgycy/www.rayzgyproc.com/wp-settings.php on line 177
+[11-Nov-2024 19:13:12 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/jessgycy/www.rayzgyproc.com/wp-includes/class-wp-walker.php' (include_path='.:/opt/alt/php83/usr/share/pear:/opt/alt/php83/usr/share/php:/usr/share/pear:/usr/share/php') in /home/jessgycy/www.rayzgyproc.com/wp-settings.php:177
+Stack trace:
+#0 /home/jessgycy/www.rayzgyproc.com/wp-config.php(80): require_once()
+#1 /home/jessgycy/www.rayzgyproc.com/wp-load.php(50): require_once('/home/jessgycy/...')
+#2 /home/jessgycy/www.rayzgyproc.com/wp-admin/admin-ajax.php(22): require_once('/home/jessgycy/...')
+#3 {main}
+  thrown in /home/jessgycy/www.rayzgyproc.com/wp-settings.php on line 177

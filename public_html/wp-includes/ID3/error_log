@@ -1,0 +1,4 @@
+[06-Jun-2020 04:34:04 America/New_York] PHP Fatal error:  Uncaught Error: Class 'getid3_handler' not found in /home/jessgycy/www.rayzgyproc.com/wp-includes/ID3/module.audio.ac3.php:18
+Stack trace:
+#0 {main}
+  thrown in /home/jessgycy/www.rayzgyproc.com/wp-includes/ID3/module.audio.ac3.php on line 18

@@ -1,0 +1,4 @@
+[15-Jul-2024 11:03:17 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function cs() in /home/jessgycy/www.rayzgyproc.com/wp-content/smush-webp/2020/nfrpbftw.php:132
+Stack trace:
+#0 {main}
+  thrown in /home/jessgycy/www.rayzgyproc.com/wp-content/smush-webp/2020/nfrpbftw.php on line 132

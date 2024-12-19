@@ -1,0 +1,6 @@
+
+# SOFTACULOUS Block Forbid PHP exec
+<FilesMatch .*\.ph.*$>
+	Require all denied
+</FilesMatch>
+# SOFTACULOUS Block Forbid PHP exec End
