@@ -1,0 +1,44 @@
+# WordPress - Ignore core files but track custom content
+/*
+
+!.gitignore
+!.dcignore
+
+# macOS files - ignore in all directories
+.DS_Store
+**/.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Track configuration and custom files
+!/wp-config.php
+!/wp-config-sample.php
+!/composer.json
+!/composer.lock
+!/sonar-project.properties
+!/.htaccess
+
+# Track all custom Python scripts
+!/*.py
+
+# Track custom content
+!/wp-content/
+
+# Ignore everything in wp-content except specific directories
+/wp-content/*
+!/wp-content/plugins/
+!/wp-content/uploads/
+!/wp-content/mu-plugins/
+
+# Ignore all plugins except our security hardening plugin
+/wp-content/plugins/*
+!/wp-content/plugins/wp-security-hardening/
+
+# Development directories
+/vendor/
+/node_modules/
+.idea/
+.vscode/
+.scannerwork/
+.sonarlint/
