@@ -3,8 +3,8 @@ import hashlib
 from collections import defaultdict
 
 def get_file_hash(filepath):
-    """Calculate MD5 hash of file contents."""
-    hasher = hashlib.md5()
+    """Calculate SHA-256 hash of file contents."""
+    hasher = hashlib.sha256()
     with open(filepath, 'rb') as f:
         buf = f.read(65536)  # Read in 64kb chunks
         while len(buf) > 0:

@@ -4,8 +4,8 @@ from collections import defaultdict
 import re
 
 def get_file_hash(filepath):
-    """Calculate MD5 hash of file contents."""
-    hasher = hashlib.md5()
+    """Calculate SHA-256 hash of file contents."""
+    hasher = hashlib.sha256()
     with open(filepath, 'rb') as f:
         buf = f.read(65536)
         while len(buf) > 0:

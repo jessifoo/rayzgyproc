@@ -1,44 +1,90 @@
-# WordPress - Ignore core files but track custom content
-/*
+# WordPress Core
+wp-admin/
+wp-includes/
 
-!.gitignore
-!.dcignore
+# WordPress Core Files
+wp-activate.php
+wp-blog-header.php
+wp-comments-post.php
+wp-config-sample.php
+wp-cron.php
+wp-links-opml.php
+wp-load.php
+wp-login.php
+wp-mail.php
+wp-settings.php
+wp-signup.php
+wp-trackback.php
+xmlrpc.php
 
-# macOS files - ignore in all directories
+# WordPress Content - Track only custom plugins and themes
+wp-content/*
+!wp-content/plugins/
+!wp-content/themes/
+
+# Track our custom security plugin
+!wp-content/plugins/wp-security-hardening/
+
+# WordPress Generated Files
+*.log
+.htaccess
+sitemap.xml
+sitemap.xml.gz
+
+# WordPress Uploads
+wp-content/uploads/
+wp-content/upgrade/
+wp-content/backup-db/
+wp-content/backups/
+wp-content/cache/
+wp-content/advanced-cache.php
+wp-content/object-cache.php
+wp-content/wp-cache-config.php
+wp-content/db.php
+
+# IDE and Editor Files
+.idea/
+.vscode/
+*.swp
+*.swo
+*.swn
+*.bak
+*.orig
+*~
+
+# macOS files
 .DS_Store
-**/.DS_Store
 .AppleDouble
 .LSOverride
 ._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
 
-# Track configuration and custom files
-!/wp-config.php
-!/wp-config-sample.php
-!/composer.json
-!/composer.lock
-!/sonar-project.properties
-!/.htaccess
+# Node modules and build files
+node_modules/
+dist/
+build/
+*.min.css
+*.min.js
 
-# Track all custom Python scripts
-!/*.py
+# Environment files
+.env
+.env.*
+!.env.example
 
-# Track custom content
-!/wp-content/
+# Composer
+vendor/
+composer.phar
 
-# Ignore everything in wp-content except specific directories
-/wp-content/*
-!/wp-content/plugins/
-!/wp-content/uploads/
-!/wp-content/mu-plugins/
+# Testing
+phpunit.xml
+.phpunit.result.cache
+coverage/
 
-# Ignore all plugins except our security hardening plugin
-/wp-content/plugins/*
-!/wp-content/plugins/wp-security-hardening/
-
-# Development directories
-/vendor/
-/node_modules/
-.idea/
-.vscode/
-.scannerwork/
-.sonarlint/
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.swp

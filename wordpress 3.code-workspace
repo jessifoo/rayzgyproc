@@ -1,0 +1,124 @@
+{
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    "git.terminalGitEditor": true,
+    "terminal.integrated.useWslProfiles": false,
+    "terminal.integrated.cwd": "/Users/jessicajohnson/Downloads/wordpress 3",
+    "terminal.integrated.defaultProfile.osx": "zsh (2)",
+    "terminal.integrated.env.osx": {
+      "TERM": "xterm-256color"
+    },
+    "terminal.integrated.suggest.enabled": true,
+    "[php]": {
+      "editor.defaultFormatter": "DEVSENSE.phptools-vscode"
+    },
+    "intelephense.enable": false,
+    "phpResolver.problems.exclude": {
+      "vendor/": true
+    },
+    "phpResolver.executablePath": "/opt/homebrew/bin/php",
+    "phpResolver.phpVersion": "8.1",
+    "phpResolver.problems.scope": "project",
+    "phpResolver.format.enable": true,
+    "phpResolver.suggest.basic": true,
+    "phpResolver.phpcs": {
+      "enable": true,
+      "standard": "WordPress",
+      "reportWidth": 120,
+      "showSources": true,
+      "encoding": "UTF-8",
+      "severity": 5,
+      "errorSeverity": 5,
+      "warningSeverity": 5,
+      "tabWidth": 4,
+      "autoloadPaths": [
+        "/Users/jessicajohnson/Downloads/wordpress 3/vendor/autoload.php"
+      ],
+      "additionalArguments": [
+        "--runtime-set",
+        "installed_paths",
+        "/Users/jessicajohnson/Downloads/wordpress 3/vendor/wp-coding-standards/wpcs,/Users/jessicajohnson/Downloads/wordpress 3/vendor/phpcsstandards/phpcsutils,/Users/jessicajohnson/Downloads/wordpress 3/vendor/phpcsstandards/phpcsextra"
+      ]
+    },
+    "phpResolver.phpFixerRules": {
+      "@PSR2": false,
+      "@Symfony": false,
+      "@WordPress": true,
+      "array_indentation": true,
+      "array_syntax": {
+        "syntax": "long"
+      },
+      "binary_operator_spaces": {
+        "operators": {
+          "=>": "single_space",
+          "=": "single_space"
+        }
+      },
+      "blank_line_after_namespace": true,
+      "blank_line_after_opening_tag": true,
+      "braces": {
+        "allow_single_line_closure": false,
+        "position_after_functions_and_oop_constructs": "same"
+      },
+      "cast_spaces": {
+        "space": "single"
+      },
+      "concat_space": {
+        "spacing": "one"
+      },
+      "declare_equal_normalize": {
+        "space": "single"
+      },
+      "elseif": true,
+      "encoding": true,
+      "full_opening_tag": true,
+      "function_declaration": {
+        "closure_function_spacing": "one"
+      },
+      "function_typehint_space": true,
+      "include": true,
+      "increment_style": {
+        "style": "post"
+      },
+      "line_ending": true,
+      "linebreak_after_opening_tag": true,
+      "lowercase_keywords": true,
+      "method_argument_space": {
+        "on_multiline": "ensure_fully_multiline"
+      },
+      "no_break_comment": true,
+      "no_closing_tag": true,
+      "no_spaces_after_function_name": true,
+      "no_spaces_inside_parenthesis": true,
+      "no_trailing_whitespace": true,
+      "no_trailing_whitespace_in_comment": true,
+      "single_blank_line_at_eof": true,
+      "single_class_element_per_statement": {
+        "elements": ["property"]
+      },
+      "single_import_per_statement": true,
+      "single_line_after_imports": true,
+      "switch_case_semicolon_to_colon": true,
+      "switch_case_space": true,
+      "visibility_required": true,
+      "constant_case": {
+        "case": "lower"
+      },
+      "lowercase_static_reference": true,
+      "magic_constant_casing": true,
+      "magic_method_casing": true,
+      "native_function_casing": true,
+      "native_function_type_declaration_casing": true,
+      "no_blank_lines_after_class_opening": true,
+      "no_leading_namespace_whitespace": true,
+      "no_whitespace_in_blank_line": true,
+      "ordered_imports": {
+        "sort_algorithm": "alpha"
+      }
+    }
+  }
+}

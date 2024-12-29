@@ -1,392 +1,263 @@
 <?php
-if (!defined('ABSPATH')) {
-    die('Direct access not permitted.');
+if ( ! defined( 'ABSPATH' ) ) {
+	die( 'Direct access not permitted.' );
 }
 
 class WP_Security_Plugin_Repair {
-    private $quarantine;
-    private $repair_log_option = 'wp_security_plugin_repairs';
-    private $last_check_option = 'wp_security_plugin_last_check';
-    private $plugin_hashes = array();
+	private $quarantine;
+	private $logger;
+	private $last_check_option = 'wp_security_plugin_last_check';
 
-    public function __construct() {
-        require_once dirname(__FILE__) . '/class-quarantine-manager.php';
-        $this->quarantine = new WP_Security_Quarantine_Manager();
-        
-        // Change to daily schedule and coordinate across sites
-        add_action('wp_security_check_plugins', array($this, 'check_and_repair_plugins'));
-        if (!wp_next_scheduled('wp_security_check_plugins')) {
-            // Get network status to stagger checks
-            $network = WP_Security_Site_Network::get_instance();
-            $status = $network->get_network_status();
-            
-            // Calculate offset based on site position (0-23 hours)
-            // Add 12 hours offset from core checks
-            $offset = 12;
-            if (!empty($status['sites'])) {
-                $site_index = array_search(home_url(), array_column($status['sites'], 'url'));
-                $total_sites = count($status['sites']);
-                $offset += ($site_index !== false) ? floor(24 / $total_sites) * $site_index : 0;
-            }
-            
-            wp_schedule_event(strtotime('today') + ($offset * HOUR_IN_SECONDS), 'daily', 'wp_security_check_plugins');
-        }
-    }
+	public function __construct() {
+		require_once __DIR__ . '/class-quarantine-manager.php';
+		require_once __DIR__ . '/class-logger.php';
 
-    public function check_and_repair_plugins() {
-        global $wp_security_rate_limiter;
-        
-        // Check if we have API calls available
-        if (!$wp_security_rate_limiter->can_call('wordpress_api', 'daily')) {
-            error_log('WordPress API rate limit reached, skipping plugin check');
-            return;
-        }
+		$this->quarantine = new WP_Security_Quarantine_Manager();
+		$this->logger     = new WP_Security_Logger();
 
-        // Skip if checked recently (within last day)
-        $last_check = get_option($this->last_check_option, 0);
-        if ((time() - $last_check) < DAY_IN_SECONDS) {
-            return;
-        }
+		// Check plugins every 6 hours
+		add_action( 'wp_security_plugin_check', array( $this, 'check_plugins' ) );
+		if ( ! wp_next_scheduled( 'wp_security_plugin_check' ) ) {
+			wp_schedule_event( time(), 'sixhours', 'wp_security_plugin_check' );
+		}
+	}
 
-        $repairs = array();
-        $plugins = get_plugins();
+	public function check_plugins() {
+		// Skip if checked recently
+		$last_check = get_option( $this->last_check_option, 0 );
+		if ( ( time() - $last_check ) < HOUR_IN_SECONDS ) {
+			return;
+		}
 
-        // Sort plugins by priority
-        $priority_plugins = $this->get_priority_plugins();
-        $other_plugins = array_diff_key($plugins, array_flip($priority_plugins));
-        
-        // First check priority plugins
-        foreach ($priority_plugins as $plugin_file) {
-            if (isset($plugins[$plugin_file]) && $this->is_wordpress_plugin($plugin_file)) {
-                $this->check_plugin_files($plugin_file, $plugins[$plugin_file], $repairs);
-            }
-        }
+		if ( ! function_exists( 'get_plugins' ) ) {
+			require_once ABSPATH . 'wp-admin/includes/plugin.php';
+		}
 
-        // Then check other plugins
-        foreach ($other_plugins as $plugin_file => $plugin_data) {
-            if ($this->is_wordpress_plugin($plugin_file)) {
-                $this->check_plugin_files($plugin_file, $plugin_data, $repairs);
-            }
-        }
+		$plugins = get_plugins();
+		foreach ( $plugins as $plugin_file => $plugin_data ) {
+			$this->check_plugin( $plugin_file, $plugin_data );
+		}
 
-        // Log repairs
-        if (!empty($repairs)) {
-            $this->log_repairs($repairs);
-            $this->notify_admin($repairs);
-        }
+		update_option( $this->last_check_option, time() );
+	}
 
-        update_option($this->last_check_option, time());
-    }
+	public function check_plugin( $plugin_file, $plugin_data ) {
+		$plugin_path = WP_PLUGIN_DIR . '/' . dirname( $plugin_file );
 
-    private function get_priority_plugins() {
-        return array(
-            'wordfence/wordfence.php',
-            'better-wp-security/better-wp-security.php',
-            'sucuri-scanner/sucuri.php',
-            'wp-security-hardening/wp-security-hardening.php',
-            'all-in-one-wp-security-and-firewall/wp-security.php',
-            'jetpack/jetpack.php',
-            'woocommerce/woocommerce.php'
-        );
-    }
+		// Skip if plugin doesn't exist
+		if ( ! is_dir( $plugin_path ) ) {
+			return;
+		}
 
-    private function check_plugin_files($plugin_file, $plugin_data, &$repairs) {
-        global $wp_security_rate_limiter;
-        
-        // Check API rate limit for each plugin
-        if (!$wp_security_rate_limiter->can_call('wordpress_api', 'daily')) {
-            return;
-        }
-        
-        $plugin_dir = WP_PLUGIN_DIR . '/' . dirname($plugin_file);
-        $plugin_files = $this->get_plugin_files($plugin_dir);
+		// Get plugin info from WordPress.org
+		$plugin_info = $this->get_plugin_info( dirname( $plugin_file ) );
+		if ( ! $plugin_info ) {
+			return;
+		}
 
-        // Record API call
-        $wp_security_rate_limiter->record_call('wordpress_api', 'daily');
+		// Check for updates
+		if ( version_compare( $plugin_data['Version'], $plugin_info['version'], '<' ) ) {
+			$this->update_plugin( $plugin_file, $plugin_info );
+		}
 
-        // Get plugin checksums from WordPress.org
-        $checksums = $this->get_plugin_checksums($plugin_file, $plugin_data['Version']);
-        if (empty($checksums)) {
-            return;
-        }
+		// Check file integrity
+		$this->verify_plugin_files( $plugin_file, $plugin_data );
+	}
 
-        // First check main plugin file
-        $main_file = WP_PLUGIN_DIR . '/' . $plugin_file;
-        if (file_exists($main_file)) {
-            $this->verify_and_repair_file($plugin_file, $main_file, $checksums, $repairs);
-        }
+	private function get_plugin_info( $slug ) {
+		if ( empty( $slug ) ) {
+			return false;
+		}
 
-        // Then check other files
-        foreach ($plugin_files as $file) {
-            $relative_path = str_replace($plugin_dir . '/', '', $file);
-            if (isset($checksums[$relative_path])) {
-                $this->verify_and_repair_file($plugin_file, $file, $checksums, $repairs);
-            }
-        }
-    }
+		$url      = "https://api.wordpress.org/plugins/info/1.0/{$slug}.json";
+		$response = wp_remote_get( $url );
 
-    private function verify_and_repair_file($plugin_file, $file_path, $checksums, &$repairs) {
-        $relative_path = basename(dirname($plugin_file)) . '/' . str_replace(
-            WP_PLUGIN_DIR . '/' . dirname($plugin_file) . '/',
-            '',
-            $file_path
-        );
+		if ( is_wp_error( $response ) ) {
+			return false;
+		}
 
-        // Skip if file isn't in checksums
-        if (!isset($checksums[$relative_path])) {
-            return;
-        }
+		return json_decode( wp_remote_retrieve_body( $response ), true );
+	}
 
-        // Quick hash check
-        $current_checksum = md5_file($file_path);
-        if ($current_checksum === $checksums[$relative_path]) {
-            return;
-        }
+	private function update_plugin( $plugin_file, $plugin_info ) {
+		require_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
+		require_once ABSPATH . 'wp-admin/includes/class-automatic-upgrader-skin.php';
 
-        // Deep verification before repair
-        if ($this->needs_repair($file_path, $current_checksum, $checksums[$relative_path])) {
-            $this->repair_plugin_file($plugin_file, $file_path, $repairs);
-        }
-    }
+		// Backup current version
+		$this->backup_plugin( $plugin_file );
 
-    private function needs_repair($file_path, $current_checksum, $expected_checksum) {
-        // Check file permissions
-        $perms = fileperms($file_path) & 0777;
-        if ($perms !== 0644 && $perms !== 0640) {
-            return true;
-        }
+		// Update plugin
+		$upgrader = new Plugin_Upgrader( new Automatic_Upgrader_Skin() );
+		$result   = $upgrader->upgrade( $plugin_file );
 
-        // Check file owner (if possible)
-        if (function_exists('posix_getpwuid')) {
-            $owner = posix_getpwuid(fileowner($file_path));
-            $process = posix_getpwuid(posix_geteuid());
-            if ($owner['name'] !== $process['name']) {
-                return true;
-            }
-        }
+		if ( ! is_wp_error( $result ) ) {
+			$this->logger->log( 'plugin_update', "Updated plugin: {$plugin_file}" );
+			return true;
+		}
 
-        // Check for suspicious content
-        $content = file_get_contents($file_path);
-        if ($this->has_suspicious_content($content)) {
-            return true;
-        }
+		$this->logger->log( 'plugin_update', "Failed to update plugin: {$plugin_file}", 'error' );
+		return false;
+	}
 
-        // Verify file integrity
-        return $current_checksum !== $expected_checksum;
-    }
+	private function verify_plugin_files( $plugin_file, $plugin_data ) {
+		$plugin_path  = WP_PLUGIN_DIR . '/' . dirname( $plugin_file );
+		$plugin_files = $this->get_plugin_files( $plugin_path );
 
-    private function has_suspicious_content($content) {
-        $suspicious_patterns = array(
-            'base64_decode\s*\(',
-            'eval\s*\(',
-            'gzinflate\s*\(',
-            'str_rot13\s*\(',
-            '\\\\x[0-9A-Fa-f]{2}',
-            'preg_replace\s*\(\s*[\'"]/.+/e[\'"]',
-            'assert\s*\(',
-            'file_put_contents\s*\(',
-            'move_uploaded_file\s*\(',
-            'system\s*\(',
-            'exec\s*\(',
-            'passthru\s*\(',
-            'shell_exec\s*\(',
-            'create_function\s*\('
-        );
+		foreach ( $plugin_files as $file ) {
+			if ( $this->is_suspicious_file( $file ) ) {
+				$this->quarantine->quarantine_file( $file );
+				unlink( $file );
+				$this->logger->log( 'plugin_security', "Removed suspicious file: {$file}" );
+				continue;
+			}
 
-        foreach ($suspicious_patterns as $pattern) {
-            if (preg_match('/' . $pattern . '/i', $content)) {
-                return true;
-            }
-        }
+			if ( $this->contains_malicious_code( $file ) ) {
+				$this->quarantine->quarantine_file( $file );
+				$this->restore_plugin_file( $plugin_file, $file );
+				$this->logger->log( 'plugin_security', "Restored compromised file: {$file}" );
+			}
+		}
+	}
 
-        // Check for hidden PHP code in non-PHP files
-        if (!preg_match('/\.php$/i', basename($file_path))) {
-            if (strpos($content, '<?php') !== false || strpos($content, '<?=') !== false) {
-                return true;
-            }
-        }
+	private function backup_plugin( $plugin_file ) {
+		$backup_dir = WP_CONTENT_DIR . '/security-backups/plugins/' . dirname( $plugin_file ) . '/' . date( 'Y-m-d-H-i-s' );
+		wp_mkdir_p( $backup_dir );
 
-        return false;
-    }
+		$plugin_dir = WP_PLUGIN_DIR . '/' . dirname( $plugin_file );
+		$this->recursive_copy( $plugin_dir, $backup_dir );
+	}
 
-    private function is_wordpress_plugin($plugin_file) {
-        if (!function_exists('plugins_api')) {
-            require_once ABSPATH . 'wp-admin/includes/plugin-install.php';
-        }
+	private function recursive_copy( $src, $dst ) {
+		$dir = opendir( $src );
+		wp_mkdir_p( $dst );
 
-        $slug = dirname($plugin_file);
-        if ($slug === '.') {
-            return false;
-        }
+		while ( ( $file = readdir( $dir ) ) !== false ) {
+			if ( $file != '.' && $file != '..' ) {
+				if ( is_dir( $src . '/' . $file ) ) {
+					$this->recursive_copy( $src . '/' . $file, $dst . '/' . $file );
+				} else {
+					copy( $src . '/' . $file, $dst . '/' . $file );
+				}
+			}
+		}
 
-        $api = plugins_api('plugin_information', array('slug' => $slug));
-        return !is_wp_error($api);
-    }
+		closedir( $dir );
+	}
 
-    private function get_plugin_files($plugin_dir) {
-        $files = array();
-        $iterator = new RecursiveIteratorIterator(
-            new RecursiveDirectoryIterator($plugin_dir, RecursiveDirectoryIterator::SKIP_DOTS)
-        );
+	private function get_plugin_files( $plugin_dir ) {
+		$files    = array();
+		$iterator = new RecursiveIteratorIterator(
+			new RecursiveDirectoryIterator( $plugin_dir )
+		);
 
-        foreach ($iterator as $file) {
-            if ($file->isFile()) {
-                $files[] = $file->getPathname();
-            }
-        }
+		foreach ( $iterator as $file ) {
+			if ( $file->isFile() ) {
+				$files[] = $file->getPathname();
+			}
+		}
 
-        return $files;
-    }
+		return $files;
+	}
 
-    private function get_plugin_checksums($plugin_file, $version) {
-        $slug = dirname($plugin_file);
-        
-        // Return cached checksums if available
-        if (isset($this->plugin_hashes[$slug])) {
-            return $this->plugin_hashes[$slug];
-        }
+	private function is_suspicious_file( $file ) {
+		$suspicious_patterns = array(
+			'/^[a-f0-9]{8,}\.php$/i',  // Random named PHP files
+			'/\.(suspected|quarantine|infected)$/i',  // Known bad extensions
+			'/^(?:info|cache|temp|tmp|bak)\.php$/i',  // Common malware names
+		);
 
-        // Get checksums from WordPress.org
-        $url = sprintf(
-            'https://downloads.wordpress.org/plugin-checksums/%s/%s.json',
-            $slug,
-            $version
-        );
+		$filename = basename( $file );
+		foreach ( $suspicious_patterns as $pattern ) {
+			if ( preg_match( $pattern, $filename ) ) {
+				return true;
+			}
+		}
 
-        $response = wp_remote_get($url);
-        if (is_wp_error($response)) {
-            return array();
-        }
+		return false;
+	}
 
-        $body = wp_remote_retrieve_body($response);
-        $data = json_decode($body, true);
+	private function contains_malicious_code( $file ) {
+		// Skip non-PHP files
+		if ( ! preg_match( '/\.php$/i', $file ) ) {
+			return false;
+		}
 
-        if (empty($data['files'])) {
-            return array();
-        }
+		$content = file_get_contents( $file );
 
-        // Cache checksums
-        $this->plugin_hashes[$slug] = $data['files'];
+		$malicious_patterns = array(
+			'/eval\s*\(\s*(?:base64_decode|gzinflate|str_rot13|gzuncompress|strrev)\s*\([^\)]+\)\s*\)/i',
+			'/\$[a-z0-9_]+\s*\(\s*\$[a-z0-9_]+\s*\)/i',  // Variable functions
+			'/(?:exec|system|passthru|shell_exec|popen|proc_open|pcntl_exec)\s*\(/i',
+			'/preg_replace\s*\(\s*[\'"]\/[^\/]+\/e[\'"]\s*,/i',  // Eval via preg_replace
+			'/\b(?:assert|create_function)\s*\(/i',
+			'/\$(?:GLOBALS|_SERVER|_GET|_POST|_FILES|_COOKIE|_REQUEST|_ENV|HTTP_RAW_POST_DATA)\[/i',
+		);
 
-        return $data['files'];
-    }
+		foreach ( $malicious_patterns as $pattern ) {
+			if ( preg_match( $pattern, $content ) ) {
+				return true;
+			}
+		}
 
-    private function repair_plugin_file($plugin_file, $file_path, &$repairs) {
-        $plugin_slug = dirname($plugin_file);
-        $plugin_data = get_plugin_data(WP_PLUGIN_DIR . '/' . $plugin_file);
-        
-        // Prepare for download
-        require_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
-        require_once ABSPATH . 'wp-admin/includes/plugin-install.php';
-        
-        // Get plugin download URL
-        $api = plugins_api('plugin_information', array('slug' => $plugin_slug));
-        if (is_wp_error($api)) {
-            return false;
-        }
+		return false;
+	}
 
-        // Download and extract plugin
-        $skin = new Automatic_Upgrader_Skin();
-        $upgrader = new Plugin_Upgrader($skin);
-        
-        // Backup existing file
-        $this->quarantine->quarantine_file($file_path, array(
-            'type' => 'plugin_file',
-            'plugin' => $plugin_file,
-            'version' => $plugin_data['Version'],
-            'auto_repair' => true
-        ));
+	private function restore_plugin_file( $plugin_file, $compromised_file ) {
+		$plugin_slug = dirname( $plugin_file );
 
-        // Force update to current version
-        add_filter('site_transient_update_plugins', function($transient) use ($plugin_file, $plugin_data, $api) {
-            $transient->response[$plugin_file] = (object)[
-                'slug' => $api->slug,
-                'plugin' => $plugin_file,
-                'new_version' => $plugin_data['Version'],
-                'package' => $api->download_link
-            ];
-            return $transient;
-        });
+		// Get plugin info
+		$plugin_info = $this->get_plugin_info( $plugin_slug );
+		if ( ! $plugin_info ) {
+			return false;
+		}
 
-        // Perform upgrade
-        $result = $upgrader->upgrade($plugin_file);
+		// Download clean version
+		$download_url = $plugin_info['download_link'];
+		$temp_file    = download_url( $download_url );
 
-        if ($result) {
-            $repairs[] = array(
-                'plugin' => $plugin_file,
-                'file' => str_replace(WP_PLUGIN_DIR . '/', '', $file_path),
-                'time' => time(),
-                'version' => $plugin_data['Version']
-            );
-            return true;
-        }
+		if ( is_wp_error( $temp_file ) ) {
+			return false;
+		}
 
-        return false;
-    }
+		// Extract to temporary directory
+		$temp_dir = WP_CONTENT_DIR . '/security-temp/' . uniqid( 'plugin_' );
+		wp_mkdir_p( $temp_dir );
 
-    private function log_repairs($repairs) {
-        $repair_log = get_option($this->repair_log_option, array());
-        $repair_log = array_merge($repair_log, $repairs);
+		$unzip_result = unzip_file( $temp_file, $temp_dir );
+		unlink( $temp_file );
 
-        // Keep only last 1000 repairs
-        if (count($repair_log) > 1000) {
-            $repair_log = array_slice($repair_log, -1000);
-        }
+		if ( is_wp_error( $unzip_result ) ) {
+			return false;
+		}
 
-        update_option($this->repair_log_option, $repair_log);
-    }
+		// Get relative path of compromised file
+		$relative_path = str_replace( WP_PLUGIN_DIR . '/' . $plugin_slug . '/', '', $compromised_file );
+		$clean_file    = $temp_dir . '/' . $plugin_slug . '/' . $relative_path;
 
-    private function notify_admin($repairs) {
-        $subject = sprintf(
-            'WordPress Plugins Auto-Repaired: %d Files Fixed',
-            count($repairs)
-        );
+		// Restore file if it exists in clean version
+		if ( file_exists( $clean_file ) ) {
+			copy( $clean_file, $compromised_file );
+			chmod( $compromised_file, 0644 );
+		}
 
-        $message = "The following plugin files were automatically repaired:\n\n";
+		// Cleanup
+		$this->recursive_rmdir( $temp_dir );
+		return true;
+	}
 
-        foreach ($repairs as $repair) {
-            $message .= sprintf(
-                "Plugin: %s\nFile: %s\nTime: %s\nVersion: %s\n\n",
-                $repair['plugin'],
-                $repair['file'],
-                date('Y-m-d H:i:s', $repair['time']),
-                $repair['version']
-            );
-        }
-
-        $message .= "All original files have been backed up to quarantine.\n";
-        $message .= "You can restore them from your WordPress dashboard if needed.\n\n";
-        $message .= "Site URL: " . get_site_url() . "\n";
-
-        wp_mail(get_option('admin_email'), $subject, $message);
-    }
-
-    public function get_repair_stats() {
-        $repair_log = get_option($this->repair_log_option, array());
-        $stats = array(
-            'total_repairs' => count($repair_log),
-            'last_repair' => 0,
-            'plugins_repaired' => array()
-        );
-
-        foreach ($repair_log as $repair) {
-            if (!isset($stats['plugins_repaired'][$repair['plugin']])) {
-                $stats['plugins_repaired'][$repair['plugin']] = 0;
-            }
-            $stats['plugins_repaired'][$repair['plugin']]++;
-            $stats['last_repair'] = max($stats['last_repair'], $repair['time']);
-        }
-
-        return $stats;
-    }
-
-    public function force_plugin_check() {
-        delete_option($this->last_check_option);
-        return $this->check_and_repair_plugins();
-    }
-
-    public function get_repair_log($limit = 100) {
-        $repair_log = get_option($this->repair_log_option, array());
-        return array_slice($repair_log, -$limit);
-    }
+	private function recursive_rmdir( $dir ) {
+		if ( is_dir( $dir ) ) {
+			$objects = scandir( $dir );
+			foreach ( $objects as $object ) {
+				if ( $object != '.' && $object != '..' ) {
+					if ( is_dir( $dir . '/' . $object ) ) {
+						$this->recursive_rmdir( $dir . '/' . $object );
+					} else {
+						unlink( $dir . '/' . $object );
+					}
+				}
+			}
+			rmdir( $dir );
+		}
+	}
 }

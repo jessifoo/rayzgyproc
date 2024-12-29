@@ -1,0 +1,15 @@
+This project has one of my wordpress sites but we're focusing on a wordpress harder
+The files for this plugin are in /wp-content/plugins/wp-security-hardening
+The plugin needs to be focused on overall wordpress health and cleaning and preventing malware and obfuscated code
+The sites are:
+jessica-johnson.ca
+rayzgyproc.com
+and spectrapsychology.com
+
+all API free teir limits must share the limtis across all three sites
+I have them on a shared hostinger account
+
+Always check wp-security-hardening/README.md to see where we're at
+and make sure to add updates for what you've done so you always have the right context
+
+Before creating a new file look through the files to make sure one hasn't already been made that could be extended or modified.

@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<ruleset name="WordPress Security Plugin">
+    <description>WordPress coding standards for the Security Hardening Plugin</description>
+
+    <!-- What to scan -->
+    <file>./wp-content/plugins/wp-security-hardening</file>
+
+    <!-- Exclude paths -->
+    <exclude-pattern>*/vendor/*</exclude-pattern>
+    <exclude-pattern>*/node_modules/*</exclude-pattern>
+    <exclude-pattern>*/tests/*</exclude-pattern>
+
+    <!-- Use WordPress as the default standard -->
+    <rule ref="WordPress"/>
+
+    <!-- Show progress -->
+    <arg value="p"/>
+    <arg name="colors"/>
+    <arg value="s"/>
+
+    <!-- PHP compatibility -->
+    <config name="testVersion" value="7.4-"/>
+    <rule ref="PHPCompatibilityWP"/>
+
+    <!-- WordPress minimum version compatibility -->
+    <config name="minimum_supported_wp_version" value="5.0"/>
+</ruleset>
