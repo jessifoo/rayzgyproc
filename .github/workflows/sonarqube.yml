@@ -44,20 +44,17 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
-      - name: SonarQube Scan 2
-        uses: SonarSource/sonarqube-scan-action@v4
       - name: Set up Java 17
         uses: actions/setup-java@v3
         with:
           java-version: '17'
           distribution: temurin  # Specify the Java distribution to use
 
-          
       - name: Analyze with SonarQube
 
         # You can pin the exact commit or the version.
         # uses: SonarSource/sonarqube-scan-action@v1.1.0
-        uses: SonarSource/sonarqube-scan-action@7295e71c9583053f5bf40e9d4068a0c974603ec8
+        uses: SonarSource/sonarqube-scan-action@v4
         env:
           JAVA_HOME: ${{ steps.setup-java.outputs.java-home }} # Explicitly pass Java 17 to the scanner
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information
