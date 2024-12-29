@@ -42,9 +42,9 @@ jobs:
 
     steps:
       - name: Set up Java 17
-        uses: Fleshgrinder/setup-java@1.0.0        
+        uses: actions/setup-java@v3
         with:
-           version: '17'
+          java-version: '17'
           
       - name: Analyze with SonarQube
 
