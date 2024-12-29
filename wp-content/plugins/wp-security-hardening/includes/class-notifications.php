@@ -44,6 +44,10 @@ class WP_Security_Notifications {
 		}
 	}
 
+	public function send_notification( $type, $message, $data = array() ) {
+		return $this->notify( $type, $message, $data );
+	}
+
 	private function should_share_notification( $type ) {
 		$shared_types = array(
 			'malware_detected',

@@ -46,14 +46,27 @@ class WP_Security_Site_Network {
 	}
 
 	private function discover_network_sites() {
-		$known_sites = get_option( 'wp_security_known_sites', array() );
+		$known_sites = array(
+			'jessica-johnson.ca' => array(
+				'url' => 'https://jessica-johnson.ca',
+				'name' => 'Jessica Johnson',
+				'status' => 'active'
+			),
+			'rayzgyproc.com' => array(
+				'url' => 'https://rayzgyproc.com',
+				'name' => 'Rayz Gyproc',
+				'status' => 'active'
+			),
+			'spectrapsychology.com' => array(
+				'url' => 'https://spectrapsychology.com',
+				'name' => 'Spectra Psychology',
+				'status' => 'active'
+			)
+		);
 
-		if ( ! empty( $known_sites ) ) {
-			foreach ( $known_sites as $site_url ) {
-				$this->add_site( $site_url );
-			}
-			$this->save_network_config();
-		}
+		update_option('wp_security_known_sites', $known_sites);
+		$this->network_sites = $known_sites;
+		$this->save_network_config();
 	}
 
 	public function add_site( $site_url ) {

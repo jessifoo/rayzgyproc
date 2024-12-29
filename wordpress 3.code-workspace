@@ -8,117 +8,150 @@
     "git.terminalGitEditor": true,
     "terminal.integrated.useWslProfiles": false,
     "terminal.integrated.cwd": "/Users/jessicajohnson/Downloads/wordpress 3",
-    "terminal.integrated.defaultProfile.osx": "zsh (2)",
+    "terminal.integrated.defaultProfile.osx": "zsh",
     "terminal.integrated.env.osx": {
       "TERM": "xterm-256color"
     },
     "terminal.integrated.suggest.enabled": true,
     "[php]": {
-      "editor.defaultFormatter": "DEVSENSE.phptools-vscode"
+      "editor.defaultFormatter": "DEVSENSE.phptools-vscode",
+      "editor.formatOnSave": true,
+      "editor.formatOnPaste": true,
+      "editor.rulers": [80, 120]
     },
-    "intelephense.enable": false,
-    "phpResolver.problems.exclude": {
-      "vendor/": true
+    "php.validate.enable": true,
+    "php.suggest.basic": true,
+    "php.executablePath": "/opt/homebrew/bin/php",
+    "php.version": "8.2",
+    "phpResolver.phpBeautifierCommand": "phpcbf",
+    "phpResolver.phpCsFixerCommand": "php-cs-fixer",
+    "phpResolver.phpSnifferCommand": "phpcs",
+    "phpResolver.phpStandards": "WordPress",
+    "files.associations": {
+      "*.php": "php"
     },
-    "phpResolver.executablePath": "/opt/homebrew/bin/php",
-    "phpResolver.phpVersion": "8.1",
-    "phpResolver.problems.scope": "project",
-    "phpResolver.format.enable": true,
-    "phpResolver.suggest.basic": true,
-    "phpResolver.phpcs": {
-      "enable": true,
-      "standard": "WordPress",
-      "reportWidth": 120,
-      "showSources": true,
-      "encoding": "UTF-8",
-      "severity": 5,
-      "errorSeverity": 5,
-      "warningSeverity": 5,
-      "tabWidth": 4,
-      "autoloadPaths": [
-        "/Users/jessicajohnson/Downloads/wordpress 3/vendor/autoload.php"
-      ],
-      "additionalArguments": [
-        "--runtime-set",
-        "installed_paths",
-        "/Users/jessicajohnson/Downloads/wordpress 3/vendor/wp-coding-standards/wpcs,/Users/jessicajohnson/Downloads/wordpress 3/vendor/phpcsstandards/phpcsutils,/Users/jessicajohnson/Downloads/wordpress 3/vendor/phpcsstandards/phpcsextra"
-      ]
-    },
+    "editor.insertSpaces": true,
+    "editor.tabSize": 4,
+    "files.trimTrailingWhitespace": true,
+    "files.insertFinalNewline": true,
+    "files.eol": "\n",
+    "phpResolver.autoImportOnSave": true,
+    "phpResolver.errorLogTruncateSize": 0,
+    "phpResolver.fixerConfigString": "<?php\n\nreturn (new PhpCsFixer\\Config())\n    ->setRules([\n   '@PSR12' => false, \n   '@Symfony' => false,\n \n   'indentation_type' => true, \n   'array_indentation' => true, \n   'array_syntax' => [\n         'syntax' => 'long' \n      ], \n   'combine_consecutive_unsets' => true, \n   'class_attributes_separation' => [\n            'elements' => [\n               'method' => 'one' \n            ] \n         ], \n   'multiline_whitespace_before_semicolons' => false, \n   'single_quote' => true, \n   'blank_line_after_opening_tag' => true, \n   'blank_line_before_statement' => true, \n   'braces' => [\n                  'allow_single_line_closure' => true, \n                  'position_after_functions_and_oop_constructs' => 'same' \n               ], \n   'cast_spaces' => false, \n   'class_definition' => [\n                     'single_line' => true \n                  ], \n   'concat_space' => [\n                        'spacing' => 'one' \n                     ], \n   'declare_equal_normalize' => true, \n   'function_typehint_space' => true, \n   'single_line_comment_style' => [\n                           'comment_types' => [\n                              'hash' \n                           ] \n                        ], \n   'include' => true, \n   'lowercase_cast' => true, \n   'native_function_casing' => true, \n   'new_with_braces' => true, \n   'no_blank_lines_after_class_opening' => true, \n   'no_blank_lines_after_phpdoc' => true, \n   'no_blank_lines_before_namespace' => false, \n   'no_empty_comment' => true, \n   'no_empty_phpdoc' => true, \n   'no_empty_statement' => true, \n   'no_extra_blank_lines' => [\n                                 'tokens' => [\n                                    'curly_brace_block', \n                                    'extra', \n                                    'parenthesis_brace_block', \n                                    'square_brace_block', \n                                    'throw', \n                                    'use' \n                                 ] \n                              ], \n   'no_leading_import_slash' => true, \n   'no_leading_namespace_whitespace' => true, \n   'no_mixed_echo_print' => [\n                                       'use' => 'echo' \n                                    ], \n   'no_multiline_whitespace_around_double_arrow' => true, \n   'no_short_bool_cast' => true, \n   'no_singleline_whitespace_before_semicolons' => true, \n   'no_spaces_around_offset' => true, \n   'no_trailing_comma_in_list_call' => true, \n   'no_trailing_comma_in_singleline_array' => true, \n   'no_unneeded_control_parentheses' => true, \n   'no_unused_imports' => true, \n   'no_whitespace_before_comma_in_array' => true, \n   'no_whitespace_in_blank_line' => true, \n   'normalize_index_brace' => true, \n   'object_operator_without_whitespace' => true, \n   'php_unit_fqcn_annotation' => true, \n   'phpdoc_align' => true, \n   'phpdoc_annotation_without_dot' => false, \n   'phpdoc_indent' => true, \n   'general_phpdoc_tag_rename' => true, \n   'phpdoc_no_access' => true, \n   'phpdoc_no_alias_tag' => true, \n   'phpdoc_no_empty_return' => false, \n   'phpdoc_no_package' => false, \n   'phpdoc_no_useless_inheritdoc' => true, \n   'phpdoc_return_self_reference' => true, \n   'phpdoc_scalar' => true, \n   'phpdoc_separation' => true, \n   'phpdoc_single_line_var_spacing' => true, \n   'phpdoc_summary' => true, \n   'phpdoc_to_comment' => true, \n   'phpdoc_trim' => true, \n   'phpdoc_types' => true, \n   'phpdoc_var_without_name' => true, \n   'increment_style' => true, \n   'return_type_declaration' => true, \n   'short_scalar_cast' => true, \n   'single_blank_line_before_namespace' => true, \n   'single_class_element_per_statement' => true, \n   'space_after_semicolon' => true, \n   'standardize_not_equals' => true, \n   'ternary_operator_spaces' => true, \n   'trailing_comma_in_multiline' => [\n                                          'elements' => [\n                                             'arrays' \n                                          ] \n                                       ], \n   'trim_array_spaces' => false, \n   'unary_operator_spaces' => false, \n   'whitespace_after_comma_in_array' => true, \n   'single_blank_line_at_eof' => false \n])\n     ->setIndent('\t')\n    ->setLineEnding('\n')\n;",
+    "phpResolver.highlightOnOpen": true,
+    "phpResolver.highlightOnSave": true,
+    "phpResolver.sortOnSave": true,
+    "prettier.enableDebugLogs": true,
+    "php.completion.showParameters": true,
+    "php.problems.excludeGitIgnore": true,
+    "php.format.codeStyle": "WordPress",
     "phpResolver.phpFixerRules": {
-      "@PSR2": false,
+      "@PSR12": false,
       "@Symfony": false,
-      "@WordPress": true,
+      "Wordpress": true,
+      "indentation_type": true,
       "array_indentation": true,
       "array_syntax": {
         "syntax": "long"
       },
-      "binary_operator_spaces": {
-        "operators": {
-          "=>": "single_space",
-          "=": "single_space"
+      "combine_consecutive_unsets": true,
+      "class_attributes_separation": {
+        "elements": {
+          "method": "one"
         }
       },
-      "blank_line_after_namespace": true,
+      "multiline_whitespace_before_semicolons": false,
+      "single_quote": true,
       "blank_line_after_opening_tag": true,
+      "blank_line_before_statement": true,
       "braces": {
-        "allow_single_line_closure": false,
+        "allow_single_line_closure": true,
         "position_after_functions_and_oop_constructs": "same"
       },
-      "cast_spaces": {
-        "space": "single"
+      "cast_spaces": false,
+      "class_definition": {
+        "single_line": true
       },
       "concat_space": {
         "spacing": "one"
       },
-      "declare_equal_normalize": {
-        "space": "single"
-      },
-      "elseif": true,
-      "encoding": true,
-      "full_opening_tag": true,
-      "function_declaration": {
-        "closure_function_spacing": "one"
-      },
+      "declare_equal_normalize": true,
       "function_typehint_space": true,
+      "single_line_comment_style": {
+        "comment_types": ["hash"]
+      },
       "include": true,
-      "increment_style": {
-        "style": "post"
-      },
-      "line_ending": true,
-      "linebreak_after_opening_tag": true,
-      "lowercase_keywords": true,
-      "method_argument_space": {
-        "on_multiline": "ensure_fully_multiline"
-      },
-      "no_break_comment": true,
-      "no_closing_tag": true,
-      "no_spaces_after_function_name": true,
-      "no_spaces_inside_parenthesis": true,
-      "no_trailing_whitespace": true,
-      "no_trailing_whitespace_in_comment": true,
-      "single_blank_line_at_eof": true,
-      "single_class_element_per_statement": {
-        "elements": ["property"]
-      },
-      "single_import_per_statement": true,
-      "single_line_after_imports": true,
-      "switch_case_semicolon_to_colon": true,
-      "switch_case_space": true,
-      "visibility_required": true,
-      "constant_case": {
-        "case": "lower"
-      },
-      "lowercase_static_reference": true,
-      "magic_constant_casing": true,
-      "magic_method_casing": true,
+      "lowercase_cast": true,
       "native_function_casing": true,
-      "native_function_type_declaration_casing": true,
+      "new_with_braces": true,
       "no_blank_lines_after_class_opening": true,
+      "no_blank_lines_after_phpdoc": true,
+      "no_blank_lines_before_namespace": false,
+      "no_empty_comment": true,
+      "no_empty_phpdoc": true,
+      "no_empty_statement": true,
+      "no_extra_blank_lines": {
+        "tokens": [
+          "curly_brace_block",
+          "extra",
+          "parenthesis_brace_block",
+          "square_brace_block",
+          "throw",
+          "use"
+        ]
+      },
+      "no_leading_import_slash": true,
       "no_leading_namespace_whitespace": true,
+      "no_mixed_echo_print": {
+        "use": "echo"
+      },
+      "no_multiline_whitespace_around_double_arrow": true,
+      "no_short_bool_cast": true,
+      "no_singleline_whitespace_before_semicolons": true,
+      "no_spaces_around_offset": true,
+      "no_trailing_comma_in_list_call": true,
+      "no_trailing_comma_in_singleline_array": true,
+      "no_unneeded_control_parentheses": true,
+      "no_unused_imports": true,
+      "no_whitespace_before_comma_in_array": true,
       "no_whitespace_in_blank_line": true,
-      "ordered_imports": {
-        "sort_algorithm": "alpha"
-      }
+      "normalize_index_brace": true,
+      "object_operator_without_whitespace": true,
+      "php_unit_fqcn_annotation": true,
+      "phpdoc_align": true,
+      "phpdoc_annotation_without_dot": false,
+      "phpdoc_indent": true,
+      "general_phpdoc_tag_rename": true,
+      "phpdoc_no_access": true,
+      "phpdoc_no_alias_tag": true,
+      "phpdoc_no_empty_return": false,
+      "phpdoc_no_package": false,
+      "phpdoc_no_useless_inheritdoc": true,
+      "phpdoc_return_self_reference": true,
+      "phpdoc_scalar": true,
+      "phpdoc_separation": true,
+      "phpdoc_single_line_var_spacing": true,
+      "phpdoc_summary": true,
+      "phpdoc_to_comment": true,
+      "phpdoc_trim": true,
+      "phpdoc_types": true,
+      "phpdoc_var_without_name": true,
+      "increment_style": true,
+      "return_type_declaration": true,
+      "short_scalar_cast": true,
+      "single_blank_line_before_namespace": true,
+      "single_class_element_per_statement": true,
+      "space_after_semicolon": true,
+      "standardize_not_equals": true,
+      "ternary_operator_spaces": true,
+      "trailing_comma_in_multiline": {
+        "elements": ["arrays"]
+      },
+      "trim_array_spaces": false,
+      "unary_operator_spaces": false,
+      "whitespace_after_comma_in_array": true,
+      "single_blank_line_at_eof": false,
+      "phpResolver.phpSnifferCommand": "/Users/jessicajohnson/.composer/vendor/bin/phpcs"
     }
   }
 }

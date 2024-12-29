@@ -1,65 +1,112 @@
 /**
  * Security Dashboard Class
  *
- * Handles the admin dashboard interface for the security plugin.
+ * Handles the admin dashboard interface for the security plugin, providing a
+ * centralized view of security metrics, status indicators, and management options.
  *
  * @package WP_Security_Hardening
  * @subpackage Admin
  * @since 1.0.0
  */
 
-// Prevent direct access to this file
+// Prevent direct access to this file.
 if ( ! defined( 'ABSPATH' ) ) {
-	die( 'Direct access not permitted.' );
+    exit( 'Direct access not permitted.' );
 }
 
 /**
- * WP_Security_Dashboard class.
+ * Class WP_Security_Dashboard
+ *
+ * Manages the security dashboard interface and functionality.
  *
  * @since 1.0.0
  */
 class WP_Security_Dashboard {
-    /** @var string The capability required to access this dashboard. */
+
+    /**
+     * The capability required to access this dashboard.
+     *
+     * @since 1.0.0
+     * @var string
+     */
     private $capability = 'manage_options';
 
-    /** @var array List of security metrics to display. */
-    private $metrics;
+    /**
+     * Component instances
+     */
+    private $scanner;
+    private $threat_intel;
+    private $file_monitor;
+    private $quarantine;
+    private $core_repair;
+    private $health_monitor;
+    private $api_manager;
 
-    /** @var array Security status indicators and their values. */
+    /**
+     * Security metrics and status indicators
+     */
+    private $metrics;
     private $status_indicators;
 
     /**
-     * Constructor - Initialize dashboard components.
+     * Constructor - Initialize dashboard components and set up WordPress hooks.
      *
      * @since 1.0.0
+     * @param WP_Security_API_Manager $api_manager API manager instance
+     * @param WP_Security_Scanner $scanner Scanner instance
+     * @param WP_Security_Threat_Intelligence $threat_intel Threat intelligence instance
+     * @param WP_Security_File_Monitor $file_monitor File monitor instance
+     * @param WP_Security_Quarantine_Manager $quarantine Quarantine manager instance
+     * @param WP_Security_Core_Repair $core_repair Core repair instance
+     * @param WP_Security_Health_Monitor $health_monitor Health monitor instance
      */
-    public function __construct() {
+    public function __construct(
+        WP_Security_API_Manager $api_manager,
+        WP_Security_Scanner $scanner,
+        WP_Security_Threat_Intelligence $threat_intel,
+        WP_Security_File_Monitor $file_monitor,
+        WP_Security_Quarantine_Manager $quarantine,
+        WP_Security_Core_Repair $core_repair,
+        WP_Security_Health_Monitor $health_monitor
+    ) {
+        $this->api_manager = $api_manager;
+        $this->scanner = $scanner;
+        $this->threat_intel = $threat_intel;
+        $this->file_monitor = $file_monitor;
+        $this->quarantine = $quarantine;
+        $this->core_repair = $core_repair;
+        $this->health_monitor = $health_monitor;
+
         $this->init_metrics();
         $this->init_status_indicators();
+        
+        // Add WordPress action hooks
         add_action('admin_menu', array($this, 'add_dashboard_menu'));
         add_action('admin_enqueue_scripts', array($this, 'enqueue_dashboard_assets'));
+        add_action('wp_ajax_wp_security_scan', array($this, 'handle_scan_request'));
+        add_action('wp_ajax_wp_security_clean', array($this, 'handle_clean_request'));
+        add_action('wp_ajax_wp_security_quarantine', array($this, 'handle_quarantine_request'));
+        add_action('wp_ajax_auto_fix_issues', array($this, 'handle_auto_fix_request'));
     }
 
     /**
      * Initialize security metrics for monitoring.
-     *
-     * @since 1.0.0
      */
     private function init_metrics() {
         $this->metrics = array(
-            'files_scanned' => 0,
-            'threats_found' => 0,
-            'last_scan_time' => 0,
-            'security_score' => 0,
+            'files_scanned' => $this->scanner->get_scan_count(),
+            'threats_found' => $this->threat_intel->get_threat_count(),
+            'last_scan_time' => $this->scanner->get_last_scan_time(),
+            'security_score' => $this->health_monitor->calculate_security_score(),
             'wp_version' => get_bloginfo('version'),
             'php_version' => phpversion(),
+            'api_usage' => $this->api_manager->get_usage_metrics(),
+            'malware_stats' => $this->scanner->get_malware_statistics(),
         );
     }
 
     /**
      * Initialize security status indicators.
-     *
-     * @since 1.0.0
      */
     private function init_status_indicators() {
         $this->status_indicators = array(
@@ -68,146 +115,179 @@ class WP_Security_Dashboard {
             'debug_mode' => WP_DEBUG,
             'auto_updates' => $this->check_auto_updates(),
             'file_editing' => $this->check_file_editing(),
+            'api_limits' => $this->api_manager->check_limits(),
+            'malware_status' => $this->scanner->get_malware_status(),
+            'obfuscated_code' => $this->scanner->check_for_obfuscated_code(),
         );
     }
 
     /**
-     * Add dashboard menu items.
+     * Add dashboard menu items to WordPress admin.
+     *
+     * Creates the main security menu item and its submenus in the WordPress
+     * admin dashboard.
      *
      * @since 1.0.0
+     * @return void
      */
     public function add_dashboard_menu() {
         add_menu_page(
-            __('Security Dashboard', 'wp-security-hardening'),
-            __('Security', 'wp-security-hardening'),
+            __( 'Security Dashboard', 'wp-security-hardening' ),
+            __( 'Security', 'wp-security-hardening' ),
             $this->capability,
             'wp-security-dashboard',
-            array($this, 'render_dashboard'),
+            array( $this, 'render_dashboard' ),
             'dashicons-shield',
             3
         );
 
         add_submenu_page(
             'wp-security-dashboard',
-            __('Security Settings', 'wp-security-hardening'),
-            __('Settings', 'wp-security-hardening'),
+            __( 'Security Settings', 'wp-security-hardening' ),
+            __( 'Settings', 'wp-security-hardening' ),
             $this->capability,
             'wp-security-settings',
-            array($this, 'render_settings')
+            array( $this, 'render_settings' )
         );
     }
 
     /**
      * Enqueue dashboard assets (CSS and JavaScript).
      *
+     * Loads the necessary CSS and JavaScript files for the security dashboard.
+     *
      * @since 1.0.0
      * @param string $hook The current admin page hook.
+     * @return void
      */
-    public function enqueue_dashboard_assets($hook) {
-        if ('toplevel_page_wp-security-dashboard' !== $hook) {
+    public function enqueue_dashboard_assets( $hook ) {
+        if ( 'toplevel_page_wp-security-dashboard' !== $hook ) {
             return;
         }
 
         wp_enqueue_style(
             'wp-security-dashboard',
-            plugins_url('css/dashboard.css', __FILE__),
+            plugins_url( 'css/dashboard.css', __FILE__ ),
             array(),
             WP_SECURITY_VERSION
         );
 
         wp_enqueue_script(
             'wp-security-dashboard',
-            plugins_url('js/dashboard.js', __FILE__),
-            array('jquery', 'wp-api'),
+            plugins_url( 'js/dashboard.js', __FILE__ ),
+            array( 'jquery', 'wp-api' ),
             WP_SECURITY_VERSION,
             true
         );
 
-        wp_localize_script('wp-security-dashboard', 'wpSecurityDashboard', array(
-            'nonce' => wp_create_nonce('wp_security_dashboard'),
-            'ajaxUrl' => admin_url('admin-ajax.php'),
+        wp_localize_script( 'wp-security-dashboard', 'wpSecurityDashboard', array(
+            'nonce' => wp_create_nonce( 'wp_security_dashboard' ),
+            'ajaxUrl' => admin_url( 'admin-ajax.php' ),
             'i18n' => array(
-                'scanning' => __('Scanning...', 'wp-security-hardening'),
-                'scanComplete' => __('Scan Complete', 'wp-security-hardening'),
-                'error' => __('Error', 'wp-security-hardening'),
+                'scanning' => __( 'Scanning...', 'wp-security-hardening' ),
+                'scanComplete' => __( 'Scan Complete', 'wp-security-hardening' ),
+                'error' => __( 'Error', 'wp-security-hardening' ),
             ),
-        ));
+        ) );
     }
 
     /**
      * Render the main security dashboard.
      *
+     * Displays the security dashboard interface, including security metrics and
+     * status indicators.
+     *
      * @since 1.0.0
+     * @return void
      */
     public function render_dashboard() {
-        if (!current_user_can($this->capability)) {
-            wp_die(__('You do not have sufficient permissions to access this page.', 'wp-security-hardening'));
+        if ( ! current_user_can( $this->capability ) ) {
+            wp_die( __( 'You do not have sufficient permissions to access this page.', 'wp-security-hardening' ) );
         }
 
         $this->update_metrics();
-        include plugin_dir_path(__FILE__) . 'templates/dashboard.php';
+        include plugin_dir_path( __FILE__ ) . 'templates/dashboard.php';
     }
 
     /**
      * Render the settings page.
      *
+     * Displays the security settings page, allowing users to configure security
+     * options.
+     *
      * @since 1.0.0
+     * @return void
      */
     public function render_settings() {
-        if (!current_user_can($this->capability)) {
-            wp_die(__('You do not have sufficient permissions to access this page.', 'wp-security-hardening'));
+        if ( ! current_user_can( $this->capability ) ) {
+            wp_die( __( 'You do not have sufficient permissions to access this page.', 'wp-security-hardening' ) );
         }
 
-        include plugin_dir_path(__FILE__) . 'templates/settings.php';
+        include plugin_dir_path( __FILE__ ) . 'templates/settings.php';
     }
 
     /**
      * Update security metrics with latest data.
      *
+     * Retrieves the latest security metrics and updates the dashboard display.
+     *
      * @since 1.0.0
+     * @return void
      */
     private function update_metrics() {
-        $this->metrics['files_scanned'] = get_option('wp_security_files_scanned', 0);
-        $this->metrics['threats_found'] = get_option('wp_security_threats_found', 0);
-        $this->metrics['last_scan_time'] = get_option('wp_security_last_scan', 0);
-        $this->metrics['security_score'] = $this->calculate_security_score();
+        $this->metrics['files_scanned'] = $this->scanner->get_scan_count();
+        $this->metrics['threats_found'] = $this->threat_intel->get_threat_count();
+        $this->metrics['last_scan_time'] = $this->scanner->get_last_scan_time();
+        $this->metrics['security_score'] = $this->health_monitor->calculate_security_score();
     }
 
     /**
-     * Calculate overall security score based on various factors.
-     *
-     * @since 1.0.0
-     * @return int Security score between 0 and 100.
+     * Handle malware scan request
      */
-    private function calculate_security_score() {
-        $score = 100;
+    public function handle_scan_request() {
+        check_ajax_referer('wp_security_nonce', 'nonce');
         
-        // Deduct points for security issues
-        if (!$this->status_indicators['admin_ssl']) {
-            $score -= 20;
-        }
-        
-        if ($this->status_indicators['debug_mode']) {
-            $score -= 10;
-        }
-        
-        if (!$this->status_indicators['auto_updates']) {
-            $score -= 15;
-        }
-        
-        if (!$this->status_indicators['file_permissions']) {
-            $score -= 25;
-        }
-        
-        if (!$this->status_indicators['file_editing']) {
-            $score -= 10;
+        if (!current_user_can($this->capability)) {
+            wp_send_json_error('Insufficient permissions');
         }
 
-        return max(0, min(100, $score));
+        // Check API limits before scanning
+        if (!$this->api_manager->can_make_request('scan')) {
+            wp_send_json_error('API limit reached. Please try again later.');
+        }
+
+        $scan_results = $this->scanner->run_full_scan();
+        $this->api_manager->record_api_usage('scan');
+
+        wp_send_json_success($scan_results);
+    }
+
+    /**
+     * Handle malware cleaning request
+     */
+    public function handle_clean_request() {
+        check_ajax_referer('wp_security_nonce', 'nonce');
+        
+        if (!current_user_can($this->capability)) {
+            wp_send_json_error('Insufficient permissions');
+        }
+
+        // Check API limits before cleaning
+        if (!$this->api_manager->can_make_request('clean')) {
+            wp_send_json_error('API limit reached. Please try again later.');
+        }
+
+        $clean_results = $this->scanner->clean_detected_threats();
+        $this->api_manager->record_api_usage('clean');
+
+        wp_send_json_success($clean_results);
     }
 
     /**
      * Check if file permissions are secure.
+     *
+     * Verifies that file permissions are set correctly to prevent unauthorized
+     * access.
      *
      * @since 1.0.0
      * @return bool True if file permissions are secure, false otherwise.
@@ -218,16 +298,16 @@ class WP_Security_Dashboard {
 
         $secure = true;
 
-        if (file_exists($wp_config_file)) {
-            $wp_config_perms = substr(sprintf('%o', fileperms($wp_config_file)), -4);
-            if ('0400' !== $wp_config_perms && '0440' !== $wp_config_perms) {
+        if ( file_exists( $wp_config_file ) ) {
+            $wp_config_perms = substr( sprintf( '%o', fileperms( $wp_config_file ) ), -4 );
+            if ( '0400' !== $wp_config_perms && '0440' !== $wp_config_perms ) {
                 $secure = false;
             }
         }
 
-        if (file_exists($htaccess_file)) {
-            $htaccess_perms = substr(sprintf('%o', fileperms($htaccess_file)), -4);
-            if ('0444' !== $htaccess_perms) {
+        if ( file_exists( $htaccess_file ) ) {
+            $htaccess_perms = substr( sprintf( '%o', fileperms( $htaccess_file ) ), -4 );
+            if ( '0444' !== $htaccess_perms ) {
                 $secure = false;
             }
         }
@@ -238,29 +318,36 @@ class WP_Security_Dashboard {
     /**
      * Check if automatic updates are enabled.
      *
+     * Verifies that automatic updates are enabled for WordPress core, plugins,
+     * and themes.
+     *
      * @since 1.0.0
      * @return bool True if auto updates are enabled, false otherwise.
      */
     private function check_auto_updates() {
         return (
-            wp_is_auto_update_enabled_for_type('core') &&
-            wp_is_auto_update_enabled_for_type('plugin') &&
-            wp_is_auto_update_enabled_for_type('theme')
+            wp_is_auto_update_enabled_for_type( 'core' ) &&
+            wp_is_auto_update_enabled_for_type( 'plugin' ) &&
+            wp_is_auto_update_enabled_for_type( 'theme' )
         );
     }
 
     /**
      * Check if file editing is disabled.
      *
+     * Verifies that file editing is disabled to prevent unauthorized changes.
+     *
      * @since 1.0.0
      * @return bool True if file editing is disabled, false otherwise.
      */
     private function check_file_editing() {
-        return defined('DISALLOW_FILE_EDIT') && DISALLOW_FILE_EDIT;
+        return defined( 'DISALLOW_FILE_EDIT' ) && DISALLOW_FILE_EDIT;
     }
 
     /**
      * Get security metrics for display.
+     *
+     * Returns the current security metrics for display on the dashboard.
      *
      * @since 1.0.0
      * @return array Array of security metrics.
@@ -271,6 +358,8 @@ class WP_Security_Dashboard {
 
     /**
      * Get security status indicators.
+     *
+     * Returns the current security status indicators for display on the dashboard.
      *
      * @since 1.0.0
      * @return array Array of security status indicators.

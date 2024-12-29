@@ -8,7 +8,9 @@
  * - spectrapsychology.com
  */
 
-class WP_Security_Resource_Test extends WP_UnitTestCase {
+use PHPUnit\Framework\TestCase;
+
+class WP_Security_Resource_Test extends TestCase {
     private $sites = [
         'jessica-johnson.ca',
         'rayzgyproc.com',

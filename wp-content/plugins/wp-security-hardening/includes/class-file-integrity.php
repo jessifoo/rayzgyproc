@@ -33,6 +33,9 @@ class WP_Security_File_Integrity {
 	private $check_interval    = 3600; // 1 hour
 	private $notification_email;
 	private $logger;
+	private $api_utils;
+	private $file_utils;
+	private $code_utils;
 
 	private $critical_files = array(
 		'wp-config.php',
@@ -55,7 +58,10 @@ class WP_Security_File_Integrity {
 
 	public function __construct() {
 		require_once __DIR__ . '/class-logger.php';
-		$this->logger             = new WP_Security_Logger();
+		$this->logger = new WP_Security_Logger();
+		$this->api_utils = new WP_Security_API_Utils();
+		$this->file_utils = new WP_Security_File_Utils();
+		$this->code_utils = new WP_Security_Code_Utils();
 		$this->notification_email = get_option( 'admin_email' );
 
 		// Schedule scans
@@ -450,6 +456,166 @@ class WP_Security_File_Integrity {
 			),
 			array( '%s', '%s', '%s', '%d', '%s', '%s' )
 		);
+	}
+
+	public function run_integrity_check() {
+		$changes = array();
+		$critical_files = $this->get_critical_files();
+
+		foreach ($critical_files as $file) {
+			$result = $this->check_file_integrity($file);
+			
+			if ($result['status'] === 'suspicious') {
+				$changes[] = array(
+					'file' => $file,
+					'type' => 'critical_file_modified',
+					'dangerous_functions' => $result['dangerous_functions'],
+					'obfuscation' => $result['obfuscation_detected'],
+					'backup_path' => $result['backup_path'],
+					'timestamp' => gmdate('Y-m-d H:i:s')
+				);
+
+				$this->logger->log(
+					'file_integrity',
+					sprintf('Critical file modified: %s', $file),
+					'warning',
+					array(
+						'file' => $file,
+						'changes' => $result
+					)
+				);
+
+				// Send notification if enabled
+				if ($this->should_notify()) {
+					$this->send_notification($file, $result);
+				}
+			}
+		}
+
+		update_option('wp_security_last_integrity_check', array(
+			'timestamp' => time(),
+			'changes' => $changes
+		));
+
+		return $changes;
+	}
+
+	private function check_file_integrity($file_path) {
+		if (!$this->file_utils->is_scannable_file($file_path)) {
+			return array(
+				'status' => 'skipped',
+				'reason' => 'File type not supported for scanning'
+			);
+		}
+
+		$content = $this->file_utils->read_file($file_path);
+		if (false === $content) {
+			return array(
+				'status' => 'error',
+				'reason' => 'Unable to read file'
+			);
+		}
+
+		// Check for malicious patterns
+		$dangerous_funcs = $this->code_utils->find_dangerous_functions($content);
+		$obfuscation = $this->code_utils->detect_obfuscation($content);
+
+		// If obfuscation detected, try to decode and recheck
+		if (!empty($obfuscation)) {
+			$decoded_content = $this->code_utils->decode_content($content);
+			if ($decoded_content !== $content) {
+				$dangerous_funcs = array_merge(
+					$dangerous_funcs,
+					$this->code_utils->find_dangerous_functions($decoded_content)
+				);
+			}
+		}
+
+		// Create backup if issues found
+		$backup_path = null;
+		if (!empty($dangerous_funcs) || !empty($obfuscation)) {
+			$backup_path = $this->file_utils->create_backup($file_path);
+		}
+
+		return array(
+			'status' => empty($dangerous_funcs) && empty($obfuscation) ? 'clean' : 'suspicious',
+			'dangerous_functions' => $dangerous_funcs,
+			'obfuscation_detected' => $obfuscation,
+			'backup_path' => $backup_path,
+			'last_checked' => gmdate('Y-m-d H:i:s')
+		);
+	}
+
+	private function get_critical_files() {
+		$files = array();
+		
+		// Core files
+		foreach ($this->critical_files as $file) {
+			$path = ABSPATH . $file;
+			if ($this->file_utils->is_scannable_file($path)) {
+				$files[] = $path;
+			}
+		}
+
+		// Active theme files
+		$theme_root = get_theme_root() . '/' . get_template();
+		$theme_files = $this->file_utils->list_files($theme_root, array('php', 'js'));
+		$files = array_merge($files, $theme_files);
+
+		// Active plugin files
+		$active_plugins = get_option('active_plugins');
+		foreach ($active_plugins as $plugin) {
+			$plugin_path = WP_PLUGIN_DIR . '/' . dirname($plugin);
+			$plugin_files = $this->file_utils->list_files($plugin_path, array('php', 'js'));
+			$files = array_merge($files, $plugin_files);
+		}
+
+		return array_unique($files);
+	}
+
+	private function send_notification($file, $changes) {
+		$to = $this->notification_email;
+		$subject = sprintf('[%s] Security Alert: Critical File Modified', get_bloginfo('name'));
+		
+		$message = "A critical file has been modified on your WordPress site:\n\n";
+		$message .= "File: " . $file . "\n";
+		$message .= "Time: " . gmdate('Y-m-d H:i:s') . "\n\n";
+		
+		if (!empty($changes['dangerous_functions'])) {
+			$message .= "Dangerous Functions Found:\n";
+			foreach ($changes['dangerous_functions'] as $func) {
+				$message .= "- " . $func['function'] . " (Context: " . $func['context'] . ")\n";
+			}
+			$message .= "\n";
+		}
+
+		if (!empty($changes['obfuscation_detected'])) {
+			$message .= "Obfuscation Detected:\n";
+			foreach ($changes['obfuscation_detected'] as $pattern) {
+				$message .= "- " . $pattern['type'] . " (Context: " . $pattern['context'] . ")\n";
+			}
+		}
+
+		if ($changes['backup_path']) {
+			$message .= "\nA backup has been created at: " . $changes['backup_path'] . "\n";
+		}
+
+		$message .= "\nPlease review these changes immediately.\n";
+		$message .= "Site URL: " . get_site_url() . "\n";
+
+		wp_mail($to, $subject, $message);
+	}
+
+	private function should_notify() {
+		$last_notification = get_option('wp_security_last_notification', 0);
+		$notification_interval = 3600; // 1 hour
+		
+		if (time() - $last_notification < $notification_interval) {
+			return false;
+		}
+
+		update_option('wp_security_last_notification', time());
+		return true;
 	}
 
 	public function get_last_scan_results() {

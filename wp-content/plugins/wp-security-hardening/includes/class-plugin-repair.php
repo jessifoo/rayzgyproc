@@ -99,6 +99,39 @@ class WP_Security_Plugin_Repair {
 		return false;
 	}
 
+	public function restore_plugin_backup( $plugin_file ) {
+		$backup_dir = WP_CONTENT_DIR . '/security-backups/plugins/' . dirname( $plugin_file );
+		
+		// Get latest backup
+		$backups = glob( $backup_dir . '/*', GLOB_ONLYDIR );
+		if ( empty( $backups ) ) {
+			$this->logger->log( 'plugin_repair', "No backup found for plugin: {$plugin_file}", 'error' );
+			return false;
+		}
+		
+		// Sort by date (newest first)
+		usort( $backups, function( $a, $b ) {
+			return filemtime( $b ) - filemtime( $a );
+		} );
+		
+		$latest_backup = $backups[0];
+		$plugin_dir = WP_PLUGIN_DIR . '/' . dirname( $plugin_file );
+		
+		// Remove current version
+		if ( is_dir( $plugin_dir ) ) {
+			$this->recursive_rmdir( $plugin_dir );
+		}
+		
+		// Restore from backup
+		if ( $this->recursive_copy( $latest_backup, $plugin_dir ) ) {
+			$this->logger->log( 'plugin_repair', "Restored plugin from backup: {$plugin_file}" );
+			return true;
+		}
+		
+		$this->logger->log( 'plugin_repair', "Failed to restore plugin from backup: {$plugin_file}", 'error' );
+		return false;
+	}
+
 	private function verify_plugin_files( $plugin_file, $plugin_data ) {
 		$plugin_path  = WP_PLUGIN_DIR . '/' . dirname( $plugin_file );
 		$plugin_files = $this->get_plugin_files( $plugin_path );

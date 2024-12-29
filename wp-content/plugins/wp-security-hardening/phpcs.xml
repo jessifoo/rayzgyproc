@@ -17,7 +17,7 @@
     <arg name="parallel" value="8"/>
 
     <!-- Rules: Start with basic WordPress rules -->
-    <config name="minimum_supported_wp_version" value="5.2"/>
+    <config name="minimum_supported_wp_version" value="6.0"/>
     
     <!-- Use WordPress as base -->
     <rule ref="WordPress">
@@ -37,6 +37,6 @@
     <rule ref="WordPress.Security.ValidatedSanitizedInput"/>
     
     <!-- PHP Compatibility -->
-    <config name="testVersion" value="7.4-"/>
+    <config name="testVersion" value="8.2-"/>
     <rule ref="PHPCompatibilityWP"/>
 </ruleset>

@@ -74,20 +74,41 @@ class WP_Security_Code_Analyzer {
 	);
 
 	public function analyze_file( $file_path ) {
-		if ( ! file_exists( $file_path ) ) {
-			return array( 'error' => 'File not found' );
+		global $wp_filesystem;
+
+		if ( ! function_exists( 'WP_Filesystem' ) ) {
+			require_once ABSPATH . 'wp-admin/includes/file.php';
 		}
 
-		$content       = file_get_contents( $file_path );
+		WP_Filesystem();
+
+		if ( ! $wp_filesystem->exists( $file_path ) ) {
+			return array(
+				'error'       => 'File not found',
+				'error_code'  => 'file_not_found',
+				'file_path'   => wp_strip_all_tags( $file_path ),
+			);
+		}
+
+		$content = $wp_filesystem->get_contents( $file_path );
+		if ( false === $content ) {
+			return array(
+				'error'      => 'Unable to read file',
+				'error_code' => 'file_read_error',
+				'file_path'  => wp_strip_all_tags( $file_path ),
+			);
+		}
+
 		$original_size = strlen( $content );
 
 		$analysis = array(
-			'file'                 => $file_path,
-			'size'                 => $original_size,
-			'threats'              => array(),
-			'obfuscation'          => array(),
+			'file'                => wp_strip_all_tags( $file_path ),
+			'size'                => $original_size,
+			'threats'             => array(),
+			'obfuscation'         => array(),
 			'suspicious_functions' => array(),
-			'risk_score'           => 0,
+			'risk_score'          => 0,
+			'scan_time'           => gmdate( 'Y-m-d H:i:s' ),
 		);
 
 		// Check for immediate red flags
@@ -115,29 +136,33 @@ class WP_Security_Code_Analyzer {
 
 	private function check_red_flags( $content, &$analysis ) {
 		// Check for null bytes (common in malware)
-		if ( strpos( $content, "\0" ) !== false ) {
+		if ( false !== strpos( $content, "\0" ) ) {
 			$analysis['threats'][] = array(
 				'type'        => 'null_byte',
 				'severity'    => 'critical',
 				'description' => 'Null bytes found in file - common in malicious files',
+				'timestamp'   => gmdate( 'Y-m-d H:i:s' ),
 			);
 		}
 
 		// Check for large chunks of obfuscated code
-		if ( preg_match( '/(\$[a-z0-9_]{1,2}=str_rot13\(|eval\(|base64_decode\(|gzinflate\()/i', $content ) ) {
+		if ( 1 === preg_match( '/(\$[a-z0-9_]{1,2}=str_rot13\(|eval\(|base64_decode\(|gzinflate\()/i', $content ) ) {
 			$analysis['threats'][] = array(
 				'type'        => 'obfuscation',
 				'severity'    => 'high',
 				'description' => 'Obfuscated code execution detected',
+				'timestamp'   => gmdate( 'Y-m-d H:i:s' ),
 			);
 		}
 
-		// Check for backdoor indicators
-		if ( preg_match( '/password.*=|shell.*=|backdoor.*=|cmd.*=|exec.*\(|system.*\(/i', $content ) ) {
+		// Check for backdoor indicators with improved pattern
+		$backdoor_pattern = '/(?:password|shell|backdoor|cmd|exec|system).*(?:=|\()/i';
+		if ( 1 === preg_match( $backdoor_pattern, $content ) ) {
 			$analysis['threats'][] = array(
 				'type'        => 'backdoor',
 				'severity'    => 'critical',
 				'description' => 'Potential backdoor code detected',
+				'timestamp'   => gmdate( 'Y-m-d H:i:s' ),
 			);
 		}
 	}
@@ -217,44 +242,126 @@ class WP_Security_Code_Analyzer {
 		);
 	}
 
-	private function analyze_code_content( $content, &$analysis ) {
-		// Check for dangerous functions
+	/**
+	 * Deobfuscates JavaScript code.
+	 *
+	 * @param string $file_path Path to the JavaScript file.
+	 * @return string|bool Deobfuscated content or false on failure.
+	 */
+	public function deobfuscate_js( $file_path ) {
+		global $wp_filesystem;
+
+		if ( ! function_exists( 'WP_Filesystem' ) ) {
+			require_once ABSPATH . 'wp-admin/includes/file.php';
+		}
+
+		WP_Filesystem();
+
+		if ( ! $wp_filesystem->exists( $file_path ) ) {
+			return false;
+		}
+
+		$content = $wp_filesystem->get_contents( $file_path );
+		if ( false === $content ) {
+			return false;
+		}
+
+		// Remove comments
+		$content = preg_replace( '/\/\*[\s\S]*?\*\/|([^\\:]|^)\/\/.*$/m', '', $content );
+
+		// Decode common JS obfuscation techniques
+		$content = $this->decode_hex( $content );
+		$content = $this->decode_base64( $content );
+		$content = $this->decode_unicode_escapes( $content );
+
+		return $content;
+	}
+
+	/**
+	 * Decodes Unicode escapes in JavaScript code.
+	 *
+	 * @param string $content JavaScript content.
+	 * @return string Decoded content.
+	 */
+	private function decode_unicode_escapes( $content ) {
+		return preg_replace_callback(
+			'/\\\\u([0-9a-fA-F]{4})/',
+			function ( $matches ) {
+				return mb_convert_encoding(
+					pack( 'H*', $matches[1] ),
+					'UTF-8',
+					'UCS-2BE'
+				);
+			},
+			$content
+		);
+	}
+
+	/**
+	 * Analyzes code content for threats.
+	 * This method is now public to support external usage.
+	 *
+	 * @param string $content Code content to analyze.
+	 * @param array  $analysis Optional existing analysis array.
+	 * @return array Analysis results.
+	 */
+	public function analyze_code_content( $content, &$analysis = array() ) {
+		if ( empty( $analysis ) ) {
+			$analysis = array(
+				'threats'             => array(),
+				'obfuscation'         => array(),
+				'suspicious_functions' => array(),
+				'risk_score'          => 0,
+				'scan_time'           => gmdate( 'Y-m-d H:i:s' ),
+			);
+		}
+
+		// Check for dangerous functions with improved pattern matching
 		foreach ( $this->dangerous_functions as $func ) {
-			if ( preg_match( "/\b{$func}\s*\(/i", $content ) ) {
+			$pattern = '/\b' . preg_quote( $func, '/' ) . '\s*\(/i';
+			if ( 1 === preg_match( $pattern, $content ) ) {
 				$analysis['suspicious_functions'][] = array(
 					'function'    => $func,
 					'severity'    => 'high',
-					'description' => "Dangerous function {$func}() found",
+					'description' => sprintf( 'Dangerous function %s() found', esc_html( $func ) ),
+					'timestamp'   => gmdate( 'Y-m-d H:i:s' ),
 				);
 			}
 		}
 
-		// Check for suspicious patterns
+		// Check for suspicious patterns with improved error handling
 		foreach ( $this->suspicious_patterns as $pattern ) {
-			if ( preg_match( $pattern, $content, $matches ) ) {
+			$result = @preg_match( $pattern, $content, $matches );
+			if ( false !== $result && 1 === $result ) {
 				$analysis['threats'][] = array(
-					'type'     => 'suspicious_pattern',
-					'pattern'  => $pattern,
-					'match'    => substr( $matches[0], 0, 100 ), // Limit match length
-					'severity' => 'medium',
+					'type'      => 'suspicious_pattern',
+					'pattern'   => wp_strip_all_tags( $pattern ),
+					'match'     => wp_strip_all_tags( substr( $matches[0], 0, 100 ) ),
+					'severity'  => 'medium',
+					'timestamp' => gmdate( 'Y-m-d H:i:s' ),
 				);
 			}
 		}
 
-		// Look for encoded strings
-		if ( preg_match_all( '/[a-zA-Z0-9+\/=]{40,}/', $content, $matches ) ) {
+		// Look for encoded strings with improved validation
+		$encoded_pattern = '/[a-zA-Z0-9+\/=]{40,}/';
+		if ( preg_match_all( $encoded_pattern, $content, $matches ) ) {
 			foreach ( $matches[0] as $match ) {
 				foreach ( $this->obfuscation_techniques as $type => $pattern ) {
-					if ( preg_match( $pattern, $match ) ) {
+					if ( 1 === preg_match( $pattern, $match ) ) {
 						$analysis['obfuscation'][] = array(
-							'type'   => $type,
-							'sample' => substr( $match, 0, 50 ) . '...',
-							'length' => strlen( $match ),
+							'type'      => $type,
+							'sample'    => wp_strip_all_tags( substr( $match, 0, 50 ) ) . '...',
+							'length'    => strlen( $match ),
+							'timestamp' => gmdate( 'Y-m-d H:i:s' ),
 						);
 					}
 				}
 			}
 		}
+
+		$this->calculate_risk_score( $analysis );
+		return $analysis;
 	}
 
 	private function calculate_risk_score( &$analysis ) {

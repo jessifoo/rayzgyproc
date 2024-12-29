@@ -4,229 +4,194 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 class WP_Security_Logger {
-	private $log_option             = 'wp_security_log';
-	private $max_entries            = 1000;
-	private $notification_threshold = 5; // Number of critical events before notifying admin
-	private $critical_events        = array(
-		'core_update'         => array( 'error' ),
-		'plugin_update'       => array( 'error' ),
-		'core_repair'         => array( 'repaired', 'restored' ),
-		'plugin_security'     => array( 'removed', 'restored' ),
-		'malware_detection'   => array( 'found', 'cleaned' ),
-		'unauthorized_access' => array( 'blocked' ),
-		'file_change'         => array( 'modified', 'deleted' ),
-	);
+    private const LOG_OPTION = 'wp_security_log';
+    private const MAX_ENTRIES = 1000;
+    private const NOTIFICATION_THRESHOLD = 5;
 
-	public function __construct() {
-		// Clean old logs daily
-		add_action( 'wp_security_clean_logs', array( $this, 'clean_old_logs' ) );
-		if ( ! wp_next_scheduled( 'wp_security_clean_logs' ) ) {
-			wp_schedule_event( time(), 'daily', 'wp_security_clean_logs' );
-		}
-	}
+    private array $critical_events = [
+        'core_update' => ['error'],
+        'plugin_update' => ['error'],
+        'core_repair' => ['repaired', 'restored'],
+        'plugin_security' => ['removed', 'restored'],
+        'malware_detection' => ['found', 'cleaned'],
+        'unauthorized_access' => ['blocked'],
+        'file_change' => ['modified', 'deleted'],
+    ];
 
-	public function log( $type, $message, $severity = 'info', $context = array() ) {
-		$log = get_option( $this->log_option, array() );
+    public function __construct() {
+        add_action('wp_security_clean_logs', [$this, 'clean_old_logs']);
+        if (!wp_next_scheduled('wp_security_clean_logs')) {
+            wp_schedule_event(time(), 'daily', 'wp_security_clean_logs');
+        }
+    }
 
-		$entry = array(
-			'timestamp' => current_time( 'timestamp' ),
-			'type'      => $type,
-			'message'   => $message,
-			'severity'  => $severity,
-			'context'   => $context,
-			'site'      => get_site_url(),
-		);
+    public function log(string $type, string $message, string $severity = 'info', array $context = []): void {
+        $log = get_option(self::LOG_OPTION, []);
 
-		array_unshift( $log, $entry );
+        $entry = [
+            'timestamp' => current_time('timestamp'),
+            'type' => $type,
+            'message' => $message,
+            'severity' => $severity,
+            'context' => $context,
+            'site' => get_site_url(),
+        ];
 
-		// Keep only the most recent entries
-		if ( count( $log ) > $this->max_entries ) {
-			array_splice( $log, $this->max_entries );
-		}
+        array_unshift($log, $entry);
 
-		update_option( $this->log_option, $log );
+        if (count($log) > self::MAX_ENTRIES) {
+            array_splice($log, self::MAX_ENTRIES);
+        }
 
-		// Check if we need to notify admin
-		$this->check_notification_threshold( $type, $severity );
-	}
+        update_option(self::LOG_OPTION, $log);
+        $this->check_notification_threshold($type, $severity);
+    }
 
-	private function check_notification_threshold( $type, $severity ) {
-		if ( $severity !== 'error' && ! $this->is_critical_event( $type ) ) {
-			return;
-		}
+    private function check_notification_threshold(string $type, string $severity): void {
+        if ($severity !== 'error' && !$this->is_critical_event($type)) {
+            return;
+        }
 
-		$recent_logs    = $this->get_recent_logs( 24 ); // Last 24 hours
-		$critical_count = 0;
+        $recent_logs = $this->get_recent_logs(24);
+        $critical_count = 0;
 
-		foreach ( $recent_logs as $log ) {
-			if ( $log['severity'] === 'error' || $this->is_critical_event( $log['type'] ) ) {
-				++$critical_count;
-			}
-		}
+        foreach ($recent_logs as $log) {
+            if ($log['severity'] === 'error' || $this->is_critical_event($log['type'])) {
+                ++$critical_count;
+            }
+        }
 
-		if ( $critical_count >= $this->notification_threshold ) {
-			$this->notify_admin( $recent_logs );
-		}
-	}
+        if ($critical_count >= self::NOTIFICATION_THRESHOLD) {
+            $this->notify_admin($recent_logs);
+        }
+    }
 
-	private function is_critical_event( $type ) {
-		return isset( $this->critical_events[ $type ] );
-	}
+    private function is_critical_event(string $type): bool {
+        return isset($this->critical_events[$type]);
+    }
 
-	private function notify_admin( $logs ) {
-		$subject = sprintf(
-			'[%s] Security Alert: Multiple Critical Events Detected',
-			get_bloginfo( 'name' )
-		);
+    private function notify_admin(array $logs): void {
+        $subject = sprintf(
+            '[%s] Security Alert: Multiple Critical Events Detected',
+            get_bloginfo('name')
+        );
 
-		$message = "Multiple critical security events have been detected on your WordPress site:\n\n";
+        $message = "Multiple critical security events have been detected on your WordPress site:\n\n";
 
-		foreach ( $logs as $log ) {
-			if ( $log['severity'] === 'error' || $this->is_critical_event( $log['type'] ) ) {
-				$message .= sprintf(
-					"[%s] %s: %s\n",
-					date( 'Y-m-d H:i:s', $log['timestamp'] ),
-					$log['type'],
-					$log['message']
-				);
-			}
-		}
+        foreach ($logs as $log) {
+            if ($log['severity'] === 'error' || $this->is_critical_event($log['type'])) {
+                $message .= sprintf(
+                    "[%s] %s: %s\n",
+                    wp_date('Y-m-d H:i:s', $log['timestamp']),
+                    $log['type'],
+                    $log['message']
+                );
+            }
+        }
 
-		$message .= "\nPlease check your WordPress dashboard for more details.\n";
-		$message .= 'Site URL: ' . get_site_url() . "\n";
+        $message .= "\nPlease check your WordPress dashboard for more details.\n";
+        $message .= 'Site URL: ' . get_site_url() . "\n";
 
-		wp_mail( get_option( 'admin_email' ), $subject, $message );
-	}
+        wp_mail(get_option('admin_email'), $subject, $message);
+    }
 
-	public function get_recent_logs( $hours = 24 ) {
-		$log    = get_option( $this->log_option, array() );
-		$cutoff = current_time( 'timestamp' ) - ( $hours * HOUR_IN_SECONDS );
+    public function get_recent_logs(int $hours = 24): array {
+        $log = get_option(self::LOG_OPTION, []);
+        $cutoff = current_time('timestamp') - ($hours * HOUR_IN_SECONDS);
 
-		return array_filter(
-			$log,
-			function ( $entry ) use ( $cutoff ) {
-				return $entry['timestamp'] >= $cutoff;
-			}
-		);
-	}
+        return array_filter(
+            $log,
+            fn($entry) => $entry['timestamp'] >= $cutoff
+        );
+    }
 
-	public function get_logs_by_type( $type, $limit = 100 ) {
-		$log = get_option( $this->log_option, array() );
+    public function get_logs_by_type(string $type, int $limit = 100): array {
+        $log = get_option(self::LOG_OPTION, []);
 
-		$filtered = array_filter(
-			$log,
-			function ( $entry ) use ( $type ) {
-				return $entry['type'] === $type;
-			}
-		);
+        $filtered = array_filter(
+            $log,
+            fn($entry) => $entry['type'] === $type
+        );
 
-		return array_slice( $filtered, 0, $limit );
-	}
+        return array_slice($filtered, 0, $limit);
+    }
 
-	public function get_logs_by_severity( $severity, $limit = 100 ) {
-		$log = get_option( $this->log_option, array() );
+    public function get_logs_by_severity(string $severity, int $limit = 100): array {
+        $log = get_option(self::LOG_OPTION, []);
 
-		$filtered = array_filter(
-			$log,
-			function ( $entry ) use ( $severity ) {
-				return $entry['severity'] === $severity;
-			}
-		);
+        $filtered = array_filter(
+            $log,
+            fn($entry) => $entry['severity'] === $severity
+        );
 
-		return array_slice( $filtered, 0, $limit );
-	}
+        return array_slice($filtered, 0, $limit);
+    }
 
-	public function clean_old_logs() {
-		$log    = get_option( $this->log_option, array() );
-		$cutoff = current_time( 'timestamp' ) - ( 30 * DAY_IN_SECONDS ); // Keep 30 days of logs
+    public function clean_old_logs(): void {
+        $log = get_option(self::LOG_OPTION, []);
+        $cutoff = current_time('timestamp') - (30 * DAY_IN_SECONDS);
 
-		$filtered = array_filter(
-			$log,
-			function ( $entry ) use ( $cutoff ) {
-				return $entry['timestamp'] >= $cutoff;
-			}
-		);
+        $filtered = array_filter(
+            $log,
+            fn($entry) => $entry['timestamp'] >= $cutoff
+        );
 
-		update_option( $this->log_option, $filtered );
-	}
+        update_option(self::LOG_OPTION, $filtered);
+    }
 
-	public function get_stats() {
-		$log    = get_option( $this->log_option, array() );
-		$recent = $this->get_recent_logs( 24 );
+    public function get_stats(): array {
+        $log = get_option(self::LOG_OPTION, []);
+        $recent = $this->get_recent_logs(24);
 
-		$stats = array(
-			'total_entries'   => count( $log ),
-			'recent_entries'  => count( $recent ),
-			'by_type'         => array(),
-			'by_severity'     => array(),
-			'critical_events' => 0,
-		);
+        $stats = [
+            'total_entries' => count($log),
+            'recent_entries' => count($recent),
+            'by_type' => [],
+            'by_severity' => [],
+            'critical_events' => 0,
+        ];
 
-		foreach ( $log as $entry ) {
-			// Count by type
-			if ( ! isset( $stats['by_type'][ $entry['type'] ] ) ) {
-				$stats['by_type'][ $entry['type'] ] = 0;
-			}
-			++$stats['by_type'][ $entry['type'] ];
+        foreach ($log as $entry) {
+            // Count by type
+            if (!isset($stats['by_type'][$entry['type']])) {
+                $stats['by_type'][$entry['type']] = 0;
+            }
+            ++$stats['by_type'][$entry['type']];
 
-			// Count by severity
-			if ( ! isset( $stats['by_severity'][ $entry['severity'] ] ) ) {
-				$stats['by_severity'][ $entry['severity'] ] = 0;
-			}
-			++$stats['by_severity'][ $entry['severity'] ];
+            // Count by severity
+            if (!isset($stats['by_severity'][$entry['severity']])) {
+                $stats['by_severity'][$entry['severity']] = 0;
+            }
+            ++$stats['by_severity'][$entry['severity']];
 
-			// Count critical events
-			if ( $entry['severity'] === 'error' || $this->is_critical_event( $entry['type'] ) ) {
-				++$stats['critical_events'];
-			}
-		}
+            // Count critical events
+            if ($entry['severity'] === 'error' || $this->is_critical_event($entry['type'])) {
+                ++$stats['critical_events'];
+            }
+        }
 
-		return $stats;
-	}
+        return $stats;
+    }
 
-	public function export_logs( $start_date = null, $end_date = null ) {
-		$log = get_option( $this->log_option, array() );
+    public function export_logs(?string $start_date = null, ?string $end_date = null): array {
+        $log = get_option(self::LOG_OPTION, []);
 
-		if ( $start_date ) {
-			$start_timestamp = strtotime( $start_date );
-			$log             = array_filter(
-				$log,
-				function ( $entry ) use ( $start_timestamp ) {
-					return $entry['timestamp'] >= $start_timestamp;
-				}
-			);
-		}
+        if ($start_date) {
+            $start_timestamp = strtotime($start_date);
+            $log = array_filter(
+                $log,
+                fn($entry) => $entry['timestamp'] >= $start_timestamp
+            );
+        }
 
-		if ( $end_date ) {
-			$end_timestamp = strtotime( $end_date );
-			$log           = array_filter(
-				$log,
-				function ( $entry ) use ( $end_timestamp ) {
-					return $entry['timestamp'] <= $end_timestamp;
-				}
-			);
-		}
+        if ($end_date) {
+            $end_timestamp = strtotime($end_date);
+            $log = array_filter(
+                $log,
+                fn($entry) => $entry['timestamp'] <= $end_timestamp
+            );
+        }
 
-		$csv = fopen( 'php://temp', 'r+' );
-		fputcsv( $csv, array( 'Timestamp', 'Type', 'Message', 'Severity', 'Site' ) );
-
-		foreach ( $log as $entry ) {
-			fputcsv(
-				$csv,
-				array(
-					date( 'Y-m-d H:i:s', $entry['timestamp'] ),
-					$entry['type'],
-					$entry['message'],
-					$entry['severity'],
-					$entry['site'],
-				)
-			);
-		}
-
-		rewind( $csv );
-		$output = stream_get_contents( $csv );
-		fclose( $csv );
-
-		return $output;
-	}
+        return $log;
+    }
 }

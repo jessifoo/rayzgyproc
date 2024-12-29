@@ -141,4 +141,100 @@ Header set Referrer-Policy "strict-origin-when-cross-origin"',
 	public function get_recommended_rules() {
 		return $this->safe_rules;
 	}
+
+	private function get_security_rules() {
+		return array(
+			'# Disable directory browsing' => 
+			'Options -Indexes',
+
+			'# Protect wp-config.php' =>
+			'<Files wp-config.php>
+				Order allow,deny
+				Deny from all
+			</Files>',
+
+			'# Protect .htaccess' =>
+			'<Files .htaccess>
+				Order allow,deny
+				Deny from all
+			</Files>',
+
+			'# Block PHP execution in uploads' =>
+			'<Directory wp-content/uploads>
+				<FilesMatch ".+\.(?i:php|phtml|php3|php4|php5|php7|pht|phar|phps)$">
+					Order allow,deny
+					Deny from all
+				</FilesMatch>
+			</Directory>',
+
+			'# Block suspicious query strings' =>
+			'RewriteCond %{QUERY_STRING} (\<|%3C).*script.*(\>|%3E) [NC,OR]
+			RewriteCond %{QUERY_STRING} GLOBALS(=|\[|\%[0-9A-Z]{0,2}) [OR]
+			RewriteCond %{QUERY_STRING} _REQUEST(=|\[|\%[0-9A-Z]{0,2})
+			RewriteRule .* - [F,L]',
+
+			'# Prevent direct access to sensitive files' =>
+			'<FilesMatch "^(wp-config\.php|php\.ini|php5\.ini|install\.php|readme\.html|readme\.txt|bb-config\.php|\.htaccess|\.htpasswd|error_log|error\.log)$">
+				Order allow,deny
+				Deny from all
+			</FilesMatch>',
+
+			'# Block access to sensitive directories' =>
+			'RedirectMatch 403 ^/(?:wp-admin|wp-includes|wp-content/plugins|wp-content/themes)/.*\.php$',
+
+			'# Limit file upload types' =>
+			'AddHandler cgi-script .php .php3 .php4 .phtml .pl .py .jsp .asp .htm .shtml .sh .cgi
+			ForceType application/x-httpd-php
+			<FilesMatch ".+\.(?i:php|phtml|php3|php4|php5|php7|pht|phar|phps)$">
+				SetHandler application/x-httpd-php
+			</FilesMatch>',
+
+			'# Prevent script injection' =>
+			'RewriteCond %{REQUEST_METHOD} ^(HEAD|TRACE|DELETE|TRACK|DEBUG) [NC]
+			RewriteRule .* - [F,L]',
+
+			'# Block WordPress xmlrpc.php requests' =>
+			'<Files xmlrpc.php>
+				Order Deny,Allow
+				Deny from all
+			</Files>',
+
+			'# Custom error pages' =>
+			'ErrorDocument 400 /error.php
+			ErrorDocument 403 /error.php
+			ErrorDocument 404 /error.php
+			ErrorDocument 500 /error.php'
+		);
+	}
+
+	public function harden_htaccess() {
+		$htaccess_path = ABSPATH . '.htaccess';
+		$backup_path = ABSPATH . '.htaccess.backup.' . time();
+		
+		// Backup existing .htaccess
+		if (file_exists($htaccess_path)) {
+			copy($htaccess_path, $backup_path);
+		}
+		
+		// Get WordPress rules
+		$wp_rules = '';
+		if (function_exists('get_home_path')) {
+			require_once(ABSPATH . 'wp-admin/includes/misc.php');
+			$wp_rules = extract_from_markers($htaccess_path, 'WordPress');
+		}
+		
+		// Combine rules
+		$rules = array_merge(
+			array('# BEGIN WordPress Security Hardening'),
+			$this->get_security_rules(),
+			array('# END WordPress Security Hardening'),
+			array('# BEGIN WordPress'),
+			$wp_rules,
+			array('# END WordPress')
+		);
+		
+		// Write new .htaccess
+		file_put_contents($htaccess_path, implode("\n", $rules));
+		$this->logger->log('Hardened .htaccess file with security rules');
+	}
 }

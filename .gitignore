@@ -1,58 +1,66 @@
-# WordPress Core
-wp-admin/
-wp-includes/
+# Ignore everything by default
+/*
 
-# WordPress Core Files
-wp-activate.php
-wp-blog-header.php
-wp-comments-post.php
-wp-config-sample.php
-wp-cron.php
-wp-links-opml.php
-wp-load.php
-wp-login.php
-wp-mail.php
-wp-settings.php
-wp-signup.php
-wp-trackback.php
-xmlrpc.php
+# Track our .gitignore and workspace settings
+!.gitignore
+!*.code-workspace
 
-# WordPress Content - Track only custom plugins and themes
+# Track our custom security plugin only
+!wp-content/
 wp-content/*
 !wp-content/plugins/
-!wp-content/themes/
-
-# Track our custom security plugin
+wp-content/plugins/*
 !wp-content/plugins/wp-security-hardening/
 
-# WordPress Generated Files
-*.log
-.htaccess
-sitemap.xml
-sitemap.xml.gz
-
-# WordPress Uploads
-wp-content/uploads/
-wp-content/upgrade/
-wp-content/backup-db/
-wp-content/backups/
-wp-content/cache/
-wp-content/advanced-cache.php
-wp-content/object-cache.php
-wp-content/wp-cache-config.php
-wp-content/db.php
-
-# IDE and Editor Files
+# Development and IDE Files
 .idea/
 .vscode/
-*.swp
-*.swo
-*.swn
+.scannerwork/
+.sonarlint/
+.sonar/
+.phpintel/
+.php_cs.cache
+.php-cs-fixer.cache
+.phpunit.result.cache
+.phpstan.neon
+.phpcs.xml
+.phpcs.xml.dist
+.phplint.cache
+.phplint-cache
+.php_cs
+.php_cs.dist
+.php-cs-fixer.php
+.php-cs-fixer.dist.php
+
+# Hidden Files and Directories
+# Removed .* to allow workspace file
+.*
+
+# Node modules and build files
+node_modules/
+dist/
+build/
+*.min.css
+*.min.js
+
+# Composer
+vendor/
+composer.phar
+
+# Testing
+phpunit.xml
+coverage/
+tests/_output/
+.phpunit.result.cache
+
+# Temporary files
+*.tmp
+*.temp
 *.bak
-*.orig
+*.swp
 *~
 
-# macOS files
+# macOS
 .DS_Store
 .AppleDouble
 .LSOverride
@@ -62,29 +70,7 @@ wp-content/db.php
 ehthumbs.db
 Thumbs.db
 
-# Node modules and build files
-node_modules/
-dist/
-build/
-*.min.css
-*.min.js
-
-# Environment files
-.env
-.env.*
-!.env.example
-
-# Composer
-vendor/
-composer.phar
-
-# Testing
-phpunit.xml
-.phpunit.result.cache
-coverage/
-
-# Temporary files
-*.tmp
-*.temp
-*.bak
-*.swp
+# Logs and databases
+*.log
+*.sql
+*.sqlite

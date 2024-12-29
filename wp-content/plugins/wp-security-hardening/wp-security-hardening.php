@@ -4,7 +4,7 @@
  * Description: A comprehensive security plugin that hardens WordPress installations, prevents malware, and detects threats.
  * Version: 1.0.0
  * Requires at least: 5.8
- * Requires PHP: 7.4
+ * Requires PHP: 8.2
  * Author: Jessica Johnson
  * Author URI: https://jessica-johnson.ca
  * License: GPL v2 or later
@@ -74,7 +74,7 @@ class WP_Security_Hardening {
      */
     public function __construct() {
         $this->define_constants();
-        $this->includes();
+        $this->load_dependencies();
         $this->init_hooks();
         $this->init_components();
 
@@ -106,42 +106,62 @@ class WP_Security_Hardening {
     }
 
     /**
-     * Include required core files.
+     * Load plugin dependencies.
      */
-    private function includes() {
-        // Core classes
-        require_once WP_SECURITY_PLUGIN_DIR . 'includes/class-wp-optimizations.php';
-        require_once WP_SECURITY_PLUGIN_DIR . 'includes/class-resource-monitor.php';
-        require_once WP_SECURITY_PLUGIN_DIR . 'includes/class-login-hardening.php';
-        require_once WP_SECURITY_PLUGIN_DIR . 'includes/class-threat-intelligence.php';
-        require_once WP_SECURITY_PLUGIN_DIR . 'includes/class-ai-security.php';
-        require_once WP_SECURITY_PLUGIN_DIR . 'includes/class-db-cleaner.php';
-        require_once WP_SECURITY_PLUGIN_DIR . 'includes/class-htaccess-cleaner.php';
+    private function load_dependencies() {
+        // Utilities
+        require_once WP_SECURITY_PLUGIN_DIR . 'includes/utils/class-file-utils.php';
+        require_once WP_SECURITY_PLUGIN_DIR . 'includes/utils/class-code-utils.php';
+        require_once WP_SECURITY_PLUGIN_DIR . 'includes/utils/class-api-utils.php';
+
+        // Core dependencies
+        require_once WP_SECURITY_PLUGIN_DIR . 'includes/class-logger.php';
         require_once WP_SECURITY_PLUGIN_DIR . 'includes/class-rate-limiter.php';
-        require_once WP_SECURITY_PLUGIN_DIR . 'includes/class-distributed-scanner.php';
-        require_once WP_SECURITY_PLUGIN_DIR . 'includes/class-update-manager.php';
-        require_once WP_SECURITY_PLUGIN_DIR . 'includes/class-threat-apis.php';
-        require_once WP_SECURITY_PLUGIN_DIR . 'includes/class-health-monitor.php';
-        require_once WP_SECURITY_PLUGIN_DIR . 'includes/class-litespeed-optimizer.php';
-        require_once WP_SECURITY_PLUGIN_DIR . 'includes/class-cron-manager.php';
+        require_once WP_SECURITY_PLUGIN_DIR . 'includes/class-api-manager.php';
+        require_once WP_SECURITY_PLUGIN_DIR . 'includes/class-notifications.php';
+        
+        // Security components
         require_once WP_SECURITY_PLUGIN_DIR . 'includes/class-security-scanner.php';
+        require_once WP_SECURITY_PLUGIN_DIR . 'includes/class-threat-intelligence.php';
+        require_once WP_SECURITY_PLUGIN_DIR . 'includes/class-threat-apis.php';
+        require_once WP_SECURITY_PLUGIN_DIR . 'includes/class-file-integrity.php';
         require_once WP_SECURITY_PLUGIN_DIR . 'includes/class-malware-detector.php';
-        require_once WP_SECURITY_PLUGIN_DIR . 'includes/class-ip-manager.php';
         require_once WP_SECURITY_PLUGIN_DIR . 'includes/class-code-analyzer.php';
-        require_once WP_SECURITY_PLUGIN_DIR . 'includes/class-site-coordinator.php';
+        require_once WP_SECURITY_PLUGIN_DIR . 'includes/class-infection-tracer.php';
+        require_once WP_SECURITY_PLUGIN_DIR . 'includes/class-ai-security.php';
+        
+        // Repair and maintenance
+        require_once WP_SECURITY_PLUGIN_DIR . 'includes/class-core-repair.php';
+        require_once WP_SECURITY_PLUGIN_DIR . 'includes/class-wp-security-core-repair.php';
         require_once WP_SECURITY_PLUGIN_DIR . 'includes/class-plugin-repair.php';
         require_once WP_SECURITY_PLUGIN_DIR . 'includes/class-quarantine-manager.php';
-        require_once WP_SECURITY_PLUGIN_DIR . 'includes/class-logger.php';
-        require_once WP_SECURITY_PLUGIN_DIR . 'includes/class-infection-tracer.php';
-        require_once WP_SECURITY_PLUGIN_DIR . 'includes/class-notifications.php';
-        require_once WP_SECURITY_PLUGIN_DIR . 'includes/class-virustotal-scanner.php';
-        require_once WP_SECURITY_PLUGIN_DIR . 'includes/class-plugin-integrations.php';
-        require_once WP_SECURITY_PLUGIN_DIR . 'includes/class-yara-scanner.php';
-        require_once WP_SECURITY_PLUGIN_DIR . 'includes/class-site-network.php';
+        require_once WP_SECURITY_PLUGIN_DIR . 'includes/class-htaccess-cleaner.php';
+        require_once WP_SECURITY_PLUGIN_DIR . 'includes/class-db-cleaner.php';
+        
+        // Monitoring and optimization
+        require_once WP_SECURITY_PLUGIN_DIR . 'includes/class-health-monitor.php';
+        require_once WP_SECURITY_PLUGIN_DIR . 'includes/class-resource-monitor.php';
+        require_once WP_SECURITY_PLUGIN_DIR . 'includes/class-wp-optimizations.php';
         require_once WP_SECURITY_PLUGIN_DIR . 'includes/class-hostinger-optimizations.php';
-        require_once WP_SECURITY_PLUGIN_DIR . 'includes/class-file-integrity.php';
-
-        // Admin classes
+        require_once WP_SECURITY_PLUGIN_DIR . 'includes/class-litespeed-optimizer.php';
+        
+        // Scanning engines
+        require_once WP_SECURITY_PLUGIN_DIR . 'includes/class-virustotal-scanner.php';
+        require_once WP_SECURITY_PLUGIN_DIR . 'includes/class-yara-scanner.php';
+        require_once WP_SECURITY_PLUGIN_DIR . 'includes/class-distributed-scanner.php';
+        
+        // Network and access control
+        require_once WP_SECURITY_PLUGIN_DIR . 'includes/class-site-network.php';
+        require_once WP_SECURITY_PLUGIN_DIR . 'includes/class-site-coordinator.php';
+        require_once WP_SECURITY_PLUGIN_DIR . 'includes/class-ip-manager.php';
+        require_once WP_SECURITY_PLUGIN_DIR . 'includes/class-login-hardening.php';
+        require_once WP_SECURITY_PLUGIN_DIR . 'includes/class-plugin-integrations.php';
+        
+        // System management
+        require_once WP_SECURITY_PLUGIN_DIR . 'includes/class-cron-manager.php';
+        require_once WP_SECURITY_PLUGIN_DIR . 'includes/class-update-manager.php';
+        
+        // Admin components
         if (is_admin()) {
             require_once WP_SECURITY_PLUGIN_DIR . 'admin/class-security-dashboard.php';
             require_once WP_SECURITY_PLUGIN_DIR . 'admin/class-security-settings.php';
@@ -152,40 +172,59 @@ class WP_Security_Hardening {
      * Initialize plugin components.
      */
     private function init_components() {
+        // Initialize core dependencies first
+        $this->components['logger'] = new WP_Security_Logger();
+        $this->components['rate_limiter'] = new WP_Security_Rate_Limiter();
+        $this->components['api_manager'] = new WP_Security_API_Manager([
+            'jessica-johnson.ca',
+            'rayzgyproc.com',
+            'spectrapsychology.com'
+        ]);
+        
+        // Initialize security components
+        $this->components['scanner'] = new WP_Security_Scanner($this->components['logger']);
+        $this->components['threat_intel'] = new WP_Security_Threat_Intelligence($this->components['api_manager']);
+        $this->components['file_monitor'] = new WP_Security_File_Monitor();
+        $this->components['quarantine'] = new WP_Security_Quarantine_Manager();
+        $this->components['core_repair'] = new WP_Security_Core_Repair();
+        $this->components['health_monitor'] = new WP_Security_Health_Monitor();
+        $this->components['malware_detector'] = new WP_Security_Malware_Detector(
+            $this->components['scanner'],
+            $this->components['threat_intel']
+        );
+        
+        // Initialize optimization components
         $this->components['optimizations'] = new WP_Security_WP_Optimizations();
         $this->components['resource_monitor'] = new WP_Security_Resource_Monitor();
-        $this->components['login_hardening'] = new WP_Security_Login_Hardening();
-        $this->components['threat_intelligence'] = new WP_Security_Threat_Intelligence();
-        $this->components['ai_security'] = new WP_Security_AI_Security();
-        $this->components['db_cleaner'] = new WP_Security_DB_Cleaner();
-        $this->components['htaccess_cleaner'] = new WP_Security_Htaccess_Cleaner();
-        $this->components['rate_limiter'] = new WP_Security_Rate_Limiter();
-        $this->components['distributed_scanner'] = new WP_Security_Distributed_Scanner();
-        $this->components['update_manager'] = new WP_Security_Update_Manager();
-        $this->components['threat_apis'] = new WP_Security_Threat_APIs();
-        $this->components['health_monitor'] = new WP_Security_Health_Monitor();
-        $this->components['litespeed_optimizer'] = new WP_Security_Litespeed_Optimizer();
+        
+        // Initialize system components
         $this->components['cron_manager'] = new WP_Security_Cron_Manager();
-        $this->components['security_scanner'] = new WP_Security_Scanner();
-        $this->components['malware_detector'] = new WP_Security_Malware_Detector();
-        $this->components['ip_manager'] = new WP_Security_IP_Manager();
-        $this->components['code_analyzer'] = new WP_Security_Code_Analyzer();
-        $this->components['site_coordinator'] = new WP_Security_Site_Coordinator();
-        $this->components['plugin_repair'] = new WP_Security_Plugin_Repair();
-        $this->components['quarantine_manager'] = new WP_Security_Quarantine_Manager();
-        $this->components['logger'] = new WP_Security_Logger();
-        $this->components['infection_tracer'] = new WP_Security_Infection_Tracer();
-        $this->components['notifications'] = new WP_Security_Notifications();
-        $this->components['virustotal_scanner'] = new WP_Security_Virustotal_Scanner();
-        $this->components['plugin_integrations'] = new WP_Security_Plugin_Integrations();
-        $this->components['yara_scanner'] = new WP_Security_Yara_Scanner();
+        $this->components['update_manager'] = new WP_Security_Update_Manager();
+        
+        // Initialize network components
         $this->components['site_network'] = new WP_Security_Site_Network();
-        $this->components['hostinger_optimizations'] = new WP_Security_Hostinger_Optimizations();
-        $this->components['file_integrity'] = new WP_Security_File_Integrity();
-
+        $this->components['ip_manager'] = new WP_Security_IP_Manager();
+        
+        // Initialize admin components
         if (is_admin()) {
-            $this->components['dashboard'] = new WP_Security_Dashboard();
+            $this->components['dashboard'] = new WP_Security_Dashboard(
+                $this->components['api_manager'],
+                $this->components['scanner'],
+                $this->components['threat_intel'],
+                $this->components['file_monitor'],
+                $this->components['quarantine'],
+                $this->components['core_repair'],
+                $this->components['health_monitor']
+            );
+            
             $this->components['settings'] = new WP_Security_Settings();
+        }
+        
+        // Register hooks for all components
+        foreach ($this->components as $component) {
+            if (method_exists($component, 'init')) {
+                $component->init();
+            }
         }
     }
 
@@ -307,15 +346,15 @@ class WP_Security_Hardening {
      */
     public function admin_notices() {
         // Check PHP version
-        if (version_compare(PHP_VERSION, '7.4', '<')) {
+        if (version_compare(PHP_VERSION, '8.2', '<')) {
             $message = sprintf(
                 /* translators: 1: Current PHP version 2: Required PHP version */
                 __(
-                    'WP Security Hardening requires PHP version %2$s or higher. You are running version %1$s.',
+                    'WordPress Security Hardening requires PHP version %2$s or higher. Your current PHP version is %1$s. Please upgrade PHP to run this plugin.',
                     'wp-security-hardening'
                 ),
                 PHP_VERSION,
-                '7.4'
+                '8.2'
             );
             echo '<div class="error"><p>' . esc_html($message) . '</p></div>';
         }

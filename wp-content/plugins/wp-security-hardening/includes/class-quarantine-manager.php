@@ -193,6 +193,10 @@ class WP_Security_Quarantine_Manager {
 		update_option( $this->quarantine_option, $this->quarantine_log );
 	}
 
+	public function get_quarantine_path($file_path) {
+		return $this->quarantine_dir . '/' . date('Y-m-d_H-i-s') . '_' . md5($file_path) . '.quar';
+	}
+
 	public function cleanup_quarantine() {
 		$total_size   = 0;
 		$current_time = time();

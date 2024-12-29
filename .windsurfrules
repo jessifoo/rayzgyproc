@@ -13,3 +13,53 @@ Always check wp-security-hardening/README.md to see where we're at
 and make sure to add updates for what you've done so you always have the right context
 
 Before creating a new file look through the files to make sure one hasn't already been made that could be extended or modified.
+
+1. Project-Wide Connectivity Audit:
+   • For each file in the project:
+   • Identify all defined functions, methods, and classes.
+   • Verify that each is invoked or utilized in other parts of the project.
+   • Ensure inter-file dependencies are resolved (e.g., functions or methods defined in one file are accessible and used in relevant files).
+
+2. Functionality and Implementation Validation:
+   • Review each file to ensure:
+   • Every function has a clear purpose, implementation, and connection to the overall project.
+   • Functions perform their intended roles end-to-end, from initialization to final output.
+   • Validate that no redundant or unused functions remain unless explicitly marked as deprecated or placeholders for future work.
+
+3. Integration Check:
+   • Test the integration of functionality across files:
+   • Trace workflows that span multiple files, ensuring proper data flow and processing.
+   • Validate that methods like deobfuscate_js() and analyze_code_content() in File A are fully utilized in File B, File C, etc.
+
+4. Documentation and Usability:
+   • Ensure every file has:
+   • Clear documentation for its purpose and role in the project.
+   • Inline comments explaining key functions, especially when they interact with other files.
+   • Create or update external documentation to reflect changes across all files.
+
+5. Security and Error Handling:
+   • Apply a consistent error-handling and validation approach across all files.
+   • Ensure all functions interacting with external inputs are secure against common vulnerabilities (e.g., input sanitization, output validation).
+   • Verify that all file operations use secure functions, such as WordPress filesystem functions if applicable.
+
+6. Code Quality and Style Consistency:
+   • Confirm adherence to project-wide coding standards:
+   • Consistent naming conventions.
+   • Proper use of indentation, spacing, and formatting.
+   • Ensure the use of standardized libraries or utilities for repeated functionality.
+
+7. Testing and Debugging:
+   • Update or create unit tests for all files:
+   • Include tests for individual functions.
+   • Add end-to-end tests for workflows involving multiple files.
+   • Run integration tests to confirm cross-file dependencies function correctly.
+
+8. Refactoring Opportunities:
+   • Identify redundant or overlapping functionality across files and consolidate into reusable modules or libraries.
+   • Suggest optimizations for repeated code patterns.
+
+9. Final Project Audit:
+   • Perform a final pass to confirm:
+   • All functions and workflows across files are fully connected.
+   • No unused, unconnected, or partially implemented components remain.
+   • The project operates as a cohesive whole.

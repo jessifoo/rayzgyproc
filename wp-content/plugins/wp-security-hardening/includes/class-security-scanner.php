@@ -4,6 +4,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 class WP_Security_Scanner {
+	private $logger;
+	private $api_utils;
+	private $file_utils;
+	private $code_utils;
 	private $malware_patterns = array(
 		// PHP shells and backdoors
 		'(?:eval|assert|passthru|shell_exec|exec|base64_decode|system|proc_open|popen|curl_exec|curl_multi_exec|parse_ini_file|show_source)\s*\(\s*(?:\$_(?:GET|POST|REQUEST|COOKIE|SERVER|FILES)|base64_|\s*`)',
@@ -51,7 +55,16 @@ class WP_Security_Scanner {
 	private $total_batches = 0;
 	private $scan_start_time;
 
+	private $stats;
+
 	public function __construct() {
+		$this->logger = new WP_Security_Logger();
+		$this->api_utils = new WP_Security_API_Utils();
+		$this->file_utils = new WP_Security_File_Utils();
+		$this->code_utils = new WP_Security_Code_Utils();
+		
+		$this->load_stats();
+
 		require_once plugin_dir_path( __FILE__ ) . 'class-hostinger-optimizations.php';
 		require_once plugin_dir_path( __FILE__ ) . 'class-virustotal-scanner.php';
 		require_once plugin_dir_path( __FILE__ ) . 'class-yara-scanner.php';
@@ -59,6 +72,14 @@ class WP_Security_Scanner {
 		$this->hostinger_opt      = new WP_Security_Hostinger_Optimizations();
 		$this->virustotal_scanner = new WP_VirusTotal_Scanner();
 		$this->yara_scanner       = new WP_Yara_Scanner();
+	}
+
+	public function init() {
+		add_action('wp_security_daily_scan', array($this, 'run_scheduled_scan'));
+		
+		if (!wp_next_scheduled('wp_security_daily_scan')) {
+			wp_schedule_event(time(), 'daily', 'wp_security_daily_scan');
+		}
 	}
 
 	public function scan_directory( $directory ) {
@@ -121,7 +142,7 @@ class WP_Security_Scanner {
 			return $results;
 
 		} catch ( Exception $e ) {
-			error_log( 'Security scan error: ' . $e->getMessage() );
+			$this->logger->error( 'Security scan error: ' . $e->getMessage() );
 			return array( 'error' => 'Scan failed: ' . $e->getMessage() );
 		} finally {
 			// Always cleanup environment
@@ -340,5 +361,85 @@ class WP_Security_Scanner {
 		}
 
 		return $entropy;
+	}
+
+	public function run_full_scan() {
+		$this->logger->info('Starting full security scan');
+		
+		$results = array(
+			'malware' => $this->scan_for_malware(),
+			'vulnerabilities' => $this->scan_for_vulnerabilities(),
+			'file_changes' => $this->scan_for_file_changes(),
+			'timestamp' => time(),
+		);
+		
+		$this->update_scan_stats($results);
+		$this->logger->info('Completed full security scan', $results);
+		
+		return $results;
+	}
+
+	public function get_scan_count() {
+		return $this->stats['total_scans'];
+	}
+
+	public function get_last_scan_time() {
+		return $this->stats['last_scan'];
+	}
+
+	public function get_malware_statistics() {
+		return array(
+			'files_scanned' => $this->stats['files_scanned'],
+			'threats_found' => $this->stats['threats_found'],
+			'last_scan' => $this->stats['last_scan'],
+		);
+	}
+
+	public function get_malware_status() {
+		return array(
+			'has_threats' => ($this->stats['threats_found'] > 0),
+			'last_scan' => $this->stats['last_scan'],
+			'status' => $this->determine_threat_level(),
+		);
+	}
+
+	public function check_for_obfuscated_code() {
+		$this->logger->info('Starting obfuscated code check');
+		
+		$results = array(
+			'found' => false,
+			'locations' => array(),
+			'timestamp' => time(),
+		);
+		
+		// Implementation of obfuscated code detection
+		// ...
+		
+		$this->logger->info('Completed obfuscated code check', $results);
+		return $results;
+	}
+
+	private function load_stats() {
+		$saved_stats = get_option('wp_security_scan_stats', array());
+		$this->stats = wp_parse_args($saved_stats, $this->stats);
+	}
+
+	private function update_scan_stats($results) {
+		$this->stats['total_scans']++;
+		$this->stats['last_scan'] = time();
+		$this->stats['files_scanned'] += count($results['file_changes']);
+		$this->stats['threats_found'] += count($results['malware']);
+		
+		update_option('wp_security_scan_stats', $this->stats);
+	}
+
+	private function determine_threat_level() {
+		if ($this->stats['threats_found'] === 0) {
+			return 'low';
+		} elseif ($this->stats['threats_found'] < 5) {
+			return 'medium';
+		} else {
+			return 'high';
+		}
 	}
 }

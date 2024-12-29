@@ -113,19 +113,20 @@ class WP_Security_Threat_Intelligence {
 		'max_execution_time'      => 30,
 	);
 
+	private $logger;
+	private $patterns = array();
+	private $last_update;
+	private $code_analyzer;
+	private $api_utils;
+	private $file_utils;
+
 	public function __construct() {
-		global $wpdb;
-		$this->patterns_table = $wpdb->prefix . 'security_threat_patterns';
-		$this->intel_table    = $wpdb->prefix . 'security_threat_intel';
-
-		$this->init_database();
-		$this->init_safety_checks();
-		$this->schedule_updates();
-
-		add_action( 'wp_security_update_intel', array( $this, 'update_threat_intelligence' ) );
-		if ( ! wp_next_scheduled( 'wp_security_update_intel' ) ) {
-			wp_schedule_event( time(), 'daily', 'wp_security_update_intel' );
-		}
+		require_once __DIR__ . '/class-logger.php';
+		$this->logger = new WP_Security_Logger();
+		$this->load_patterns();
+		$this->code_analyzer = new WP_Security_Code_Analyzer();
+		$this->api_utils = new WP_Security_API_Utils();
+		$this->file_utils = new WP_Security_File_Utils();
 	}
 
 	public function schedule_updates() {
@@ -159,7 +160,7 @@ class WP_Security_Threat_Intelligence {
 	}
 
 	private function get_wordpress_patterns() {
-		$response = wp_remote_get( $this->sources['pattern_repo'] );
+		$response = $this->make_api_request( 'wordpress', $this->sources['pattern_repo'] );
 		if ( is_wp_error( $response ) ) {
 			return array();
 		}
@@ -176,7 +177,7 @@ class WP_Security_Threat_Intelligence {
 		$patterns = array();
 		foreach ( $this->github_repos as $repo => $branch ) {
 			$url      = "https://raw.githubusercontent.com/{$repo}/{$branch}/patterns.json";
-			$response = wp_remote_get( $url );
+			$response = $this->make_api_request( 'github', $url );
 
 			if ( ! is_wp_error( $response ) ) {
 				$repo_patterns = json_decode( wp_remote_retrieve_body( $response ), true );
@@ -399,7 +400,7 @@ class WP_Security_Threat_Intelligence {
 				$this->sources['wpvulndb']
 			);
 
-			$response = wp_remote_get( $api_url );
+			$response = $this->make_api_request( 'wpvulndb', $api_url );
 			if ( ! is_wp_error( $response ) ) {
 				$vulnerabilities = json_decode( wp_remote_retrieve_body( $response ), true );
 				if ( $vulnerabilities ) {
@@ -425,12 +426,7 @@ class WP_Security_Threat_Intelligence {
 		foreach ( $this->github_repos as $repo => $branch ) {
 			$url = "https://api.github.com/repos/{$repo}/commits?sha={$branch}";
 
-			$response = wp_remote_get(
-				$url,
-				array(
-					'headers' => array( 'Accept' => 'application/vnd.github.v3+json' ),
-				)
-			);
+			$response = $this->make_api_request( 'github', $url );
 
 			if ( ! is_wp_error( $response ) ) {
 				$commits = json_decode( wp_remote_retrieve_body( $response ), true );
@@ -502,28 +498,111 @@ class WP_Security_Threat_Intelligence {
 		}
 	}
 
-	private function extract_patterns_from_events( $events ) {
-		$patterns      = array();
-		$code_analyzer = new WP_Security_Code_Analyzer();
+	private function get_widget_settings() {
+		global $wp_registered_widgets;
+		$settings = array();
+		
+		foreach ($wp_registered_widgets as $widget_id => $widget) {
+			$settings[$widget_id] = get_option($widget['callback'][0]->option_name);
+		}
+		
+		return $settings;
+	}
 
-		foreach ( $events as $event ) {
-			$threat_data = json_decode( $event->threat_data, true );
-			if ( isset( $threat_data['code_sample'] ) ) {
-				// Analyze the malicious code
-				$analysis = $code_analyzer->analyze_code_content( $threat_data['code_sample'] );
-
-				// Extract patterns from analysis
-				foreach ( $analysis['patterns'] as $pattern ) {
-					$patterns[] = array(
-						'type'     => 'regex',
-						'pattern'  => $pattern['pattern'],
-						'severity' => $pattern['severity'],
-					);
+	private function extract_patterns_from_commit($commit) {
+		$patterns = array();
+		
+		// Extract patterns from commit message and changes
+		$message = isset($commit['commit']['message']) ? $commit['commit']['message'] : '';
+		$files = isset($commit['files']) ? $commit['files'] : array();
+		
+		// Look for security-related keywords
+		$security_keywords = array(
+			'vulnerability', 'exploit', 'malware', 'injection', 'xss',
+			'csrf', 'rce', 'backdoor', 'security fix', 'patch'
+		);
+		
+		foreach ($security_keywords as $keyword) {
+			if (stripos($message, $keyword) !== false) {
+				// Extract relevant code patterns
+				foreach ($files as $file) {
+					if (isset($file['patch'])) {
+						$patterns = array_merge(
+							$patterns,
+							$this->extract_code_patterns($file['patch'])
+						);
+					}
 				}
+				break;
 			}
 		}
-
+		
 		return $patterns;
+	}
+
+	private function extract_code_patterns($patch_content) {
+		$patterns = array();
+		
+		// Common malware pattern indicators
+		$suspicious_patterns = array(
+			'eval\s*\(' => 'high',
+			'base64_decode\s*\(' => 'high',
+			'gzinflate\s*\(' => 'high',
+			'str_rot13\s*\(' => 'medium',
+			'exec\s*\(' => 'high',
+			'shell_exec\s*\(' => 'high',
+			'passthru\s*\(' => 'high',
+			'system\s*\(' => 'high',
+			'preg_replace\s*\([\'"].*e[\'"]' => 'high',
+			'assert\s*\(' => 'medium',
+			'create_function\s*\(' => 'medium',
+			'\$\{.+\}' => 'low',
+			'(?:file|fopen|file_get_contents)\s*\([\'"]https?://' => 'medium'
+		);
+		
+		foreach ($suspicious_patterns as $pattern => $severity) {
+			if (preg_match('/' . $pattern . '/i', $patch_content)) {
+				$patterns[] = array(
+					'type' => 'regex',
+					'pattern' => $pattern,
+					'severity' => $severity,
+					'description' => 'Potentially malicious code pattern'
+				);
+			}
+		}
+		
+		return $patterns;
+	}
+
+	private function analyze_code_content($content, $analysis = array()) {
+		if (empty($this->code_analyzer)) {
+			$this->code_analyzer = new WP_Security_Code_Analyzer();
+		}
+		return $this->code_analyzer->analyze_code_content($content, $analysis);
+	}
+
+	private function restore_from_backup($file_path) {
+		$backup_path = WP_CONTENT_DIR . '/wp-security-backups/' . md5($file_path);
+		
+		if (!file_exists($backup_path)) {
+			$this->logger->log(
+				'threat_intelligence',
+				"No backup found for file: {$file_path}",
+				'error'
+			);
+			return false;
+		}
+		
+		if (copy($backup_path, $file_path)) {
+			$this->logger->log(
+				'threat_intelligence',
+				"Restored file from backup: {$file_path}",
+				'info'
+			);
+			return true;
+		}
+		
+		return false;
 	}
 
 	private function map_severity( $external_severity ) {
@@ -743,5 +822,36 @@ class WP_Security_Threat_Intelligence {
 			'last_update'     => get_option( $this->last_update_option, 0 ),
 			'pattern_version' => get_option( $this->pattern_version_option, 0 ),
 		);
+	}
+
+	private function analyze_file($file_path) {
+		if (!$this->file_utils->is_scannable_file($file_path)) {
+			return false;
+		}
+
+		$content = $this->file_utils->read_file($file_path);
+		if (false === $content) {
+			return false;
+		}
+
+		// Create backup before analysis
+		$backup_path = $this->file_utils->create_backup($file_path);
+		if (false === $backup_path) {
+			$this->logger->error('Failed to create backup for file: ' . $file_path);
+		}
+
+		$analysis = array();
+		$this->code_analyzer->analyze_code_content($content, $analysis);
+		$analysis['backup_path'] = $backup_path;
+
+		return $analysis;
+	}
+
+	private function make_api_request($api_name, $url, $args = array()) {
+		return $this->api_utils->make_request($url, $args, $api_name, get_site_url());
+	}
+
+	private function can_make_api_request($api_name) {
+		return $this->api_utils->can_make_request($api_name, get_site_url());
 	}
 }
