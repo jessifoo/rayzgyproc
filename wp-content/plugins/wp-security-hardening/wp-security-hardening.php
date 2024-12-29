@@ -180,6 +180,7 @@ class WP_Security_Hardening {
             'rayzgyproc.com',
             'spectrapsychology.com'
         ]);
+        $this->components['site_coordinator'] = WP_Security_Site_Coordinator::get_instance();
         
         // Initialize security components
         $this->components['scanner'] = new WP_Security_Scanner($this->components['logger']);

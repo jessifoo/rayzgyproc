@@ -176,7 +176,7 @@ rule WordPress_Suspicious_Variables {
 }
 YARA;
 
-		file_put_contents( $this->rules_dir . 'WordPress.yar', $wp_rules );
+		WP_Security_File_Utils::write_file( $this->rules_dir . 'WordPress.yar', $wp_rules );
 	}
 
 	public function run_scheduled_scan() {
@@ -416,15 +416,28 @@ YARA;
 		wp_mail( get_option( 'admin_email' ), $subject, $message );
 	}
 
-	private function scan_file( $file_path ) {
-		if ( ! file_exists( $file_path ) ) {
-			return array( 'error' => 'File not found' );
+	private function scan_file( $file ) {
+		if ( ! WP_Security_File_Utils::is_scannable_file( $file ) ) {
+			return false;
 		}
 
+		$content = WP_Security_File_Utils::read_file( $file );
+		if ( false === $content ) {
+			return false;
+		}
+
+		return $this->analyze_content( $content, $file );
+	}
+
+	private function get_disk_writes() {
+		return WP_Security_File_Utils::get_disk_writes();
+	}
+
+	private function analyze_content( $content, $file ) {
 		// Check if yara-php extension is available
 		if ( ! extension_loaded( 'yara' ) ) {
 			// Fallback to command-line yara if available
-			return $this->scan_with_cli_yara( $file_path );
+			return $this->scan_with_cli_yara( $file );
 		}
 
 		try {
@@ -435,7 +448,7 @@ YARA;
 
 			$matches = array();
 			foreach ( $rules as $rule ) {
-				$rule_matches = $rule->scan( $file_path );
+				$rule_matches = $rule->scan( $content );
 				if ( ! empty( $rule_matches ) ) {
 					$matches = array_merge( $matches, $rule_matches );
 				}

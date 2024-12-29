@@ -119,57 +119,174 @@ class WP_Security_VirusTotal_Scanner {
 		$results = array();
 
 		foreach ( $files as $file ) {
-			if ( ! file_exists( $file ) ) {
-				continue;
-			}
-
-			$response = wp_remote_post(
-				$url,
-				array(
-					'headers' => array(
-						'Content-Type' => 'multipart/form-data',
-					),
-					'body'    => array(
-						'apikey' => $this->api_key,
-						'file'   => file_get_contents( $file ),
-					),
-				)
-			);
-
-			if ( ! is_wp_error( $response ) ) {
-				$body = json_decode( wp_remote_retrieve_body( $response ), true );
-				if ( ! empty( $body['scan_id'] ) ) {
-					// Wait for results
-					sleep( 15 ); // VirusTotal needs time to process
-					$results[ $file ] = $this->get_report( $body['scan_id'] );
-				}
+			$upload_result = $this->upload_file( $file );
+			if ( $upload_result ) {
+				$results[ $file ] = $upload_result;
 			}
 		}
 
 		return $results;
 	}
 
-	/**
-	 * Get scan report
-	 */
-	private function get_report( $scan_id ) {
-		$url = 'https://www.virustotal.com/vtapi/v2/file/report';
-
-		$response = wp_remote_post(
-			$url,
-			array(
-				'body' => array(
-					'apikey'   => $this->api_key,
-					'resource' => $scan_id,
-				),
-			)
-		);
-
-		if ( ! is_wp_error( $response ) ) {
-			return json_decode( wp_remote_retrieve_body( $response ), true );
+	private function upload_file( $file ) {
+		if ( ! WP_Security_File_Utils::is_scannable_file( $file ) ) {
+			return false;
 		}
 
-		return null;
+		$content = WP_Security_File_Utils::read_file( $file );
+		if ( false === $content ) {
+			return false;
+		}
+
+		return $this->upload_content( $content, basename( $file ) );
+	}
+
+	private function upload_content( $content, $filename ) {
+		if ( empty( $this->api_key ) ) {
+			self::$logger->error( 'VirusTotal API key not configured' );
+			return false;
+		}
+
+		try {
+			$response = wp_remote_post(
+				'https://www.virustotal.com/vtapi/v2/file/scan',
+				array(
+					'headers' => array(
+						'Content-Type' => 'multipart/form-data',
+					),
+					'body'    => array(
+						'apikey' => $this->api_key,
+						'file'   => $content,
+					),
+					'timeout' => 30,
+				)
+			);
+
+			if ( is_wp_error( $response ) ) {
+				self::$logger->error( 'VirusTotal API request failed', array(
+					'error' => $response->get_error_message(),
+					'file'  => $filename,
+				) );
+				return false;
+			}
+
+			$body = json_decode( wp_remote_retrieve_body( $response ), true );
+			$status_code = wp_remote_retrieve_response_code( $response );
+
+			if ( $status_code !== 200 ) {
+				self::$logger->error( 'VirusTotal API returned error', array(
+					'status' => $status_code,
+					'response' => $body,
+					'file' => $filename,
+				) );
+				return false;
+			}
+
+			if ( empty( $body['scan_id'] ) ) {
+				self::$logger->error( 'VirusTotal API response missing scan ID', array(
+					'response' => $body,
+					'file' => $filename,
+				) );
+				return false;
+			}
+
+			// Wait for results with proper timeout handling
+			$retry_count = 3;
+			$retry_delay = 15;
+
+			for ( $i = 0; $i < $retry_count; $i++ ) {
+				sleep( $retry_delay );
+				$report = $this->get_report( $body['scan_id'] );
+
+				if ( $report ) {
+					self::$logger->info( 'VirusTotal scan completed', array(
+						'file' => $filename,
+						'scan_id' => $body['scan_id'],
+						'positives' => isset( $report['positives'] ) ? $report['positives'] : 0,
+					) );
+					return $report;
+				}
+
+				self::$logger->warning( 'VirusTotal scan pending, retrying', array(
+					'attempt' => $i + 1,
+					'file' => $filename,
+					'scan_id' => $body['scan_id'],
+				) );
+			}
+
+			self::$logger->error( 'VirusTotal scan timed out', array(
+				'file' => $filename,
+				'scan_id' => $body['scan_id'],
+			) );
+			return false;
+
+		} catch ( Exception $e ) {
+			self::$logger->error( 'Exception during VirusTotal scan', array(
+				'error' => $e->getMessage(),
+				'file' => $filename,
+			) );
+			return false;
+		}
+	}
+
+	/**
+	 * Get scan report from VirusTotal
+	 */
+	private function get_report( $scan_id ) {
+		if ( empty( $this->api_key ) ) {
+			self::$logger->error( 'VirusTotal API key not configured' );
+			return false;
+		}
+
+		try {
+			$response = wp_remote_get(
+				'https://www.virustotal.com/vtapi/v2/file/report',
+				array(
+					'body' => array(
+						'apikey' => $this->api_key,
+						'resource' => $scan_id,
+					),
+					'timeout' => 15,
+				)
+			);
+
+			if ( is_wp_error( $response ) ) {
+				self::$logger->error( 'Failed to get VirusTotal report', array(
+					'error' => $response->get_error_message(),
+					'scan_id' => $scan_id,
+				) );
+				return false;
+			}
+
+			$body = json_decode( wp_remote_retrieve_body( $response ), true );
+			$status_code = wp_remote_retrieve_response_code( $response );
+
+			if ( $status_code !== 200 ) {
+				self::$logger->error( 'VirusTotal report API error', array(
+					'status' => $status_code,
+					'response' => $body,
+					'scan_id' => $scan_id,
+				) );
+				return false;
+			}
+
+			if ( ! isset( $body['response_code'] ) || $body['response_code'] !== 1 ) {
+				self::$logger->warning( 'VirusTotal report not ready', array(
+					'scan_id' => $scan_id,
+					'response_code' => isset( $body['response_code'] ) ? $body['response_code'] : null,
+				) );
+				return false;
+			}
+
+			return $body;
+
+		} catch ( Exception $e ) {
+			self::$logger->error( 'Exception while getting VirusTotal report', array(
+				'error' => $e->getMessage(),
+				'scan_id' => $scan_id,
+			) );
+			return false;
+		}
 	}
 
 	/**

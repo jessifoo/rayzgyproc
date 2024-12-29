@@ -139,22 +139,7 @@ class WP_Security_Site_Coordinator {
 	}
 
 	private function get_disk_writes() {
-		$status_file = $this->cache_dir . '/disk_writes.txt';
-
-		if ( ! file_exists( $status_file ) ) {
-			file_put_contents( $status_file, '0:' . time() );
-			return 0;
-		}
-
-		list($writes, $last_check) = explode( ':', file_get_contents( $status_file ) );
-
-		if ( time() - $last_check > 3600 ) {
-			// Reset counter every hour
-			file_put_contents( $status_file, '0:' . time() );
-			return 0;
-		}
-
-		return (int) $writes;
+		return WP_Security_File_Utils::get_disk_writes($this->cache_dir);
 	}
 
 	private function is_resource_critical( $usage ) {
@@ -177,18 +162,7 @@ class WP_Security_Site_Coordinator {
 	}
 
 	private function get_memory_limit() {
-		$limit = ini_get( 'memory_limit' );
-		if ( preg_match( '/^(\d+)(.)$/', $limit, $matches ) ) {
-			switch ( strtoupper( $matches[2] ) ) {
-				case 'G':
-					return $matches[1] * 1024 * 1024 * 1024;
-				case 'M':
-					return $matches[1] * 1024 * 1024;
-				case 'K':
-					return $matches[1] * 1024;
-			}
-		}
-		return $limit;
+		return WP_Security_File_Utils::get_memory_limit();
 	}
 
 	public function pause_intensive_operations() {

@@ -8,10 +8,20 @@ class WP_Security_Distributed_Scanner {
 	private $excluded_paths    = array();
 	private $known_good_hashes = array();
 	private $repair_mode       = false;
+	private $site_coordinator  = null;
 
 	public function __construct() {
-		$this->init_paths();
+		$this->site_coordinator = WP_Security_Site_Coordinator::get_instance();
+		add_action( 'init', array( $this, 'init_scanner' ) );
 		add_action( 'wp_security_scan_network', array( $this, 'scan_network' ) );
+	}
+
+	public function init_scanner() {
+		// Check if we should run scan based on site coordination
+		if ( ! $this->site_coordinator->check_resource_usage() ) {
+			return;
+		}
+		$this->init_paths();
 	}
 
 	private function init_paths() {

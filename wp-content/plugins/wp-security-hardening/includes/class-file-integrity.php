@@ -423,8 +423,8 @@ class WP_Security_File_Integrity {
 		$quarantine_dir = WP_CONTENT_DIR . '/security-quarantine';
 		if ( ! file_exists( $quarantine_dir ) ) {
 			wp_mkdir_p( $quarantine_dir );
-			file_put_contents( $quarantine_dir . '/.htaccess', 'Deny from all' );
-			file_put_contents( $quarantine_dir . '/index.php', '<?php // Silence is golden.' );
+			WP_Security_File_Utils::write_file( $quarantine_dir . '/.htaccess', 'Deny from all' );
+			WP_Security_File_Utils::write_file( $quarantine_dir . '/index.php', '<?php // Silence is golden.' );
 		}
 
 		foreach ( $suspicious as $file ) {
@@ -501,14 +501,14 @@ class WP_Security_File_Integrity {
 	}
 
 	private function check_file_integrity($file_path) {
-		if (!$this->file_utils->is_scannable_file($file_path)) {
+		if (!WP_Security_File_Utils::is_scannable_file($file_path)) {
 			return array(
 				'status' => 'skipped',
 				'reason' => 'File type not supported for scanning'
 			);
 		}
 
-		$content = $this->file_utils->read_file($file_path);
+		$content = WP_Security_File_Utils::read_file($file_path);
 		if (false === $content) {
 			return array(
 				'status' => 'error',
@@ -534,7 +534,7 @@ class WP_Security_File_Integrity {
 		// Create backup if issues found
 		$backup_path = null;
 		if (!empty($dangerous_funcs) || !empty($obfuscation)) {
-			$backup_path = $this->file_utils->create_backup($file_path);
+			$backup_path = WP_Security_File_Utils::create_backup($file_path);
 		}
 
 		return array(
@@ -552,21 +552,21 @@ class WP_Security_File_Integrity {
 		// Core files
 		foreach ($this->critical_files as $file) {
 			$path = ABSPATH . $file;
-			if ($this->file_utils->is_scannable_file($path)) {
+			if (WP_Security_File_Utils::is_scannable_file($path)) {
 				$files[] = $path;
 			}
 		}
 
 		// Active theme files
 		$theme_root = get_theme_root() . '/' . get_template();
-		$theme_files = $this->file_utils->list_files($theme_root, array('php', 'js'));
+		$theme_files = WP_Security_File_Utils::list_files($theme_root, array('php', 'js'));
 		$files = array_merge($files, $theme_files);
 
 		// Active plugin files
 		$active_plugins = get_option('active_plugins');
 		foreach ($active_plugins as $plugin) {
 			$plugin_path = WP_PLUGIN_DIR . '/' . dirname($plugin);
-			$plugin_files = $this->file_utils->list_files($plugin_path, array('php', 'js'));
+			$plugin_files = WP_Security_File_Utils::list_files($plugin_path, array('php', 'js'));
 			$files = array_merge($files, $plugin_files);
 		}
 

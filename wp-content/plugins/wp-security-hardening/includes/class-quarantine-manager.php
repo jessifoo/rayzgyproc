@@ -9,11 +9,13 @@ class WP_Security_Quarantine_Manager {
 	private $max_quarantine_size = 104857600; // 100MB
 	private $max_quarantine_age  = 604800; // 7 days
 	private $quarantine_option   = 'wp_security_quarantine_log';
+	private $site_coordinator;
 
 	public function __construct() {
 		$upload_dir           = wp_upload_dir();
 		$this->quarantine_dir = $upload_dir['basedir'] . '/security-quarantine';
 		$this->quarantine_log = get_option( $this->quarantine_option, array() );
+		$this->site_coordinator = WP_Security_Site_Coordinator::get_instance();
 
 		// Create quarantine directory if it doesn't exist
 		if ( ! file_exists( $this->quarantine_dir ) ) {
@@ -30,6 +32,12 @@ class WP_Security_Quarantine_Manager {
 
 	public function quarantine_file( $file_path, $threat_details ) {
 		if ( ! file_exists( $file_path ) ) {
+			return false;
+		}
+
+		// Check resource usage before quarantine operation
+		if ( ! $this->site_coordinator->check_resource_usage() ) {
+			error_log( 'Quarantine operation paused - Resource usage too high' );
 			return false;
 		}
 
@@ -68,69 +76,19 @@ class WP_Security_Quarantine_Manager {
 	}
 
 	private function secure_file( $source_path, $dest_path, $metadata ) {
-		try {
-			// Read file content
-			$content = file_get_contents( $source_path );
-			if ( $content === false ) {
-				return false;
-			}
-
-			// Prepare package
-			$package = array(
-				'metadata' => $metadata,
-				'content'  => base64_encode( $content ),
-			);
-
-			// Encrypt package
-			$encrypted = $this->encrypt_data( json_encode( $package ) );
-			if ( $encrypted === false ) {
-				return false;
-			}
-
-			// Save encrypted file
-			return file_put_contents( $dest_path, $encrypted ) !== false;
-		} catch ( Exception $e ) {
-			error_log( 'Quarantine error: ' . $e->getMessage() );
-			return false;
-		}
+		return WP_Security_File_Utils::secure_file($source_path, $dest_path, $metadata);
 	}
 
 	private function encrypt_data( $data ) {
-		if ( ! function_exists( 'openssl_encrypt' ) ) {
-			// Fallback to simple encoding if OpenSSL is not available
-			return base64_encode( gzcompress( $data ) );
-		}
-
-		$key       = $this->get_encryption_key();
-		$iv        = openssl_random_pseudo_bytes( openssl_cipher_iv_length( 'AES-256-CBC' ) );
-		$encrypted = openssl_encrypt( $data, 'AES-256-CBC', $key, 0, $iv );
-
-		return base64_encode( $iv . $encrypted );
+		return WP_Security_File_Utils::encrypt_data($data);
 	}
 
 	private function decrypt_data( $encrypted_data ) {
-		$encrypted_data = base64_decode( $encrypted_data );
-
-		if ( ! function_exists( 'openssl_decrypt' ) ) {
-			// Fallback to simple decoding if OpenSSL is not available
-			return gzuncompress( base64_decode( $encrypted_data ) );
-		}
-
-		$key       = $this->get_encryption_key();
-		$ivlen     = openssl_cipher_iv_length( 'AES-256-CBC' );
-		$iv        = substr( $encrypted_data, 0, $ivlen );
-		$encrypted = substr( $encrypted_data, $ivlen );
-
-		return openssl_decrypt( $encrypted, 'AES-256-CBC', $key, 0, $iv );
+		return WP_Security_File_Utils::decrypt_data($encrypted_data);
 	}
 
 	private function get_encryption_key() {
-		$key = get_option( 'wp_security_quarantine_key' );
-		if ( ! $key ) {
-			$key = wp_generate_password( 32, true, true );
-			update_option( 'wp_security_quarantine_key', $key );
-		}
-		return $key;
+		return WP_Security_File_Utils::get_encryption_key();
 	}
 
 	public function restore_file( $quarantine_name ) {
@@ -198,6 +156,12 @@ class WP_Security_Quarantine_Manager {
 	}
 
 	public function cleanup_quarantine() {
+		// Check resource usage before cleanup
+		if ( ! $this->site_coordinator->check_resource_usage() ) {
+			error_log( 'Quarantine cleanup paused - Resource usage too high' );
+			return false;
+		}
+
 		$total_size   = 0;
 		$current_time = time();
 

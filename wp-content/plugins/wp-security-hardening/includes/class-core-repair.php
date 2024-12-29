@@ -41,11 +41,7 @@ class WP_Security_Core_Repair {
         
         // Create backup before restoration
         if (file_exists($file_path)) {
-            $backup_dir = dirname($backup_path);
-            if (!file_exists($backup_dir)) {
-                wp_mkdir_p($backup_dir);
-            }
-            copy($file_path, $backup_path);
+            $this->backup_file($file_path);
         }
         
         // Get fresh copy from WordPress
@@ -67,14 +63,8 @@ class WP_Security_Core_Repair {
             return false;
         }
         
-        // Ensure directory exists
-        $dir = dirname($file_path);
-        if (!file_exists($dir)) {
-            wp_mkdir_p($dir);
-        }
-        
         // Write new file
-        if (file_put_contents($file_path, $content)) {
+        if ($this->restore_file($file_path, $content)) {
             $this->logger->log(
                 'core_repair',
                 "Restored core file: {$file}",
@@ -99,7 +89,8 @@ class WP_Security_Core_Repair {
             return false;
         }
         
-        if (copy($backup_path, $file_path)) {
+        $content = file_get_contents($backup_path);
+        if ($this->restore_file($file_path, $content)) {
             $this->logger->log(
                 'core_repair',
                 "Restored core file from backup: {$file}",
@@ -127,5 +118,18 @@ class WP_Security_Core_Repair {
         }
         
         return $data['checksums'];
+    }
+
+    private function backup_file($file_path) {
+        return WP_Security_File_Utils::create_backup($file_path);
+    }
+
+    private function restore_file($file_path, $content) {
+        $dir = dirname($file_path);
+        if (!file_exists($dir)) {
+            WP_Security_File_Utils::write_file($dir . '/.placeholder', '');
+        }
+
+        return WP_Security_File_Utils::write_file($file_path, $content);
     }
 }
