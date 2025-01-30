@@ -47,6 +47,8 @@ jobs:
           build-mode: autobuild
         - language: javascript-typescript
           build-mode: none
+        - language: php
+          build-mode: none
         # CodeQL supports the following values keywords for 'language': 'c-cpp', 'csharp', 'go', 'java-kotlin', 'javascript-typescript', 'python', 'ruby', 'swift'
         # Use `c-cpp` to analyze code written in C, C++ or both
         # Use 'java-kotlin' to analyze code written in Java, Kotlin or both
@@ -92,3 +94,16 @@ jobs:
       uses: github/codeql-action/analyze@v3
       with:
         category: "/language:${{matrix.language}}"
+        
+    - name: WordPress Vulnerability Scanner              
+      # You may pin to the exact commit or the version.
+      # uses: jazzsequence/action-wordpress-vulnerability-scanner@fe087125aa4e6478f4a933dcd0e9b3619935e9c0
+      uses: jazzsequence/action-wordpress-vulnerability-scanner@1.0.1
+      with:
+        # The API provider to use for the vulnerability check. Valid options are `patchstack`, `wpscan` and `wordfence`. Defaults to `wordfence`.
+        # The API token to use for the vulnerability check. Defaults to `''`. Patchstack and WPScan both require an API token. The API token is optional for Wordfence.
+        # The type of vulnerability check to run. Valid options are `plugin`, `theme` and `core`. Defaults to `plugin`.
+        type: core, plugin
+        # optional, default is plugin
+        # The name of the plugin or theme to check. Defaults to the name of the repository.
+            
