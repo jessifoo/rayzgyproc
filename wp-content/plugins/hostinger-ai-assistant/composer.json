@@ -1,0 +1,38 @@
+{
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "git@github.com:hostinger/hostinger-wp-helper.git"
+    },
+    {
+      "type": "vcs",
+      "url": "git@github.com:hostinger/hostinger-wp-menu-manager.git"
+    },
+    {
+      "type": "vcs",
+      "url": "git@github.com:hostinger/hostinger-wp-surveys.git"
+    },
+    {
+      "type": "vcs",
+      "url": "git@github.com:hostinger/hostinger-wp-amplitude.git"
+    }
+  ],
+  "require": {
+    "yahnis-elsts/plugin-update-checker": "^5.1",
+    "alleyinteractive/wp-block-converter": "^1.5",
+    "automattic/jetpack-autoloader": "^3.0",
+    "hostinger/hostinger-wp-helper": "dev-main",
+    "hostinger/hostinger-wp-menu-manager": "dev-main",
+    "hostinger/hostinger-wp-surveys": "dev-main",
+    "hostinger/hostinger-wp-amplitude": "dev-main",
+    "psr/log": "1.1"
+  },
+  "config": {
+    "platform-check": false,
+    "allow-plugins": {
+      "automattic/jetpack-autoloader": true,
+      "alleyinteractive/composer-wordpress-autoloader": true
+    }
+  },
+  "minimum-stability": "dev"
+}

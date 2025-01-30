@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36">
+	<defs>
+		<style>
+            #checkmark-bg {
+                fill: transparent;
+            }
+			.cls-1{fill:#608a9f;}
+		</style>
+	</defs>
+	<g id="Layer_2" data-name="Layer 2">
+		<g id="Layer_1-2" data-name="Layer 1">
+			<rect id="checkmark-bg" width="36" height="36" />
+			<polygon id="checkmark" class="cls-1" points="14.75 20.78 2.64 15.63 0 16.44 14.75 31.32 36 4.68 32.28 4.68 14.75 20.78" />
+		</g>
+	</g>
+</svg>

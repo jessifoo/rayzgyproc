@@ -1,0 +1,534 @@
+# Copyright (C) 2024 Hostinger
+# This file is distributed under the GPL-2.0+.
+msgid ""
+msgstr ""
+"Project-Id-Version: Hostinger AI 2.0.13\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/hostinger-ai-"
+"assistant\n"
+"Last-Translator: \n"
+"Language-Team: Korean\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2024-08-19T12:02:35+00:00\n"
+"PO-Revision-Date: 2025-01-15 07:07+0000\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Domain: hostinger-ai-assistant\n"
+"Language: ko_KR\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Loco-Version: 2.6.14; wp-6.7.1"
+
+#: includes/class-hostinger-ai-assistant-errors.php:14
+msgid "Action Failed. Try again or contact support. Apologies."
+msgstr ""
+"죄송합니다. 작업이 실패했습니다. 다시 시도하거나 지원팀에 문의해 주세요.\n"
+
+#: gutenberg-block/dist/index.js:1 gutenberg-block/src/edit.js:353
+msgid "Add an image inside my content"
+msgstr "내 콘텐츠에 이미지 추가"
+
+#: admin/class-hostinger-ai-assistant-admin.php:134
+#: admin/class-hostinger-ai-assistant-admin.php:135
+#: admin/partials/hostinger-ai-assistant-tab-view.php:23
+#: gutenberg-block/dist/index.js:1 gutenberg-block/src/index.js:10
+msgid "AI Content Creator"
+msgstr "AI 콘텐츠 크리에이터"
+
+#: admin/class-hostinger-ai-assistant-translations.php:49
+msgid "AI may produce inaccurate information"
+msgstr "AI는 부정확한 정보를 생성할 수 있습니다"
+
+#: admin/class-hostinger-ai-assistant-translations.php:34
+msgid "AI-generated image"
+msgstr "AI 생성 이미지"
+
+#: includes/class-hostinger-ai-assistant-errors.php:17
+msgid "An unexpected error occurred. Please try again or contact support."
+msgstr "예기치 않은 오류가 발생했습니다. 다시 시도하거나 지원팀에 문의하세요."
+
+#: admin/partials/hostinger-ai-assistant-tab-view.php:217
+msgid "Are you sure you want to replace your existing content with a new one ?"
+msgstr "기존 콘텐츠를 새 콘텐츠로 교체하시겠습니까?"
+
+#: admin/class-hostinger-ai-assistant-translations.php:50
+msgid "Ask AI"
+msgstr "AI에 질문하기"
+
+#. translators: %s: PHP version
+#: admin/class-hostinger-ai-assistant-notices.php:21
+#: hostinger-ai-assistant.php:136
+msgid "Attention:"
+msgstr "주의:"
+
+#: admin/partials/hostinger-ai-assistant-tab-view.php:112
+msgid "Balances depth and readability, engaging audiences and driving leads."
+msgstr "깊이 있는 내용과 가독성 사이 균형을 맞춰 독자의 관심을 끌고 잠재 고객을 이끌어냅니다"
+
+#: admin/class-hostinger-ai-assistant-translations.php:44
+msgid "Beta"
+msgstr "베타"
+
+#: admin/partials/hostinger-ai-assistant-tab-view.php:178
+msgid "Brewing content with magic"
+msgstr "마법으로 콘텐츠 제작하기"
+
+#: admin/class-hostinger-ai-assistant-translations.php:64
+#: admin/partials/hostinger-ai-assistant-tab-view.php:224
+msgid "Cancel"
+msgstr "취소"
+
+#: admin/partials/hostinger-ai-assistant-tab-view.php:195
+msgid "characters"
+msgstr "문자"
+
+#: admin/partials/hostinger-ai-assistant-tab-view.php:125
+msgid "Choose the length of generated content"
+msgstr "생성된 콘텐츠의 길이를 선택하세요"
+
+#: admin/partials/hostinger-ai-assistant-tab-view.php:66
+msgid "Choose the type of content that will be generated"
+msgstr "생성할 콘텐츠 유형을 선택하세요"
+
+#: admin/partials/hostinger-ai-assistant-tab-view.php:87
+msgid "Choose your desired emotional impact on readers"
+msgstr "독자에게 원하는 감정적 효과를 선택하세요"
+
+#: admin/class-hostinger-ai-assistant-translations.php:62
+msgid "Clear chat"
+msgstr "채팅 지우기"
+
+#: admin/partials/hostinger-ai-assistant-tab-view.php:220
+msgid ""
+"Clicking <b>Generate new content</b> will permanently delete your existing "
+"content and generate a new one on your recent inputs."
+msgstr ""
+"<b>새 콘텐츠 생성</b>을 클릭하면 기존 콘텐츠가 영구적으로 삭제되고, 최근 입력한 내용을 바탕으로 새로운 콘텐츠가 생성됩니다."
+
+#: admin/class-hostinger-ai-assistant-translations.php:47
+msgid "Close"
+msgstr "닫기"
+
+#: admin/partials/hostinger-ai-assistant-tab-view.php:94
+#: includes/woocommerce/class-hostinger-ai-assistant-product-ai-metabox.php:77
+#: gutenberg-block/dist/index.js:1 gutenberg-block/src/edit.js:336
+msgid "Content length"
+msgstr "콘텐츠 길이"
+
+#: admin/partials/hostinger-ai-assistant-tab-view.php:135
+msgid "Content main idea"
+msgstr "콘텐츠 주요 아이디어"
+
+#: admin/partials/hostinger-ai-assistant-tab-view.php:43
+msgid "Content Type"
+msgstr "콘텐츠 유형"
+
+#: admin/partials/hostinger-ai-assistant-tab-view.php:168
+#: gutenberg-block/dist/index.js:1 gutenberg-block/src/edit.js:366
+msgid "Create content"
+msgstr "콘텐츠 생성"
+
+#: admin/class-hostinger-ai-assistant-translations.php:33
+msgid "Create Post with AI"
+msgstr "AI로 게시물 작성"
+
+#: includes/woocommerce/class-hostinger-ai-assistant-product-ai-metabox.php:24
+msgid "Create product with AI"
+msgstr "AI로 제품 제작"
+
+#: includes/woocommerce/class-hostinger-ai-assistant-product-ai-metabox.php:70
+msgid "Describe your product in short"
+msgstr "제품을 간단히 설명하세요"
+
+#: admin/partials/hostinger-ai-assistant-seo-meta-view.php:40
+msgid "Description"
+msgstr "설명"
+
+#: includes/class-hostinger-ai-assistant-errors.php:23
+msgid "Description is empty. Please provide a valid description."
+msgstr "설명란이 비어있습니다. 내용을 다시 입력해주세요."
+
+#: includes/class-hostinger-ai-assistant-surveys.php:25
+msgid "Do you have any comments/suggestions to improve our AI tools?"
+msgstr "AI 도구를 개선하기 위한 의견이나 제안이 있으신가요?"
+
+#: admin/partials/hostinger-ai-assistant-tab-view.php:202
+msgid "Edit as a draft"
+msgstr "임시 글로 편집"
+
+#: gutenberg-block/dist/index.js:1 gutenberg-block/src/edit.js:276
+msgid "Edit prompt"
+msgstr "프롬프트 편집"
+
+#: admin/class-hostinger-ai-assistant-translations.php:30
+#: admin/partials/hostinger-ai-assistant-tab-view.php:148
+msgid "Enter at least 10 characters"
+msgstr "10자 이상 입력"
+
+#: admin/class-hostinger-ai-assistant-translations.php:29
+msgid "Example: website development, WordPress tutorial, ..."
+msgstr "예: 웹사이트 개발, 워드프레스 튜토리얼, ..."
+
+#: admin/class-hostinger-ai-assistant-translations.php:56
+msgid "Excellent"
+msgstr "훌륭함"
+
+#: admin/class-hostinger-ai-assistant-translations.php:24
+#: admin/partials/hostinger-ai-assistant-tab-view.php:79
+#: includes/woocommerce/class-hostinger-ai-assistant-product-ai-metabox.php:89
+#: gutenberg-block/dist/index.js:1 gutenberg-block/src/edit.js:43
+msgid "Formal"
+msgstr "공식"
+
+#: admin/class-hostinger-ai-assistant-translations.php:26
+#: admin/partials/hostinger-ai-assistant-tab-view.php:81
+#: includes/woocommerce/class-hostinger-ai-assistant-product-ai-metabox.php:91
+#: gutenberg-block/dist/index.js:1 gutenberg-block/src/edit.js:51
+msgid "Friendly"
+msgstr "친절"
+
+#: admin/partials/hostinger-ai-assistant-tab-view.php:227
+msgid "Generate new content"
+msgstr "새로운 콘텐츠 생성"
+
+#: admin/partials/hostinger-ai-assistant-tab-view.php:237
+#: admin/partials/hostinger-ai-assistant-tab-view.php:240
+msgid "Generating content..."
+msgstr "콘텐츠 생성하기..."
+
+#: admin/class-hostinger-ai-assistant-translations.php:42
+#, fuzzy
+#| msgid ""
+#| "Hi, I'm your personal AI Assistant. You can ask me any questions you have "
+#| "regarding WordPress. I'm still learning, so sometimes can make mistakes. "
+#| "What questions do you have?"
+msgid ""
+"Hi, I'm Kodee, your personal AI assistant. You can ask me any questions you "
+"have regarding WordPress. I'm still learning, so sometimes can make mistakes."
+" What questions do you have?"
+msgstr ""
+"안녕하세요, 저는 여러분의 AI 개인 비서입니다. 워드프레스에 관해 궁금한 점이 있으면 무엇이든 물어보세요. 아직 배우는 중이라 가끔 "
+"실수를 할 수 있습니다. 어떤 질문이 있으신가요?"
+
+#. Author of the plugin
+#: hostinger-ai-assistant.php
+msgid "Hostinger"
+msgstr "호스팅어"
+
+#. Plugin Name of the plugin
+#: hostinger-ai-assistant.php
+msgid "Hostinger AI"
+msgstr "호스팅어 AI"
+
+#. Description of the plugin
+#: hostinger-ai-assistant.php
+msgid "Hostinger AI plugin for WordPress."
+msgstr "워드프레스 전용 호스팅어 AI 플러그인."
+
+#: includes/class-hostinger-ai-assistant-surveys.php:24
+msgid ""
+"How would you rate your experience using our AI Assistant plugin for content "
+"generation? (Scale 1-10)"
+msgstr "AI 어시스턴트 플러그인으로 콘텐츠를 만들어본 경험은 어떠셨나요? (1~10점에서 선택)"
+
+#. Plugin URI of the plugin
+#. Author URI of the plugin
+#: hostinger-ai-assistant.php
+msgid "https://hostinger.com"
+msgstr "https://hostinger.com"
+
+#: admin/class-hostinger-ai-assistant-translations.php:69
+msgid ""
+"I'm sorry, I didn't understand your question. Could you please rephrase it "
+"or ask something different?"
+msgstr "죄송합니다. 질문을 이해하지 못했습니다. 다시 말씀해 주시거나 다른 질문을 해 주시겠습니까?"
+
+#: admin/partials/hostinger-ai-assistant-tab-view.php:155
+msgid ""
+"If you skip this part, AI will automatically generate keyword suggestions "
+"after you generate the content"
+msgstr "이 부분을 건너뛰면 콘텐츠를 생성한 후 AI가 자동으로 키워드를 제안합니다"
+
+#: admin/class-hostinger-ai-assistant-translations.php:37
+msgid "Insert this image inside content"
+msgstr "콘텐츠 안에 이 이미지 삽입"
+
+#: admin/partials/hostinger-ai-assistant-seo-meta-view.php:9
+msgid "Keywords"
+msgstr "키워드"
+
+#: admin/class-hostinger-ai-assistant-translations.php:43
+#, fuzzy
+msgid "Kodee"
+msgstr "Kodee"
+
+#: admin/class-hostinger-ai-assistant-translations.php:45
+msgid "Leave feedback"
+msgstr "피드백 남기기"
+
+#: admin/partials/hostinger-ai-assistant-tab-view.php:137
+msgid ""
+"Let us know more about your content idea. For example: Article about how to "
+"use WordPress to dive into website development including tutorials how to "
+"use it in a simple way..."
+msgstr ""
+"콘텐츠 아이디어에 대해 자세히 알려주세요. 예를 들어 워드프레스를 사용하여 웹사이트 개발에 뛰어드는 방법에 대한 글(간단한 사용 방법 "
+"튜토리얼 포함)..."
+
+#: admin/class-hostinger-ai-assistant-translations.php:31
+msgid ""
+"Let us now more about your post idea. Share more details for better results"
+msgstr "이제 여러분의 포스트 아이디어에 대해 자세히 알려주세요. 더 나은 결과를 위해 세부 사항을 최대한 공유 해주세요"
+
+#: admin/partials/hostinger-ai-assistant-tab-view.php:116
+#: includes/woocommerce/class-hostinger-ai-assistant-product-ai-metabox.php:81
+#: gutenberg-block/dist/index.js:1 gutenberg-block/src/edit.js:32
+msgid "Long"
+msgstr "긴"
+
+#: gutenberg-block/dist/index.js:1 gutenberg-block/src/edit.js:303
+msgid "Main topic"
+msgstr "주요 주제"
+
+#: admin/partials/hostinger-ai-assistant-tab-view.php:110
+#: includes/woocommerce/class-hostinger-ai-assistant-product-ai-metabox.php:80
+#: gutenberg-block/dist/index.js:1 gutenberg-block/src/edit.js:28
+msgid "Medium"
+msgstr "중간"
+
+#: admin/partials/hostinger-ai-assistant-seo-meta-view.php:29
+msgid "Meta description"
+msgstr "메타 디스크립션"
+
+#: admin/partials/hostinger-ai-assistant-seo-meta-view.php:30
+msgid ""
+"Meta descriptions offer concise page summaries in search results, aiding "
+"user understanding before clicking."
+msgstr "메타 디스크립션은 검색 결과에 페이지 내용을 간단히 보여주어, 사용자가 클릭하기 전에 내용을 파악할 수 있게 해줍니다."
+
+#: admin/class-hostinger-ai-assistant-translations.php:23
+#: admin/partials/hostinger-ai-assistant-tab-view.php:78
+#: includes/woocommerce/class-hostinger-ai-assistant-product-ai-metabox.php:88
+#: gutenberg-block/dist/index.js:1 gutenberg-block/src/edit.js:39
+msgid "Neutral"
+msgstr "중립"
+
+#: admin/partials/hostinger-ai-assistant-tab-view.php:27
+#, fuzzy
+msgid "Open guide"
+msgstr "가이드 열기"
+
+#: admin/partials/hostinger-ai-assistant-tab-view.php:152
+msgid "Optional"
+msgstr "선택 사항"
+
+#: gutenberg-block/dist/index.js:1 gutenberg-block/src/edit.js:316
+msgid "Personalize your content"
+msgstr "콘텐츠 개인화"
+
+#: admin/class-hostinger-ai-assistant-translations.php:63
+msgid ""
+"Please note that all chat messages will be permanently deleted. This action "
+"cannot be undone. Proceeding will result in the removal of all messages from "
+"this chat session."
+msgstr ""
+"주의: 모든 채팅 내용이 영구적으로 삭제되며, 이 작업은 되돌릴 수 없습니다. 계속 진행하시면 현재 채팅방의 모든 메시지가 삭제됩니다."
+
+#: admin/class-hostinger-ai-assistant-translations.php:55
+msgid "Poor"
+msgstr "불편함"
+
+#: includes/woocommerce/class-hostinger-ai-assistant-product-ai-metabox.php:38
+msgid "Powered by"
+msgstr "제공:"
+
+#: admin/partials/hostinger-ai-assistant-tab-view.php:159
+msgid "Press Enter key to finalize a keyword"
+msgstr "Enter 키를 눌러 키워드를 완성합니다"
+
+#: admin/partials/hostinger-ai-assistant-tab-view.php:208
+msgid "Publish"
+msgstr "게시"
+
+#: admin/class-hostinger-ai-assistant-translations.php:53
+#, fuzzy
+msgid "Rate your experience using Kodee"
+msgstr "코디 사용 경험 평가하기"
+
+#: admin/class-hostinger-ai-assistant-translations.php:46
+msgid "Restart chatbot"
+msgstr "챗봇 다시 시작"
+
+#: admin/class-hostinger-ai-assistant-translations.php:58
+msgid "Send"
+msgstr "보내기"
+
+#: admin/partials/hostinger-ai-assistant-seo-meta-view.php:10
+msgid ""
+"SEO keywords improve web content visibility on search engines like Google by "
+"being relevant and naturally placed"
+msgstr "SEO 키워드를 자연스럽고 연관성 있게 사용하면 구글 등의 검색 엔진에서 웹 콘텐츠가 더 잘 노출됩니다"
+
+#: admin/class-hostinger-ai-assistant-translations.php:36
+msgid "Set featured Image as thumbnail"
+msgstr "추천 이미지를 썸네일로 설정"
+
+#: admin/class-hostinger-ai-assistant-translations.php:54
+msgid "Share Your Experience"
+msgstr "사용 경험 공유하기"
+
+#: admin/partials/hostinger-ai-assistant-tab-view.php:98
+#: admin/partials/hostinger-ai-assistant-tab-view.php:104
+#: includes/woocommerce/class-hostinger-ai-assistant-product-ai-metabox.php:79
+#: gutenberg-block/dist/index.js:1 gutenberg-block/src/edit.js:24
+msgid "Short"
+msgstr "짧은"
+
+#: admin/class-hostinger-ai-assistant-translations.php:68
+msgid "Sorry, the AI Chatbot is currently unavailable. Please try again later."
+msgstr "죄송합니다. 현재 AI 챗봇을 사용할 수 없습니다. 나중에 다시 시도해 주세요."
+
+#: admin/class-hostinger-ai-assistant-translations.php:59
+msgid "Thank you for your feedback"
+msgstr "피드백을 보내주셔서 감사합니다"
+
+#. translators: %s: PHP version
+#: hostinger-ai-assistant.php:136
+msgid "The Hostinger AI plugin requires minimum PHP version of <b>%s</b>. "
+msgstr "호스팅어 AI 플러그인을 사용하려면 PHP 버전 <b>%s</b> 이상이 필요합니다."
+
+#: gutenberg-block/dist/index.js:1 gutenberg-block/src/edit.js:119
+#: gutenberg-block/src/edit.js:170
+msgid "There was an error with your request. Please try again."
+msgstr "요청 과정에서 오류가 발생했습니다. 다시 시도해 주세요."
+
+#: admin/partials/hostinger-ai-assistant-seo-meta-view.php:20
+msgid ""
+"These keywords can help your article and website rank higher in search "
+"engines. You can input up to 5 keywords."
+msgstr "이 키워드들은 검색엔진에서 콘텐츠와 웹사이트 순위를 높이는 데 도움이 됩니다. 키워드는 최대 5개까지 입력 가능합니다."
+
+#: admin/partials/hostinger-ai-assistant-tab-view.php:243
+msgid "This will only take a moment"
+msgstr "잠시만 기다려주세요"
+
+#: admin/class-hostinger-ai-assistant-notices.php:21
+msgid ""
+"To unlock the exclusive features of <b>Hostinger AI</b>, you must possess a "
+"unique API token, which is exclusively provided to Hostinger clients"
+msgstr "<b>호스팅어 AI</b>의 고급 기능은 호스팅어 고객에게만 제공되는 API 토큰으로 이용하실 수 있습니다."
+
+#: admin/partials/hostinger-ai-assistant-tab-view.php:73
+#: includes/woocommerce/class-hostinger-ai-assistant-product-ai-metabox.php:86
+#: gutenberg-block/dist/index.js:1 gutenberg-block/src/edit.js:325
+msgid "Tone of voice"
+msgstr "톤앤매너"
+
+#: admin/class-hostinger-ai-assistant-translations.php:21
+msgid "tones selected"
+msgstr "톤으로 선택됨"
+
+#: admin/class-hostinger-ai-assistant-translations.php:25
+#: admin/partials/hostinger-ai-assistant-tab-view.php:80
+#: includes/woocommerce/class-hostinger-ai-assistant-product-ai-metabox.php:90
+#: gutenberg-block/dist/index.js:1 gutenberg-block/src/edit.js:47
+msgid "Trustworthy"
+msgstr "신뢰할 수 있는"
+
+#: includes/class-hostinger-ai-assistant-errors.php:36
+msgid "Unknown error code."
+msgstr "알 수 없는 오류 코드입니다."
+
+#: includes/content/class-hostinger-ai-assistant-content-generation.php:233
+msgid "Unsplash"
+msgstr "Unsplash"
+
+#: gutenberg-block/dist/index.js:1 gutenberg-block/src/edit.js:282
+msgid "Use this content"
+msgstr "이 콘텐츠 사용"
+
+#: admin/class-hostinger-ai-assistant-translations.php:35
+msgid "Use this image as:"
+msgstr "이 이미지를 다음과 같이 사용합니다:"
+
+#: admin/partials/hostinger-ai-assistant-tab-view.php:106
+msgid "Usually used for video, infographics, or product descriptions"
+msgstr "일반적으로 동영상, 인포그래픽 또는 제품 설명에 사용됩니다"
+
+#: admin/partials/hostinger-ai-assistant-tab-view.php:118
+msgid "Usually used to make high-ranked articles that will generate more leads"
+msgstr "검색 순위가 높은 글을 작성하여 더 많은 잠재 고객을 확보하는 데 주로 사용됩니다"
+
+#: includes/class-hostinger-ai-assistant-errors.php:20
+msgid ""
+"We apologize for the inconvenience. The AI content generation process "
+"encountered a server error. Please try again later."
+msgstr "불편을 드려 죄송합니다. AI 콘텐츠 생성 과정에서 서버 오류가 발생했습니다. 잠시 후 다시 시도해 주세요."
+
+#: admin/partials/hostinger-ai-assistant-tab-view.php:152
+msgid "What are the focus keywords of your content?"
+msgstr "콘텐츠의 핵심 키워드는 무엇인가요?"
+
+#: gutenberg-block/dist/index.js:1 gutenberg-block/src/edit.js:299
+msgid "What content do you want AI to create today?"
+msgstr "AI가 오늘 어떤 콘텐츠를 만들어드릴까요?"
+
+#: admin/partials/hostinger-ai-assistant-tab-view.php:36
+msgid "What do you want to make today?"
+msgstr "오늘은 무엇을 만들고 싶으신가요?"
+
+#: admin/partials/hostinger-ai-assistant-tab-view.php:130
+msgid "What is your content about?"
+msgstr "콘텐츠의 주제는 무엇인가요?"
+
+#: admin/class-hostinger-ai-assistant-translations.php:27
+#: admin/partials/hostinger-ai-assistant-tab-view.php:82
+#: includes/woocommerce/class-hostinger-ai-assistant-product-ai-metabox.php:92
+#: gutenberg-block/dist/index.js:1 gutenberg-block/src/edit.js:55
+msgid "Witty"
+msgstr "위트있는"
+
+#: admin/partials/hostinger-ai-assistant-tab-view.php:193
+msgid "words"
+msgstr "단어"
+
+#: gutenberg-block/dist/index.js:1 gutenberg-block/src/edit.js:62
+msgid "Write a motivational post about..."
+msgstr "다음에 대한 동기 부여 게시물을 작성하세요."
+
+#: gutenberg-block/dist/index.js:1 gutenberg-block/src/edit.js:61
+msgid "Write a recommendation list of..."
+msgstr "추천 목록 작성하기..."
+
+#: gutenberg-block/dist/index.js:1 gutenberg-block/src/edit.js:60
+msgid "Write a step-by-step tutorial about..."
+msgstr "다음에 대한 단계별 튜토리얼을 작성하세요."
+
+#: gutenberg-block/dist/index.js:1 gutenberg-block/src/edit.js:65
+msgid "Write a summary of..."
+msgstr "요약 작성하기..."
+
+#: gutenberg-block/dist/index.js:1 gutenberg-block/src/edit.js:64
+#: gutenberg-block/src/edit.js:304
+msgid "Write an article about ..."
+msgstr "다음에 대한 기사 작성하기..."
+
+#: gutenberg-block/dist/index.js:1 gutenberg-block/src/edit.js:63
+msgid "Write promotional content about..."
+msgstr "다음에 대한 홍보 콘텐츠 작성하기..."
+
+#: admin/class-hostinger-ai-assistant-translations.php:57
+msgid "Write your feedback"
+msgstr "피드백 작성하기"
+
+#: admin/class-hostinger-ai-assistant-translations.php:48
+msgid "Write your question"
+msgstr "질문 작성하기"
+
+#. translators: %s: PHP version
+#: hostinger-ai-assistant.php:140
+msgid "You are running <b>%s</b> PHP version."
+msgstr "<b>%s</b> PHP 버전을 실행 중입니다."
+
+#: admin/class-hostinger-ai-assistant-translations.php:32
+msgid "You're good to go, but you can share more details for better results"
+msgstr "지금도 바로 시작 가능합니다만, 더 좋은 결과를 원하시면 자세한 내용을 추가해주세요"

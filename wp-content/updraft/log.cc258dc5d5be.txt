@@ -1,0 +1,659 @@
+0000.000 (0) Opened log file at time: Tue, 28 Jan 2025 17:06:19 +0000 on https://rayzgyproc.com
+0000.001 (0) UpdraftPlus WordPress backup plugin (https://updraftplus.com): 1.25.1 WP: 6.7.1 PHP: 8.2.24 (litespeed, Linux us-bos-web1718.main-hosting.eu 5.14.0-427.42.1.el9_4.x86_64 #1 SMP PREEMPT_DYNAMIC Fri Nov 1 14:58:02 EDT 2024 x86_64) MySQL: 10.11.10-MariaDB (max packet size=1073741824) WPLANG: en_US Server: LiteSpeed safe_mode: 0 max_execution_time: 900 memory_limit: 2048M (used: 12.3M | 14M) multisite: N openssl: OpenSSL 3.0.7 1 Nov 2022 mcrypt: N LANG:  ZipArchive::addFile: Y
+0000.001 (0) Free space on disk containing Updraft's temporary directory: 15065683.6 MB
+0000.002 (0) Tasks: Backup files: 1 (schedule: unset) Backup DB: 1 (schedule: unset)
+0000.003 (0) Semaphore (fd, wpcs_options) being initialised
+0000.004 (0) Requesting semaphore lock (fd) (apparently not via scheduler)
+0000.004 (0) Set semaphore last lock (fd) time to 2025-01-28 17:06:19
+0000.005 (0) Semaphore lock (fd) complete
+0000.006 (0) Backup run: resumption=0, nonce=cc258dc5d5be, file_nonce=cc258dc5d5be begun at=1738083979 (0s ago), job type=backup
+0000.006 (0) Scheduling a resumption (1) after 300 seconds (1738084279) in case this run gets aborted
+0000.019 (0) Checking if we have a zip executable available
+0000.020 (0) Creation of backups of directories: beginning
+0000.021 (0) Beginning creation of dump of plugins (split every: 400 MB)
+0001.055 (0) Total entities for the zip file: 1918 directories, 11585 files (0 skipped as non-modified), 146.4 MB
+0001.064 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 100 files added (on-disk size: 0 KB)
+0001.071 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 200 files added (on-disk size: 0 KB)
+0001.079 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 300 files added (on-disk size: 0 KB)
+0001.086 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 400 files added (on-disk size: 0 KB)
+0001.094 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 500 files added (on-disk size: 0 KB)
+0001.101 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 600 files added (on-disk size: 0 KB)
+0001.108 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 700 files added (on-disk size: 0 KB)
+0001.116 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 800 files added (on-disk size: 0 KB)
+0001.123 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 900 files added (on-disk size: 0 KB)
+0001.130 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 1000 files added (on-disk size: 0 KB)
+0001.130 (0) Adding batch to zip file (UpdraftPlus_ZipArchive): over 1000 files added on this batch (11.3 MB, 11585 files batched, 1001 (1001) added so far); re-opening (prior size: 0 KB)
+0004.089 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 1100 files added (on-disk size: 5354.3 KB)
+0004.096 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 1200 files added (on-disk size: 5354.3 KB)
+0004.103 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 1300 files added (on-disk size: 5354.3 KB)
+0004.110 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 1400 files added (on-disk size: 5354.3 KB)
+0004.117 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 1500 files added (on-disk size: 5354.3 KB)
+0004.124 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 1600 files added (on-disk size: 5354.3 KB)
+0004.130 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 1700 files added (on-disk size: 5354.3 KB)
+0004.131 (0) Adding batch to zip file (UpdraftPlus_ZipArchive): over 25 MB added on this batch (25.6 MB, 11585 files batched, 706 (1707) added so far); re-opening (prior size: 5354.3 KB)
+0005.516 (0) A useful amount of data was added after this amount of zip processing: 2.3 s (normalised: 2.3 s, rate: 11180.9 KB/s)
+0005.517 (0) Performance is good - will increase the amount of data we attempt to batch (time=2.3420689105988, normalised_time=2.289621789828, max_time=5.5166730880737, data points known=1, old_max_bytes=26214400, new_max_bytes=68695363)
+0005.542 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 1800 files added (on-disk size: 13023.9 KB)
+0005.550 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 1900 files added (on-disk size: 13023.9 KB)
+0005.558 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 2000 files added (on-disk size: 13023.9 KB)
+0005.565 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 2100 files added (on-disk size: 13023.9 KB)
+0005.572 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 2200 files added (on-disk size: 13023.9 KB)
+0005.581 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 2300 files added (on-disk size: 13023.9 KB)
+0005.589 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 2400 files added (on-disk size: 13023.9 KB)
+0005.598 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 2500 files added (on-disk size: 13023.9 KB)
+0005.605 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 2600 files added (on-disk size: 13023.9 KB)
+0005.611 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 2700 files added (on-disk size: 13023.9 KB)
+0005.612 (0) Adding batch to zip file (UpdraftPlus_ZipArchive): over 1000 files added on this batch (29.7 MB, 11585 files batched, 1001 (2708) added so far); re-opening (prior size: 13023.9 KB)
+0007.005 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 2800 files added (on-disk size: 21691.5 KB)
+0007.012 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 2900 files added (on-disk size: 21691.5 KB)
+0007.018 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 3000 files added (on-disk size: 21691.5 KB)
+0007.025 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 3100 files added (on-disk size: 21691.5 KB)
+0007.031 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 3200 files added (on-disk size: 21691.5 KB)
+0007.037 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 3300 files added (on-disk size: 21691.5 KB)
+0007.044 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 3400 files added (on-disk size: 21691.5 KB)
+0007.051 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 3500 files added (on-disk size: 21691.5 KB)
+0007.057 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 3600 files added (on-disk size: 21691.5 KB)
+0007.064 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 3700 files added (on-disk size: 21691.5 KB)
+0007.065 (0) Adding batch to zip file (UpdraftPlus_ZipArchive): over 1000 files added on this batch (19.4 MB, 11585 files batched, 1001 (3709) added so far); re-opening (prior size: 21691.5 KB)
+0008.353 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 3800 files added (on-disk size: 26957.4 KB)
+0008.360 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 3900 files added (on-disk size: 26957.4 KB)
+0008.367 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 4000 files added (on-disk size: 26957.4 KB)
+0008.376 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 4100 files added (on-disk size: 26957.4 KB)
+0008.383 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 4200 files added (on-disk size: 26957.4 KB)
+0008.391 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 4300 files added (on-disk size: 26957.4 KB)
+0008.398 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 4400 files added (on-disk size: 26957.4 KB)
+0008.405 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 4500 files added (on-disk size: 26957.4 KB)
+0008.412 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 4600 files added (on-disk size: 26957.4 KB)
+0008.419 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 4700 files added (on-disk size: 26957.4 KB)
+0008.420 (0) Adding batch to zip file (UpdraftPlus_ZipArchive): over 1000 files added on this batch (4.5 MB, 11585 files batched, 1001 (4710) added so far); re-opening (prior size: 26957.4 KB)
+0008.911 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 4800 files added (on-disk size: 28450.5 KB)
+0008.918 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 4900 files added (on-disk size: 28450.5 KB)
+0008.925 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 5000 files added (on-disk size: 28450.5 KB)
+0008.932 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 5100 files added (on-disk size: 28450.5 KB)
+0008.940 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 5200 files added (on-disk size: 28450.5 KB)
+0008.947 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 5300 files added (on-disk size: 28450.5 KB)
+0008.953 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 5400 files added (on-disk size: 28450.5 KB)
+0008.960 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 5500 files added (on-disk size: 28450.5 KB)
+0008.967 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 5600 files added (on-disk size: 28450.5 KB)
+0008.975 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 5700 files added (on-disk size: 28450.5 KB)
+0008.976 (0) Adding batch to zip file (UpdraftPlus_ZipArchive): over 1000 files added on this batch (10.1 MB, 11585 files batched, 1001 (5711) added so far); re-opening (prior size: 28450.5 KB)
+0009.573 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 5800 files added (on-disk size: 31302.8 KB)
+0009.581 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 5900 files added (on-disk size: 31302.8 KB)
+0009.588 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 6000 files added (on-disk size: 31302.8 KB)
+0009.595 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 6100 files added (on-disk size: 31302.8 KB)
+0009.603 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 6200 files added (on-disk size: 31302.8 KB)
+0009.610 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 6300 files added (on-disk size: 31302.8 KB)
+0009.617 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 6400 files added (on-disk size: 31302.8 KB)
+0009.623 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 6500 files added (on-disk size: 31302.8 KB)
+0009.630 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 6600 files added (on-disk size: 31302.8 KB)
+0009.638 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 6700 files added (on-disk size: 31302.8 KB)
+0009.639 (0) Adding batch to zip file (UpdraftPlus_ZipArchive): over 1000 files added on this batch (3.2 MB, 11585 files batched, 1001 (6712) added so far); re-opening (prior size: 31302.8 KB)
+0010.062 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 6800 files added (on-disk size: 32387.6 KB)
+0010.069 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 6900 files added (on-disk size: 32387.6 KB)
+0010.078 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 7000 files added (on-disk size: 32387.6 KB)
+0010.086 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 7100 files added (on-disk size: 32387.6 KB)
+0010.093 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 7200 files added (on-disk size: 32387.6 KB)
+0010.101 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 7300 files added (on-disk size: 32387.6 KB)
+0010.108 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 7400 files added (on-disk size: 32387.6 KB)
+0010.117 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 7500 files added (on-disk size: 32387.6 KB)
+0010.124 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 7600 files added (on-disk size: 32387.6 KB)
+0010.133 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 7700 files added (on-disk size: 32387.6 KB)
+0010.134 (0) Adding batch to zip file (UpdraftPlus_ZipArchive): over 1000 files added on this batch (8.3 MB, 11585 files batched, 1001 (7713) added so far); re-opening (prior size: 32387.6 KB)
+0010.741 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 7800 files added (on-disk size: 35302.1 KB)
+0010.747 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 7900 files added (on-disk size: 35302.1 KB)
+0010.754 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 8000 files added (on-disk size: 35302.1 KB)
+0010.761 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 8100 files added (on-disk size: 35302.1 KB)
+0010.768 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 8200 files added (on-disk size: 35302.1 KB)
+0010.775 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 8300 files added (on-disk size: 35302.1 KB)
+0010.782 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 8400 files added (on-disk size: 35302.1 KB)
+0010.790 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 8500 files added (on-disk size: 35302.1 KB)
+0010.799 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 8600 files added (on-disk size: 35302.1 KB)
+0010.809 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 8700 files added (on-disk size: 35302.1 KB)
+0010.811 (0) Adding batch to zip file (UpdraftPlus_ZipArchive): over 1000 files added on this batch (5.5 MB, 11585 files batched, 1001 (8714) added so far); re-opening (prior size: 35302.1 KB)
+0011.230 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 8800 files added (on-disk size: 37284.1 KB)
+0011.237 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 8900 files added (on-disk size: 37284.1 KB)
+0011.245 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 9000 files added (on-disk size: 37284.1 KB)
+0011.252 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 9100 files added (on-disk size: 37284.1 KB)
+0011.259 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 9200 files added (on-disk size: 37284.1 KB)
+0011.267 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 9300 files added (on-disk size: 37284.1 KB)
+0011.275 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 9400 files added (on-disk size: 37284.1 KB)
+0011.283 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 9500 files added (on-disk size: 37284.1 KB)
+0011.290 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 9600 files added (on-disk size: 37284.1 KB)
+0011.297 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 9700 files added (on-disk size: 37284.1 KB)
+0011.299 (0) Adding batch to zip file (UpdraftPlus_ZipArchive): over 1000 files added on this batch (2 MB, 11585 files batched, 1001 (9715) added so far); re-opening (prior size: 37284.1 KB)
+0011.595 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 9800 files added (on-disk size: 38181.1 KB)
+0011.602 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 9900 files added (on-disk size: 38181.1 KB)
+0011.610 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 10000 files added (on-disk size: 38181.1 KB)
+0011.617 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 10100 files added (on-disk size: 38181.1 KB)
+0011.625 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 10200 files added (on-disk size: 38181.1 KB)
+0011.631 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 10300 files added (on-disk size: 38181.1 KB)
+0011.638 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 10400 files added (on-disk size: 38181.1 KB)
+0011.645 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 10500 files added (on-disk size: 38181.1 KB)
+0011.652 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 10600 files added (on-disk size: 38181.1 KB)
+0011.659 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 10700 files added (on-disk size: 38181.1 KB)
+0011.660 (0) Adding batch to zip file (UpdraftPlus_ZipArchive): over 1000 files added on this batch (18.5 MB, 11585 files batched, 1001 (10716) added so far); re-opening (prior size: 38181.1 KB)
+0015.818 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 10800 files added (on-disk size: 45504.5 KB)
+0015.825 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 10900 files added (on-disk size: 45504.5 KB)
+0015.833 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 11000 files added (on-disk size: 45504.5 KB)
+0015.840 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 11100 files added (on-disk size: 45504.5 KB)
+0015.847 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 11200 files added (on-disk size: 45504.5 KB)
+0015.854 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 11300 files added (on-disk size: 45504.5 KB)
+0015.861 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 11400 files added (on-disk size: 45504.5 KB)
+0015.867 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.tmp: 11500 files added (on-disk size: 45504.5 KB)
+0016.602 (0) Creating zip file manifest (backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.list-temp.tmp)
+0016.631 (0) Successfully created zip file manifest (size: 1154847)
+0016.935 (0) Created plugins zip (0) - 48237.6 KB in 16.9 s (2852 KB/s) (sha1: fa17a946324dd41f9c7cc237290f70ef3aab1d8f, sha256: 7089ad149b2d4578027f208fcd0fd4cb197ac5670d6a77143781024e5d283c6b)
+0016.941 (0) Cloud backup selection (1/1): none with instance (1/1) (last)
+0016.941 (0) No remote despatch: user chose no remote backup service
+0016.941 (0) Recording as successfully uploaded: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip
+0016.942 (0) Deleting zip manifest (backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip.list.tmp)
+0016.943 (0) Retain: beginning examination of existing backup sets; user setting: retain_files=2, retain_db=2
+0016.943 (0) Number of backup sets in history: 0; groups (db): 1
+0016.943 (0) Number of backup sets in history: 0; groups (files): 1
+0016.943 (0) Retain: saving new backup history (sets now: 0) and finishing retain operation
+0016.945 (0) Beginning creation of dump of themes (split every: 400 MB)
+0017.019 (0) Total entities for the zip file: 368 directories, 1171 files (0 skipped as non-modified), 34.1 MB
+0017.026 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-themes.zip.tmp: 100 files added (on-disk size: 0 KB)
+0017.033 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-themes.zip.tmp: 200 files added (on-disk size: 0 KB)
+0017.039 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-themes.zip.tmp: 300 files added (on-disk size: 0 KB)
+0017.046 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-themes.zip.tmp: 400 files added (on-disk size: 0 KB)
+0017.052 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-themes.zip.tmp: 500 files added (on-disk size: 0 KB)
+0017.059 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-themes.zip.tmp: 600 files added (on-disk size: 0 KB)
+0017.067 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-themes.zip.tmp: 700 files added (on-disk size: 0 KB)
+0017.075 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-themes.zip.tmp: 800 files added (on-disk size: 0 KB)
+0017.082 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-themes.zip.tmp: 900 files added (on-disk size: 0 KB)
+0017.088 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-themes.zip.tmp: 1000 files added (on-disk size: 0 KB)
+0017.088 (0) Adding batch to zip file (UpdraftPlus_ZipArchive): over 1000 files added on this batch (27 MB, 1171 files batched, 1001 (1001) added so far); re-opening (prior size: 0 KB)
+0018.271 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-themes.zip.tmp: 1100 files added (on-disk size: 11903.1 KB)
+0018.500 (0) Creating zip file manifest (backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-themes.zip.list-temp.tmp)
+0018.504 (0) Successfully created zip file manifest (size: 95161)
+0018.641 (0) Created themes zip (0) - 18939.5 KB in 1.7 s (11173.3 KB/s) (sha1: 10a7ea3451f9a98fe2e34c2e2e27e5e367b39739, sha256: 7a5c199d0efa0eae48cdd39d7420d632196373ac08e04721ffdcec1047b6b91f)
+0018.642 (0) Cloud backup selection (1/1): none with instance (1/1) (last)
+0018.642 (0) No remote despatch: user chose no remote backup service
+0018.642 (0) Recording as successfully uploaded: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-themes.zip
+0018.643 (0) Deleting zip manifest (backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-themes.zip.list.tmp)
+0018.643 (0) Retain: beginning examination of existing backup sets; user setting: retain_files=2, retain_db=2
+0018.644 (0) Number of backup sets in history: 0; groups (db): 1
+0018.645 (0) Number of backup sets in history: 0; groups (files): 1
+0018.645 (0) Retain: saving new backup history (sets now: 0) and finishing retain operation
+0018.646 (0) Exclusion option setting (uploads): backup*,*backups,backwpup*,wp-clone,snapshots
+0018.646 (0) Looking for candidates to backup in: /home/u825958722/domains/rayzgyproc.com/public_html/wp-content/uploads
+0018.646 (0) finding files: smush: adding to list (1)
+0018.646 (0) finding files: smartcrawl: adding to list (2)
+0018.647 (0) finding files: wpo-plugins-tables-list.json: adding to list (3)
+0018.647 (0) finding files: astra-docs: adding to list (4)
+0018.647 (0) finding files: 2017: adding to list (5)
+0018.647 (0) finding files: elementor: adding to list (6)
+0018.647 (0) finding files: .htaccess: adding to list (7)
+0018.648 (0) finding files: wpo: adding to list (8)
+0018.648 (0) finding files: eb-patterns: adding to list (9)
+0018.648 (0) finding files: 2020: adding to list (10)
+0018.648 (0) finding files: ast-block-templates-json: adding to list (11)
+0018.648 (0) finding files: wp-defender: adding to list (12)
+0018.648 (0) finding files: 2018: adding to list (13)
+0018.649 (0) finding files: 2025: adding to list (14)
+0018.649 (0) finding files: 2019: adding to list (15)
+0018.649 (0) finding files: astra-sites: adding to list (16)
+0018.649 (0) finding files: wpforms: adding to list (17)
+0018.649 (0) Beginning creation of dump of uploads (split every: 400 MB)
+0018.748 (0) Total entities for the zip file: 28 directories, 812 files (0 skipped as non-modified), 62.7 MB
+0018.755 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-uploads.zip.tmp: 100 files added (on-disk size: 0 KB)
+0018.762 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-uploads.zip.tmp: 200 files added (on-disk size: 0 KB)
+0018.769 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-uploads.zip.tmp: 300 files added (on-disk size: 0 KB)
+0018.779 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-uploads.zip.tmp: 400 files added (on-disk size: 0 KB)
+0018.787 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-uploads.zip.tmp: 500 files added (on-disk size: 0 KB)
+0018.794 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-uploads.zip.tmp: 600 files added (on-disk size: 0 KB)
+0018.802 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-uploads.zip.tmp: 700 files added (on-disk size: 0 KB)
+0018.810 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-uploads.zip.tmp: 800 files added (on-disk size: 0 KB)
+0019.537 (0) Creating zip file manifest (backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-uploads.zip.list-temp.tmp)
+0019.540 (0) Successfully created zip file manifest (size: 45292)
+0019.843 (0) Created uploads zip (0) - 49478 KB in 1.2 s (41470.3 KB/s) (sha1: 7139b4e9286133f012f086f67e452fc6bb223901, sha256: 1946e58cffa5108133d2e042b3dd505166e52d9a002c19fb572e54f1158a2e56)
+0019.844 (0) Cloud backup selection (1/1): none with instance (1/1) (last)
+0019.844 (0) No remote despatch: user chose no remote backup service
+0019.845 (0) Recording as successfully uploaded: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-uploads.zip
+0019.845 (0) Deleting zip manifest (backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-uploads.zip.list.tmp)
+0019.846 (0) Retain: beginning examination of existing backup sets; user setting: retain_files=2, retain_db=2
+0019.846 (0) Number of backup sets in history: 0; groups (db): 1
+0019.846 (0) Number of backup sets in history: 0; groups (files): 1
+0019.846 (0) Retain: saving new backup history (sets now: 0) and finishing retain operation
+0019.847 (0) Beginning creation of dump of mu-plugins (split every: 400 MB)
+0019.848 (0) Total entities for the zip file: 1 directories, 2 files (0 skipped as non-modified), 0 MB
+0019.850 (0) Creating zip file manifest (backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-mu-plugins.zip.list-temp.tmp)
+0019.850 (0) Successfully created zip file manifest (size: 108)
+0019.851 (0) Created mu-plugins zip (0) - 1.7 KB in 0 s (527 KB/s) (sha1: baf16c968e2bd92d1bfdd4309e32619e90628b47, sha256: 285851861c8a00601c2b7f3f63c124ccb0645c4260ac7bb52351c96e34199e35)
+0019.852 (0) Cloud backup selection (1/1): none with instance (1/1) (last)
+0019.852 (0) No remote despatch: user chose no remote backup service
+0019.852 (0) Recording as successfully uploaded: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-mu-plugins.zip
+0019.853 (0) Deleting zip manifest (backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-mu-plugins.zip.list.tmp)
+0019.853 (0) Retain: beginning examination of existing backup sets; user setting: retain_files=2, retain_db=2
+0019.854 (0) Number of backup sets in history: 0; groups (db): 1
+0019.854 (0) Number of backup sets in history: 0; groups (files): 1
+0019.854 (0) Retain: saving new backup history (sets now: 0) and finishing retain operation
+0019.855 (0) Beginning backup of other directories found in the content directory (index: 0)
+0019.855 (0) Exclusion option setting (others): upgrade,cache,updraft,backup*,*backups,mysql.sql,debug.log
+0019.855 (0) Looking for candidates to backup in: /home/u825958722/domains/rayzgyproc.com/public_html/wp-content
+0019.856 (0) finding files: plugins: skipping: this is the plugins directory
+0019.856 (0) finding files: index.php: adding to list (1)
+0019.856 (0) finding files: wphb-cache: adding to list (2)
+0019.856 (0) finding files: themes: skipping: this is the themes directory
+0019.856 (0) finding files: mu-plugins: skipping: this is the mu-plugins directory
+0019.856 (0) finding files: ai1wm-backups: skipping: excluded by options (glob)
+0019.856 (0) finding files: smush-webp: adding to list (3)
+0019.857 (0) finding files: upgrade-temp-backup: adding to list (4)
+0019.857 (0) finding files: wflogs: adding to list (5)
+0019.857 (0) finding files: uploads: skipping: this is the uploads directory
+0019.857 (0) finding files: updraft: skipping: this is the updraft directory
+0019.857 (0) finding files: upgrade: skipping: excluded by options
+0019.921 (0) Total entities for the zip file: 17 directories, 560 files (0 skipped as non-modified), 20.9 MB
+0019.928 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-others.zip.tmp: 100 files added (on-disk size: 0 KB)
+0019.934 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-others.zip.tmp: 200 files added (on-disk size: 0 KB)
+0019.940 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-others.zip.tmp: 300 files added (on-disk size: 0 KB)
+0019.947 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-others.zip.tmp: 400 files added (on-disk size: 0 KB)
+0019.953 (0) Zip: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-others.zip.tmp: 500 files added (on-disk size: 0 KB)
+0023.641 (0) Creating zip file manifest (backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-others.zip.list-temp.tmp)
+0023.643 (0) Successfully created zip file manifest (size: 35039)
+0023.746 (0) Created others zip (0) - 16289.4 KB in 3.9 s (4190 KB/s) (sha1: 9a5baf8df26d0463a3b654fdcd9e3a4cb9dcc2e8, sha256: 51728550dc23607f529d286ff5ebea947b8efb9e9a6358c2b160c288c1cb8f11)
+0023.747 (0) Cloud backup selection (1/1): none with instance (1/1) (last)
+0023.747 (0) No remote despatch: user chose no remote backup service
+0023.748 (0) Recording as successfully uploaded: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-others.zip
+0023.748 (0) Deleting zip manifest (backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-others.zip.list.tmp)
+0023.749 (0) Retain: beginning examination of existing backup sets; user setting: retain_files=2, retain_db=2
+0023.749 (0) Number of backup sets in history: 0; groups (db): 1
+0023.749 (0) Number of backup sets in history: 0; groups (files): 1
+0023.749 (0) Retain: saving new backup history (sets now: 0) and finishing retain operation
+0023.752 (0) Saving backup status to database (elements: 10)
+0023.752 (0) Beginning creation of database dump (WordPress DB)
+0023.753 (0) SQL compatibility mode is: NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION
+0023.761 (0) Table wpcs_options: Total expected rows (via COUNT): 925
+0023.938 (0) Table wpcs_options: Rows added in this batch (next record: 179809): 921 (uncompressed bytes in this segment=9164863) in 0.18 seconds
+0023.941 (0) Table wpcs_options: finishing file(s) (2, 1273.5 KB)
+0023.942 (0) Table wpcs_users: Total expected rows (via COUNT): 3
+0023.942 (0) Table is relatively small; fetch_rows will thus be: 20 (allow_further_reductions=1, is_first_fetch=1, known_bigger_than_table=1)
+0023.943 (0) Table wpcs_users: Rows added in this batch (next record: 4): 3 (uncompressed bytes in this segment=1556) in 0.00 seconds
+0023.944 (0) Table wpcs_users: finishing file(s) (2, 0.8 KB)
+0023.947 (0) Table wpcs_usermeta: Total expected rows (via COUNT): 89
+0023.947 (0) Table is relatively small; fetch_rows will thus be: 100 (allow_further_reductions=1, is_first_fetch=1, known_bigger_than_table=1)
+0023.948 (0) Table wpcs_usermeta: Rows added in this batch (next record: 129): 89 (uncompressed bytes in this segment=8543) in 0.00 seconds
+0023.950 (0) Table wpcs_usermeta: finishing file(s) (2, 3.7 KB)
+0023.952 (0) Table wpcs_commentmeta: Total expected rows (via COUNT): 0
+0023.952 (0) Table wpcs_commentmeta: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=661) in 0.00 seconds
+0023.954 (0) Table wpcs_commentmeta: finishing file(s) (2, 0.4 KB)
+0023.956 (0) Table wpcs_comments: Total expected rows (via COUNT): 1
+0023.956 (0) Table is relatively small; fetch_rows will thus be: 20 (allow_further_reductions=1, is_first_fetch=1, known_bigger_than_table=1)
+0023.957 (0) Table wpcs_comments: Rows added in this batch (next record: 1): 1 (uncompressed bytes in this segment=1902) in 0.00 seconds
+0023.958 (0) Table wpcs_comments: finishing file(s) (2, 0.7 KB)
+0023.960 (0) Table wpcs_links: Total expected rows (via COUNT): 0
+0023.960 (0) Table wpcs_links: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=1035) in 0.00 seconds
+0023.962 (0) Table wpcs_links: finishing file(s) (2, 0.5 KB)
+0023.965 (0) Table wpcs_postmeta: Total expected rows (approximate): 1895
+0024.014 (0) Table wpcs_postmeta: Rows added in this batch (next record: 49222): 2093 (uncompressed bytes in this segment=3226078) in 0.05 seconds
+0024.016 (0) Table wpcs_postmeta: finishing file(s) (2, 231.5 KB)
+0024.019 (0) Table wpcs_posts: Total expected rows (via COUNT): 337
+0024.019 (0) Table is relatively small; fetch_rows will thus be: 500 (allow_further_reductions=1, is_first_fetch=1, known_bigger_than_table=1)
+0024.032 (0) Table wpcs_posts: Rows added in this batch (next record: 4199): 337 (uncompressed bytes in this segment=989741) in 0.01 seconds
+0024.034 (0) Table wpcs_posts: finishing file(s) (2, 60.2 KB)
+0024.035 (0) Table wpcs_term_relationships: Total expected rows (approximate): 15
+0024.036 (0) Table wpcs_term_relationships: Rows added in this batch (next record: 100000): 15 (uncompressed bytes in this segment=907) in 0.00 seconds
+0024.037 (0) Table wpcs_term_relationships: finishing file(s) (2, 0.4 KB)
+0024.039 (0) Table wpcs_term_taxonomy: Total expected rows (via COUNT): 5
+0024.039 (0) Table is relatively small; fetch_rows will thus be: 20 (allow_further_reductions=1, is_first_fetch=1, known_bigger_than_table=1)
+0024.040 (0) Table wpcs_term_taxonomy: Rows added in this batch (next record: 5): 5 (uncompressed bytes in this segment=1006) in 0.00 seconds
+0024.041 (0) Table wpcs_term_taxonomy: finishing file(s) (2, 0.5 KB)
+0024.042 (0) Table wpcs_termmeta: Total expected rows (via COUNT): 3
+0024.043 (0) Table is relatively small; fetch_rows will thus be: 20 (allow_further_reductions=1, is_first_fetch=1, known_bigger_than_table=1)
+0024.043 (0) Table wpcs_termmeta: Rows added in this batch (next record: 3): 3 (uncompressed bytes in this segment=799) in 0.00 seconds
+0024.044 (0) Table wpcs_termmeta: finishing file(s) (2, 0.4 KB)
+0024.046 (0) Table wpcs_terms: Total expected rows (via COUNT): 5
+0024.046 (0) Table is relatively small; fetch_rows will thus be: 20 (allow_further_reductions=1, is_first_fetch=1, known_bigger_than_table=1)
+0024.046 (0) Table wpcs_terms: Rows added in this batch (next record: 5): 5 (uncompressed bytes in this segment=820) in 0.00 seconds
+0024.047 (0) Table wpcs_terms: finishing file(s) (2, 0.5 KB)
+0024.049 (0) Table wpcs_actionscheduler_actions: Total expected rows (via COUNT): 57
+0024.049 (0) Table is relatively small; fetch_rows will thus be: 100 (allow_further_reductions=1, is_first_fetch=1, known_bigger_than_table=1)
+0024.050 (0) Table wpcs_actionscheduler_actions: Rows added in this batch (next record: 1694): 57 (uncompressed bytes in this segment=30017) in 0.00 seconds
+0024.051 (0) Table wpcs_actionscheduler_actions: finishing file(s) (2, 2.7 KB)
+0024.053 (0) Table wpcs_actionscheduler_claims: Total expected rows (via COUNT): 0
+0024.053 (0) Table wpcs_actionscheduler_claims: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=623) in 0.00 seconds
+0024.054 (0) Table wpcs_actionscheduler_claims: finishing file(s) (2, 0.4 KB)
+0024.056 (0) Table wpcs_actionscheduler_groups: Total expected rows (via COUNT): 3
+0024.056 (0) Table is relatively small; fetch_rows will thus be: 20 (allow_further_reductions=1, is_first_fetch=1, known_bigger_than_table=1)
+0024.056 (0) Table wpcs_actionscheduler_groups: Rows added in this batch (next record: 3): 3 (uncompressed bytes in this segment=707) in 0.00 seconds
+0024.057 (0) Table wpcs_actionscheduler_groups: finishing file(s) (2, 0.4 KB)
+0024.059 (0) Table wpcs_actionscheduler_logs: Total expected rows (via COUNT): 169
+0024.059 (0) Table is relatively small; fetch_rows will thus be: 250 (allow_further_reductions=1, is_first_fetch=1, known_bigger_than_table=1)
+0024.060 (0) Table wpcs_actionscheduler_logs: Rows added in this batch (next record: 5054): 169 (uncompressed bytes in this segment=15454) in 0.00 seconds
+0024.061 (0) Table wpcs_actionscheduler_logs: finishing file(s) (2, 2 KB)
+0024.063 (0) Table wpcs_bv_activities_store: Total expected rows (via COUNT): 1
+0024.063 (0) Table is relatively small; fetch_rows will thus be: 20 (allow_further_reductions=1, is_first_fetch=1, known_bigger_than_table=1)
+0024.064 (0) Table wpcs_bv_activities_store: Rows added in this batch (next record: 3): 1 (uncompressed bytes in this segment=1062) in 0.00 seconds
+0024.065 (0) Table wpcs_bv_activities_store: finishing file(s) (2, 0.6 KB)
+0024.066 (0) Table wpcs_bv_fw_requests: Total expected rows (via COUNT): 442
+0024.066 (0) Table is relatively small; fetch_rows will thus be: 500 (allow_further_reductions=1, is_first_fetch=1, known_bigger_than_table=1)
+0024.072 (0) Table wpcs_bv_fw_requests: Rows added in this batch (next record: 885): 442 (uncompressed bytes in this segment=189902) in 0.01 seconds
+0024.074 (0) Table wpcs_bv_fw_requests: finishing file(s) (2, 21.1 KB)
+0024.076 (0) Table wpcs_bv_ip_store: Total expected rows (approximate): 5771
+0024.098 (0) Table wpcs_bv_ip_store: Rows added in this batch (next record: 5771): 5771 (uncompressed bytes in this segment=280081) in 0.02 seconds
+0024.100 (0) Table wpcs_bv_ip_store: finishing file(s) (2, 58 KB)
+0024.101 (0) Table wpcs_bv_lp_requests: Total expected rows (via COUNT): 0
+0024.102 (0) Table wpcs_bv_lp_requests: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=738) in 0.00 seconds
+0024.103 (0) Table wpcs_bv_lp_requests: finishing file(s) (2, 0.4 KB)
+0024.104 (0) Table wpcs_e_events: Total expected rows (via COUNT): 0
+0024.105 (0) Table wpcs_e_events: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=519) in 0.00 seconds
+0024.106 (0) Table wpcs_e_events: finishing file(s) (2, 0.3 KB)
+0024.108 (0) Table wpcs_eb_form_settings: Total expected rows (via COUNT): 0
+0024.108 (0) Table wpcs_eb_form_settings: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=722) in 0.00 seconds
+0024.109 (0) Table wpcs_eb_form_settings: finishing file(s) (2, 0.4 KB)
+0024.110 (0) Table wpcs_patchstack_event_log: Total expected rows (via COUNT): 2
+0024.110 (0) Table is relatively small; fetch_rows will thus be: 20 (allow_further_reductions=1, is_first_fetch=1, known_bigger_than_table=1)
+0024.111 (0) Table wpcs_patchstack_event_log: Rows added in this batch (next record: 9): 2 (uncompressed bytes in this segment=1114) in 0.00 seconds
+0024.112 (0) Table wpcs_patchstack_event_log: finishing file(s) (2, 0.5 KB)
+0024.114 (0) Table wpcs_patchstack_firewall_log: Total expected rows (via COUNT): 0
+0024.114 (0) Table wpcs_patchstack_firewall_log: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=977) in 0.00 seconds
+0024.116 (0) Table wpcs_patchstack_firewall_log: finishing file(s) (2, 0.5 KB)
+0024.117 (0) Table wpcs_patchstack_logic: Total expected rows (via COUNT): 33
+0024.117 (0) Table is relatively small; fetch_rows will thus be: 50 (allow_further_reductions=1, is_first_fetch=1, known_bigger_than_table=1)
+0024.118 (0) Table wpcs_patchstack_logic: Rows added in this batch (next record: 502): 33 (uncompressed bytes in this segment=3376) in 0.00 seconds
+0024.119 (0) Table wpcs_patchstack_logic: finishing file(s) (2, 1.2 KB)
+0024.121 (0) Table wpcs_pc_commentmeta: Total expected rows (via COUNT): 0
+0024.121 (0) Table wpcs_pc_commentmeta: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=664) in 0.00 seconds
+0024.123 (0) Table wpcs_pc_commentmeta: finishing file(s) (2, 0.4 KB)
+0024.124 (0) Table wpcs_pc_comments: Total expected rows (via COUNT): 0
+0024.125 (0) Table wpcs_pc_comments: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=1479) in 0.00 seconds
+0024.126 (0) Table wpcs_pc_comments: finishing file(s) (2, 0.5 KB)
+0024.127 (0) Table wpcs_pc_links: Total expected rows (via COUNT): 0
+0024.128 (0) Table wpcs_pc_links: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=1057) in 0.00 seconds
+0024.129 (0) Table wpcs_pc_links: finishing file(s) (2, 0.5 KB)
+0024.131 (0) Table wpcs_pc_options: Total expected rows (via COUNT): 103
+0024.131 (0) Table is relatively small; fetch_rows will thus be: 200 (allow_further_reductions=1, is_first_fetch=1, known_bigger_than_table=1)
+0024.132 (0) Table wpcs_pc_options: Rows added in this batch (next record: 103): 103 (uncompressed bytes in this segment=14711) in 0.00 seconds
+0024.133 (0) Table wpcs_pc_options: finishing file(s) (2, 3.3 KB)
+0024.135 (0) Table wpcs_pc_postmeta: Total expected rows (via COUNT): 0
+0024.135 (0) Table wpcs_pc_postmeta: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=637) in 0.00 seconds
+0024.137 (0) Table wpcs_pc_postmeta: finishing file(s) (2, 0.4 KB)
+0024.138 (0) Table wpcs_pc_posts: Total expected rows (via COUNT): 0
+0024.139 (0) Table wpcs_pc_posts: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=1677) in 0.00 seconds
+0024.140 (0) Table wpcs_pc_posts: finishing file(s) (2, 0.6 KB)
+0024.142 (0) Table wpcs_pc_term_relationships: Total expected rows (approximate): 0
+0024.142 (0) Table wpcs_pc_term_relationships: Rows added in this batch (next record: 0): 0 (uncompressed bytes in this segment=671) in 0.00 seconds
+0024.143 (0) Table wpcs_pc_term_relationships: finishing file(s) (2, 0.4 KB)
+0024.145 (0) Table wpcs_pc_term_taxonomy: Total expected rows (via COUNT): 0
+0024.145 (0) Table wpcs_pc_term_taxonomy: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=802) in 0.00 seconds
+0024.146 (0) Table wpcs_pc_term_taxonomy: finishing file(s) (2, 0.4 KB)
+0024.148 (0) Table wpcs_pc_termmeta: Total expected rows (via COUNT): 0
+0024.149 (0) Table wpcs_pc_termmeta: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=637) in 0.00 seconds
+0024.150 (0) Table wpcs_pc_termmeta: finishing file(s) (2, 0.4 KB)
+0024.152 (0) Table wpcs_pc_terms: Total expected rows (via COUNT): 0
+0024.152 (0) Table wpcs_pc_terms: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=612) in 0.00 seconds
+0024.154 (0) Table wpcs_pc_terms: finishing file(s) (2, 0.4 KB)
+0024.155 (0) Table wpcs_pc_usermeta: Total expected rows (via COUNT): 0
+0024.156 (0) Table wpcs_pc_usermeta: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=639) in 0.00 seconds
+0024.157 (0) Table wpcs_pc_usermeta: finishing file(s) (2, 0.4 KB)
+0024.159 (0) Table wpcs_pc_users: Total expected rows (via COUNT): 0
+0024.159 (0) Table wpcs_pc_users: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=994) in 0.00 seconds
+0024.160 (0) Table wpcs_pc_users: finishing file(s) (2, 0.5 KB)
+0024.162 (0) Table wpcs_tm_taskmeta: Total expected rows (via COUNT): 0
+0024.162 (0) Table wpcs_tm_taskmeta: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=619) in 0.00 seconds
+0024.164 (0) Table wpcs_tm_taskmeta: finishing file(s) (2, 0.4 KB)
+0024.165 (0) Table wpcs_tm_tasks: Total expected rows (via COUNT): 0
+0024.166 (0) Table wpcs_tm_tasks: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=762) in 0.00 seconds
+0024.167 (0) Table wpcs_tm_tasks: finishing file(s) (2, 0.4 KB)
+0024.168 (0) Table wpcs_wfauditevents: Total expected rows (via COUNT): 0
+0024.169 (0) Table wpcs_wfauditevents: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=757) in 0.00 seconds
+0024.170 (0) Table wpcs_wfauditevents: finishing file(s) (2, 0.4 KB)
+0024.171 (0) Table wpcs_wfblockediplog: Total expected rows (approximate): 4
+0024.172 (0) Table wpcs_wfblockediplog: Rows added in this batch (next record: 1000): 4 (uncompressed bytes in this segment=958) in 0.00 seconds
+0024.174 (0) Table wpcs_wfblockediplog: finishing file(s) (2, 0.5 KB)
+0024.176 (0) Table wpcs_wfblocks7: Total expected rows (via COUNT): 0
+0024.176 (0) Table wpcs_wfblocks7: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=882) in 0.00 seconds
+0024.178 (0) Table wpcs_wfblocks7: finishing file(s) (2, 0.5 KB)
+0024.179 (0) Table wpcs_wfconfig: Total expected rows (approximate): 284
+0024.217 (0) Table wpcs_wfconfig: Rows added in this batch (next record: 1000): 287 (uncompressed bytes in this segment=929433) in 0.04 seconds
+0024.219 (0) Table wpcs_wfconfig: finishing file(s) (2, 459.1 KB)
+0024.220 (0) Table wpcs_wfcrawlers: Total expected rows (approximate): 1
+0024.221 (0) Table wpcs_wfcrawlers: Rows added in this batch (next record: 1000): 1 (uncompressed bytes in this segment=766) in 0.00 seconds
+0024.222 (0) Table wpcs_wfcrawlers: finishing file(s) (2, 0.5 KB)
+0024.224 (0) Table wpcs_wffilechanges: Total expected rows (approximate): 0
+0024.224 (0) Table wpcs_wffilechanges: Rows added in this batch (next record: 0): 0 (uncompressed bytes in this segment=494) in 0.00 seconds
+0024.225 (0) Table wpcs_wffilechanges: finishing file(s) (2, 0.3 KB)
+0024.227 (0) Table wpcs_wffilemods: Total expected rows (approximate): 12624
+0024.395 (0) Table wpcs_wffilemods: Rows added in this batch (next record: 20000): 12851 (uncompressed bytes in this segment=5153713) in 0.17 seconds
+0024.397 (0) Table wpcs_wffilemods: finishing file(s) (2, 1377.9 KB)
+0024.399 (0) Table wpcs_wfhits: Total expected rows (via COUNT): 22
+0024.399 (0) Table is relatively small; fetch_rows will thus be: 20 (allow_further_reductions=1, is_first_fetch=1, known_bigger_than_table=1)
+0024.401 (0) Table wpcs_wfhits: Rows added in this batch (next record: 4856): 22 (uncompressed bytes in this segment=13390) in 0.00 seconds
+0024.403 (0) Table wpcs_wfhits: finishing file(s) (2, 2.3 KB)
+0024.405 (0) Table wpcs_wfhoover: Total expected rows (via COUNT): 0
+0024.406 (0) Table wpcs_wfhoover: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=575) in 0.00 seconds
+0024.408 (0) Table wpcs_wfhoover: finishing file(s) (2, 0.4 KB)
+0024.409 (0) Table wpcs_wfissues: Total expected rows (via COUNT): 0
+0024.410 (0) Table wpcs_wfissues: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=904) in 0.00 seconds
+0024.411 (0) Table wpcs_wfissues: finishing file(s) (2, 0.4 KB)
+0024.413 (0) Table wpcs_wfknownfilelist: Total expected rows (approximate): 12968
+0024.478 (0) Table wpcs_wfknownfilelist: Rows added in this batch (next record: 12853): 12853 (uncompressed bytes in this segment=2777904) in 0.07 seconds
+0024.480 (0) Table wpcs_wfknownfilelist: finishing file(s) (2, 175 KB)
+0024.481 (0) Table wpcs_wflivetraffichuman: Total expected rows (approximate): 0
+0024.482 (0) Table wpcs_wflivetraffichuman: Rows added in this batch (next record: 0): 0 (uncompressed bytes in this segment=690) in 0.00 seconds
+0024.484 (0) Table wpcs_wflivetraffichuman: finishing file(s) (2, 0.4 KB)
+0024.485 (0) Table wpcs_wflocs: Total expected rows (approximate): 185
+0024.487 (0) Table wpcs_wflocs: Rows added in this batch (next record: 1000): 185 (uncompressed bytes in this segment=23193) in 0.00 seconds
+0024.489 (0) Table wpcs_wflocs: finishing file(s) (2, 5.6 KB)
+0024.491 (0) Table wpcs_wflogins: Total expected rows (via COUNT): 414
+0024.491 (0) Table is relatively small; fetch_rows will thus be: 500 (allow_further_reductions=1, is_first_fetch=1, known_bigger_than_table=1)
+0024.495 (0) Table wpcs_wflogins: Rows added in this batch (next record: 414): 414 (uncompressed bytes in this segment=94819) in 0.01 seconds
+0024.497 (0) Table wpcs_wflogins: finishing file(s) (2, 10.6 KB)
+0024.499 (0) Table wpcs_wfls_2fa_secrets: Total expected rows (via COUNT): 0
+0024.499 (0) Table wpcs_wfls_2fa_secrets: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=723) in 0.00 seconds
+0024.501 (0) Table wpcs_wfls_2fa_secrets: finishing file(s) (2, 0.4 KB)
+0024.502 (0) Table wpcs_wfls_role_counts: Total expected rows (approximate): 0
+0024.503 (0) Table wpcs_wfls_role_counts: Rows added in this batch (next record: 0): 0 (uncompressed bytes in this segment=588) in 0.00 seconds
+0024.504 (0) Table wpcs_wfls_role_counts: finishing file(s) (2, 0.4 KB)
+0024.506 (0) Table wpcs_wfls_settings: Total expected rows (approximate): 30
+0024.506 (0) Table wpcs_wfls_settings: Rows added in this batch (next record: 1000): 30 (uncompressed bytes in this segment=2106) in 0.00 seconds
+0024.508 (0) Table wpcs_wfls_settings: finishing file(s) (2, 0.9 KB)
+0024.509 (0) Table wpcs_wfnotifications: Total expected rows (approximate): 19
+0024.510 (0) Table wpcs_wfnotifications: Rows added in this batch (next record: 1000): 19 (uncompressed bytes in this segment=3961) in 0.00 seconds
+0024.511 (0) Table wpcs_wfnotifications: finishing file(s) (2, 0.9 KB)
+0024.513 (0) Table wpcs_wfpendingissues: Total expected rows (via COUNT): 0
+0024.513 (0) Table wpcs_wfpendingissues: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=926) in 0.00 seconds
+0024.515 (0) Table wpcs_wfpendingissues: finishing file(s) (2, 0.4 KB)
+0024.516 (0) Table wpcs_wfreversecache: Total expected rows (approximate): 1
+0024.517 (0) Table wpcs_wfreversecache: Rows added in this batch (next record: 1000): 1 (uncompressed bytes in this segment=667) in 0.00 seconds
+0024.518 (0) Table wpcs_wfreversecache: finishing file(s) (2, 0.4 KB)
+0024.520 (0) Table wpcs_wfsecurityevents: Total expected rows (via COUNT): 0
+0024.520 (0) Table wpcs_wfsecurityevents: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=730) in 0.00 seconds
+0024.522 (0) Table wpcs_wfsecurityevents: finishing file(s) (2, 0.4 KB)
+0024.523 (0) Table wpcs_wfsnipcache: Total expected rows (via COUNT): 0
+0024.524 (0) Table wpcs_wfsnipcache: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=759) in 0.00 seconds
+0024.525 (0) Table wpcs_wfsnipcache: finishing file(s) (2, 0.4 KB)
+0024.527 (0) Table wpcs_wfstatus: Total expected rows (approximate): 1303
+0024.532 (0) Table wpcs_wfstatus: Rows added in this batch (next record: 9565): 1303 (uncompressed bytes in this segment=130857) in 0.01 seconds
+0024.534 (0) Table wpcs_wfstatus: finishing file(s) (2, 22.7 KB)
+0024.536 (0) Table wpcs_wftrafficrates: Total expected rows (approximate): 0
+0024.536 (0) Table wpcs_wftrafficrates: Rows added in this batch (next record: 0): 0 (uncompressed bytes in this segment=608) in 0.00 seconds
+0024.537 (0) Table wpcs_wftrafficrates: finishing file(s) (2, 0.4 KB)
+0024.539 (0) Table wpcs_wfwaffailures: Total expected rows (via COUNT): 0
+0024.539 (0) Table wpcs_wfwaffailures: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=577) in 0.00 seconds
+0024.541 (0) Table wpcs_wfwaffailures: finishing file(s) (2, 0.4 KB)
+0024.543 (0) Table wpcs_wpforms_tasks_meta: Total expected rows (via COUNT): 6
+0024.543 (0) Table is relatively small; fetch_rows will thus be: 20 (allow_further_reductions=1, is_first_fetch=1, known_bigger_than_table=1)
+0024.544 (0) Table wpcs_wpforms_tasks_meta: Rows added in this batch (next record: 40): 6 (uncompressed bytes in this segment=1108) in 0.00 seconds
+0024.545 (0) Table wpcs_wpforms_tasks_meta: finishing file(s) (2, 0.6 KB)
+0024.547 (0) Table wpcs_wpmailsmtp_debug_events: Total expected rows (via COUNT): 134
+0024.547 (0) Table is relatively small; fetch_rows will thus be: 250 (allow_further_reductions=1, is_first_fetch=1, known_bigger_than_table=1)
+0024.549 (0) Table wpcs_wpmailsmtp_debug_events: Rows added in this batch (next record: 134): 134 (uncompressed bytes in this segment=70813) in 0.00 seconds
+0024.550 (0) Table wpcs_wpmailsmtp_debug_events: finishing file(s) (2, 2.8 KB)
+0024.552 (0) Table wpcs_wpmailsmtp_tasks_meta: Total expected rows (via COUNT): 0
+0024.553 (0) Table wpcs_wpmailsmtp_tasks_meta: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=569) in 0.00 seconds
+0024.555 (0) Table wpcs_wpmailsmtp_tasks_meta: finishing file(s) (2, 0.3 KB)
+0024.556 (0) Table wpcs_wpo_404_detector: Total expected rows (via COUNT): 2
+0024.556 (0) Table is relatively small; fetch_rows will thus be: 20 (allow_further_reductions=1, is_first_fetch=1, known_bigger_than_table=1)
+0024.557 (0) Table wpcs_wpo_404_detector: Rows added in this batch (next record: 2): 2 (uncompressed bytes in this segment=1024) in 0.00 seconds
+0024.558 (0) Table wpcs_wpo_404_detector: finishing file(s) (2, 0.5 KB)
+0024.559 (0) PHP event: code E_WARNING: filemtime(): stat failed for /home/u825958722/domains/rayzgyproc.com/public_html/wp-content/updraft/backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db.gz (line 1923, wp-content/plugins/updraftplus/backup.php)
+0024.559 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_options.table.tmpr179810.gz (1/68/fopen): adding to final database dump
+0024.573 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_options.table.gz (2/68/fopen): adding to final database dump
+0024.574 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_users.table.tmpr5.gz (3/68/fopen): adding to final database dump
+0024.574 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_users.table.gz (4/68/fopen): adding to final database dump
+0024.574 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_usermeta.table.tmpr130.gz (5/68/fopen): adding to final database dump
+0024.575 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_usermeta.table.gz (6/68/fopen): adding to final database dump
+0024.575 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_commentmeta.table.tmpr0.gz (7/68/fopen): adding to final database dump
+0024.575 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_commentmeta.table.gz (8/68/fopen): adding to final database dump
+0024.576 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_comments.table.tmpr2.gz (9/68/fopen): adding to final database dump
+0024.576 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_comments.table.gz (10/68/fopen): adding to final database dump
+0024.576 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_links.table.tmpr0.gz (11/68/fopen): adding to final database dump
+0024.576 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_links.table.gz (12/68/fopen): adding to final database dump
+0024.577 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_postmeta.table.tmpr49223.gz (13/68/fopen): adding to final database dump
+0024.579 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_postmeta.table.gz (14/68/fopen): adding to final database dump
+0024.579 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_posts.table.tmpr4200.gz (15/68/fopen): adding to final database dump
+0024.580 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_posts.table.gz (16/68/fopen): adding to final database dump
+0024.581 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_term_relationships.table.tmpr100001.gz (17/68/fopen): adding to final database dump
+0024.581 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_term_relationships.table.gz (18/68/fopen): adding to final database dump
+0024.581 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_term_taxonomy.table.tmpr6.gz (19/68/fopen): adding to final database dump
+0024.581 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_term_taxonomy.table.gz (20/68/fopen): adding to final database dump
+0024.581 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_termmeta.table.tmpr4.gz (21/68/fopen): adding to final database dump
+0024.582 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_termmeta.table.gz (22/68/fopen): adding to final database dump
+0024.582 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_terms.table.tmpr6.gz (23/68/fopen): adding to final database dump
+0024.582 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_terms.table.gz (24/68/fopen): adding to final database dump
+0024.583 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_actionscheduler_actions.table.tmpr1695.gz (25/68/fopen): adding to final database dump
+0024.583 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_actionscheduler_actions.table.gz (26/68/fopen): adding to final database dump
+0024.583 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_actionscheduler_claims.table.tmpr0.gz (27/68/fopen): adding to final database dump
+0024.583 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_actionscheduler_claims.table.gz (28/68/fopen): adding to final database dump
+0024.584 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_actionscheduler_groups.table.tmpr4.gz (29/68/fopen): adding to final database dump
+0024.584 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_actionscheduler_groups.table.gz (30/68/fopen): adding to final database dump
+0024.584 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_actionscheduler_logs.table.tmpr5055.gz (31/68/fopen): adding to final database dump
+0024.584 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_actionscheduler_logs.table.gz (32/68/fopen): adding to final database dump
+0024.585 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_bv_activities_store.table.tmpr4.gz (33/68/fopen): adding to final database dump
+0024.585 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_bv_activities_store.table.gz (34/68/fopen): adding to final database dump
+0024.585 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_bv_fw_requests.table.tmpr886.gz (35/68/fopen): adding to final database dump
+0024.585 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_bv_fw_requests.table.gz (36/68/fopen): adding to final database dump
+0024.586 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_bv_ip_store.table.tmpr5772.gz (37/68/fopen): adding to final database dump
+0024.586 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_bv_ip_store.table.gz (38/68/fopen): adding to final database dump
+0024.586 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_bv_lp_requests.table.tmpr0.gz (39/68/fopen): adding to final database dump
+0024.587 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_bv_lp_requests.table.gz (40/68/fopen): adding to final database dump
+0024.587 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_e_events.table.tmpr0.gz (41/68/fopen): adding to final database dump
+0024.587 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_e_events.table.gz (42/68/fopen): adding to final database dump
+0024.587 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_eb_form_settings.table.tmpr0.gz (43/68/fopen): adding to final database dump
+0024.587 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_eb_form_settings.table.gz (44/68/fopen): adding to final database dump
+0024.587 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_patchstack_event_log.table.tmpr10.gz (45/68/fopen): adding to final database dump
+0024.588 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_patchstack_event_log.table.gz (46/68/fopen): adding to final database dump
+0024.588 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_patchstack_firewall_log.table.tmpr0.gz (47/68/fopen): adding to final database dump
+0024.588 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_patchstack_firewall_log.table.gz (48/68/fopen): adding to final database dump
+0024.588 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_patchstack_logic.table.tmpr503.gz (49/68/fopen): adding to final database dump
+0024.588 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_patchstack_logic.table.gz (50/68/fopen): adding to final database dump
+0024.589 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_pc_commentmeta.table.tmpr0.gz (51/68/fopen): adding to final database dump
+0024.589 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_pc_commentmeta.table.gz (52/68/fopen): adding to final database dump
+0024.589 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_pc_comments.table.tmpr0.gz (53/68/fopen): adding to final database dump
+0024.589 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_pc_comments.table.gz (54/68/fopen): adding to final database dump
+0024.589 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_pc_links.table.tmpr0.gz (55/68/fopen): adding to final database dump
+0024.589 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_pc_links.table.gz (56/68/fopen): adding to final database dump
+0024.590 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_pc_options.table.tmpr104.gz (57/68/fopen): adding to final database dump
+0024.590 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_pc_options.table.gz (58/68/fopen): adding to final database dump
+0024.590 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_pc_postmeta.table.tmpr0.gz (59/68/fopen): adding to final database dump
+0024.590 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_pc_postmeta.table.gz (60/68/fopen): adding to final database dump
+0024.590 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_pc_posts.table.tmpr0.gz (61/68/fopen): adding to final database dump
+0024.590 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_pc_posts.table.gz (62/68/fopen): adding to final database dump
+0024.591 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_pc_term_relationships.table.tmpr1.gz (63/68/fopen): adding to final database dump
+0024.591 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_pc_term_relationships.table.gz (64/68/fopen): adding to final database dump
+0024.591 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_pc_term_taxonomy.table.tmpr0.gz (65/68/fopen): adding to final database dump
+0024.591 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_pc_term_taxonomy.table.gz (66/68/fopen): adding to final database dump
+0024.592 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_pc_termmeta.table.tmpr0.gz (67/68/fopen): adding to final database dump
+0024.592 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_pc_termmeta.table.gz (68/68/fopen): adding to final database dump
+0024.592 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_pc_terms.table.tmpr0.gz (69/68/fopen): adding to final database dump
+0024.592 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_pc_terms.table.gz (70/68/fopen): adding to final database dump
+0024.592 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_pc_usermeta.table.tmpr0.gz (71/68/fopen): adding to final database dump
+0024.593 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_pc_usermeta.table.gz (72/68/fopen): adding to final database dump
+0024.593 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_pc_users.table.tmpr0.gz (73/68/fopen): adding to final database dump
+0024.593 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_pc_users.table.gz (74/68/fopen): adding to final database dump
+0024.593 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_tm_taskmeta.table.tmpr0.gz (75/68/fopen): adding to final database dump
+0024.594 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_tm_taskmeta.table.gz (76/68/fopen): adding to final database dump
+0024.594 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_tm_tasks.table.tmpr0.gz (77/68/fopen): adding to final database dump
+0024.594 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_tm_tasks.table.gz (78/68/fopen): adding to final database dump
+0024.594 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_wfauditevents.table.tmpr0.gz (79/68/fopen): adding to final database dump
+0024.595 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_wfauditevents.table.gz (80/68/fopen): adding to final database dump
+0024.595 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_wfblockediplog.table.tmpr1001.gz (81/68/fopen): adding to final database dump
+0024.595 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_wfblockediplog.table.gz (82/68/fopen): adding to final database dump
+0024.595 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_wfblocks7.table.tmpr0.gz (83/68/fopen): adding to final database dump
+0024.595 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_wfblocks7.table.gz (84/68/fopen): adding to final database dump
+0024.596 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_wfconfig.table.tmpr1001.gz (85/68/fopen): adding to final database dump
+0024.600 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_wfconfig.table.gz (86/68/fopen): adding to final database dump
+0024.601 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_wfcrawlers.table.tmpr1001.gz (87/68/fopen): adding to final database dump
+0024.601 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_wfcrawlers.table.gz (88/68/fopen): adding to final database dump
+0024.601 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_wffilechanges.table.tmpr1.gz (89/68/fopen): adding to final database dump
+0024.601 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_wffilechanges.table.gz (90/68/fopen): adding to final database dump
+0024.602 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_wffilemods.table.tmpr20001.gz (91/68/fopen): adding to final database dump
+0024.616 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_wffilemods.table.gz (92/68/fopen): adding to final database dump
+0024.617 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_wfhits.table.tmpr4857.gz (93/68/fopen): adding to final database dump
+0024.617 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_wfhits.table.gz (94/68/fopen): adding to final database dump
+0024.617 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_wfhoover.table.tmpr0.gz (95/68/fopen): adding to final database dump
+0024.617 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_wfhoover.table.gz (96/68/fopen): adding to final database dump
+0024.617 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_wfissues.table.tmpr0.gz (97/68/fopen): adding to final database dump
+0024.618 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_wfissues.table.gz (98/68/fopen): adding to final database dump
+0024.618 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_wfknownfilelist.table.tmpr12854.gz (99/68/fopen): adding to final database dump
+0024.620 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_wfknownfilelist.table.gz (100/68/fopen): adding to final database dump
+0024.621 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_wflivetraffichuman.table.tmpr1.gz (101/68/fopen): adding to final database dump
+0024.621 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_wflivetraffichuman.table.gz (102/68/fopen): adding to final database dump
+0024.621 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_wflocs.table.tmpr1001.gz (103/68/fopen): adding to final database dump
+0024.621 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_wflocs.table.gz (104/68/fopen): adding to final database dump
+0024.621 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_wflogins.table.tmpr415.gz (105/68/fopen): adding to final database dump
+0024.622 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_wflogins.table.gz (106/68/fopen): adding to final database dump
+0024.622 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_wfls_2fa_secrets.table.tmpr0.gz (107/68/fopen): adding to final database dump
+0024.622 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_wfls_2fa_secrets.table.gz (108/68/fopen): adding to final database dump
+0024.622 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_wfls_role_counts.table.tmpr1.gz (109/68/fopen): adding to final database dump
+0024.623 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_wfls_role_counts.table.gz (110/68/fopen): adding to final database dump
+0024.623 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_wfls_settings.table.tmpr1001.gz (111/68/fopen): adding to final database dump
+0024.623 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_wfls_settings.table.gz (112/68/fopen): adding to final database dump
+0024.623 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_wfnotifications.table.tmpr1001.gz (113/68/fopen): adding to final database dump
+0024.623 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_wfnotifications.table.gz (114/68/fopen): adding to final database dump
+0024.623 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_wfpendingissues.table.tmpr0.gz (115/68/fopen): adding to final database dump
+0024.623 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_wfpendingissues.table.gz (116/68/fopen): adding to final database dump
+0024.624 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_wfreversecache.table.tmpr1001.gz (117/68/fopen): adding to final database dump
+0024.624 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_wfreversecache.table.gz (118/68/fopen): adding to final database dump
+0024.624 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_wfsecurityevents.table.tmpr0.gz (119/68/fopen): adding to final database dump
+0024.624 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_wfsecurityevents.table.gz (120/68/fopen): adding to final database dump
+0024.624 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_wfsnipcache.table.tmpr0.gz (121/68/fopen): adding to final database dump
+0024.624 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_wfsnipcache.table.gz (122/68/fopen): adding to final database dump
+0024.625 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_wfstatus.table.tmpr9566.gz (123/68/fopen): adding to final database dump
+0024.625 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_wfstatus.table.gz (124/68/fopen): adding to final database dump
+0024.625 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_wftrafficrates.table.tmpr1.gz (125/68/fopen): adding to final database dump
+0024.625 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_wftrafficrates.table.gz (126/68/fopen): adding to final database dump
+0024.625 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_wfwaffailures.table.tmpr0.gz (127/68/fopen): adding to final database dump
+0024.626 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_wfwaffailures.table.gz (128/68/fopen): adding to final database dump
+0024.626 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_wpforms_tasks_meta.table.tmpr41.gz (129/68/fopen): adding to final database dump
+0024.626 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_wpforms_tasks_meta.table.gz (130/68/fopen): adding to final database dump
+0024.626 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_wpmailsmtp_debug_events.table.tmpr135.gz (131/68/fopen): adding to final database dump
+0024.626 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_wpmailsmtp_debug_events.table.gz (132/68/fopen): adding to final database dump
+0024.627 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_wpmailsmtp_tasks_meta.table.tmpr0.gz (133/68/fopen): adding to final database dump
+0024.627 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_wpmailsmtp_tasks_meta.table.gz (134/68/fopen): adding to final database dump
+0024.627 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_wpo_404_detector.table.tmpr3.gz (135/68/fopen): adding to final database dump
+0024.627 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db-table-wpcs_wpo_404_detector.table.gz (136/68/fopen): adding to final database dump
+0024.630 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db.gz: finished writing out complete database file (3735.4 KB)
+0024.665 (0) Total database tables backed up: 68 (backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db.gz, size: 3825136, sha1: eebc86bd6d5da68ef7d7e63dd513818c5462e597, sha256: 3c583ac56d295147f7506b9ce254e6582f19eb74fab52919c498b2c297a48994)
+0024.666 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-plugins.zip: plugins: This file has already been successfully processed
+0024.666 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-themes.zip: themes: This file has already been successfully processed
+0024.667 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-uploads.zip: uploads: This file has already been successfully processed
+0024.667 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-mu-plugins.zip: mu-plugins: This file has already been successfully processed
+0024.667 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-others.zip: others: This file has already been successfully processed
+0024.667 (0) backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db.gz: db: This file has not yet been successfully uploaded: will queue
+0024.667 (0) Saving backup history. Total backup size: 133.5 MB
+0024.668 (0) Requesting upload of the files that have not yet been successfully uploaded (1)
+0024.668 (0) Cloud backup selection (1/1): none with instance (1/1) (last)
+0024.668 (0) No remote despatch: user chose no remote backup service
+0024.669 (0) Recording as successfully uploaded: backup_2025-01-28-1706_Rayz_Gyproc_cc258dc5d5be-db.gz
+0024.669 (0) Retain: beginning examination of existing backup sets; user setting: retain_files=2, retain_db=2
+0024.670 (0) Number of backup sets in history: 1; groups (db): 1
+0024.670 (0) Examining (for databases) backup set with group_id=0, nonce=cc258dc5d5be, datestamp=1738083979 (Jan 28 2025 17:06:19)
+0024.670 (0) This backup set is the backup set just made, so will not be deleted.
+0024.670 (0) Number of backup sets in history: 1; groups (files): 1
+0024.671 (0) Examining (for files) backup set with nonce=cc258dc5d5be, datestamp=1738083979 (Jan 28 2025 17:06:19)
+0024.671 (0) This backup set is the backup set just made, so will not be deleted.
+0024.671 (0) This backup set is the backup set just made, so will not be deleted.
+0024.671 (0) This backup set is the backup set just made, so will not be deleted.
+0024.671 (0) This backup set is the backup set just made, so will not be deleted.
+0024.671 (0) This backup set is the backup set just made, so will not be deleted.
+0024.671 (0) This backup set remains non-empty (f=1/d=1); will retain in history
+0024.671 (0) Retain: saving new backup history (sets now: 1) and finishing retain operation
+0024.672 (0) Resume backup (cc258dc5d5be, 0): finish run
+0024.673 (0) Decremented the semaphore (fd) by 1
+0024.673 (0) Semaphore (fd) unlocked
+0024.673 (0) There were no errors in the uploads, so the 'resume' event (1) is being unscheduled
+0024.675 (0) No email will/can be sent - the user has not configured an email address.
+0024.675 (0) The backup succeeded and is now complete

@@ -1,0 +1,73 @@
+{
+    "definitions": {
+        "files": {
+            "qLPAE": {
+                "severity": "suspicious",
+                "signature": "IlwvW15hLXpcXFwvJ1wiXWV2YWxcXChbXlxcKV0rWydcIlxcc1xcKTtdK1wvaSI,",
+                "class": "scripting"
+            },
+            "Y9N1H": {
+                "severity": "suspicious",
+                "signature": "IlwvXFwkYXV0aF9wYXNzXFxzKj0uKztcL2ki",
+                "class": "scripting"
+            },
+            "2F58G": {
+                "severity": "suspicious",
+                "signature": "IlwvcHJlZ19yZXBsYWNlXFxzKlxcKC4rW1xcXC9cXCNcXHxdW2ldKmVbaV0qWydcIl0uK1xcKVwvaSI,",
+                "class": "scripting"
+            },
+            "wCM8D": {
+                "severity": "suspicious",
+                "signature": "IlwvXFxcL1xcKiBUaGlzIGZpbGUgaXMgcHJvdGVjdGVkIGJ5IGNvcHlyaWdodCBsYXcgYW5kIHByb3ZpZGVkIHVuZGVyIGxpY2Vuc2UuIFJldmVyc2UgZW5naW5lZXJpbmcgb2YgdGhpcyBmaWxlIGlzIHN0cmljdGx5IHByb2hpYml0ZWQuIFxcKlxcXC9cLyI,",
+                "class": "scripting"
+            },
+            "GML4E": {
+                "severity": "suspicious",
+                "signature": "IlwvXFwjKFxcdyspXFwjLis_XFwjXFxcL1xcMVxcI1wvaXMi",
+                "class": "scripting"
+            },
+            "CD69I": {
+                "severity": "severe",
+                "signature": "IlwvKFxccyooXFwkWzAtOV9hLXpdKylcXHMqPVxccyooW1wiJ10pKFthLXpcXFwvX1xcLTAtOVxcLl0qXFxcXHhbYS1mMC05XXsyfSkrW15cXDNdKj9cXDM7fFxccyooXFxcL1xcKihbXipdKlxcKig_IVxcXC8pKSpbXipdKlxcKlxcXC8pKSpbXFxAXFxzXSooaW5jbHVkZXxyZXF1aXJlKShfb25jZSk_W1xcc1xcKF0qKFxcXC9cXCpbXlxcKl0qKFxcKlteXFwqXFxcL10qKStcXFwvXFxzKikqW1xcKFxcc10qKChbXCInXSkoW2EtelxcXC9fXFwtMC05XFwuXSpcXFxcKHhbYS1mMC05XXsyfXxbMC05XXsyLDN9KSkrW15cXDEyXSo_XFwxMnxcXDJ8XFwkXyg_IVJFUVVFU1RcXFsndGFyZ2V0J1xcXTspKFBPU3xSRVFVRVN8R0UpVFxccyooXFxbW15cXF1dK1xcXVxccyp8XFx7W15cXH1dK1xcfVxccyopKylbXFxzXFwpXSo7KFxccypcXDUpKlwvaSI,",
+                "class": "scripting"
+            },
+            "xCQBJ": {
+                "severity": "severe",
+                "signature": "IlwvPFxcP1twaFxcc10rKFxcXC9cXFwvW15cXG5dKlxccyt8KGlmW1xcc1xcKF0raXNzZXRcXCh8ZnVuY3Rpb25cXHMrW2Etel8wLTldK1xcKFteXFx7XStbXFx7XFxzXSsuK3JldHVybilbXjtdKztbXFxzXFx9XSspKigoKFxcXC9cXCooW14qXSpcXCooPyFcXFwvKSkqW14qXSpcXCpcXFwvXFxzKnxpZlxccyopK1xcKGlzc2V0W1xcc1xcKF0rW1xcJFxceydcIl9dK1teXFx7XStbXFx7XFxzXSopPygoXFxcL1xcKihbXipdKlxcKig_IVxcXC8pKSpbXipdKlxcKlxcXC9cXHMqfFxcJFthLXpfMC05XSsoXFxzKlxcW1teXFxdXSpcXF0pKlxccyopKz1bXjtdKjtcXHMqfGZvcihlYWNoKT9cXHMqXFwoW15cXHtdK1xce1teXFx9XStcXH1cXHMqKSspKygoZnVuY3Rpb25cXHMrW2Etel8wLTldK1xcKFteXFx7XStbXFx7XFxzXSsuKj8pP1xcJFtcXCRcXHtdKlthLXpfMC05XStbXFx9XFxzXSooXFxcL1xcKihbXipdKlxcKig_IVxcXC8pKSpbXipdKlxcKlxcXC9cXHMqfFxcW1teXFxdXStcXF1cXHMqKSpcXCguKjtbXFx9XFxzXSopKygkfFxcPz4pXC9pIg,,",
+                "class": "scripting"
+            },
+            "v411F": {
+                "severity": "suspicious",
+                "signature": "IlwvanNvbjJcXC5taW5cXC5qc1wvaSI,",
+                "class": "scripting"
+            }
+        },
+        "db": {
+            "J53Gh": {
+                "severity": "severe",
+                "query": "IiU8c2NyaXB0JSI,",
+                "signature": "IlwvPHNjcmlwdC4rP2Zyb21DaGFyQ29kZS4rP2xvY2F0aW9uLis_bG9jYXRpb24uKz9sb2NhdGlvbi4rPzxcXFwvc2NyaXB0PlwvaXMi",
+                "class": "database"
+            },
+            "cHTCI": {
+                "severity": "severe",
+                "query": "IiU8YSAldmlhZ3JhJSI,",
+                "signature": "IlwvPGFbXj5dKj5bXjxdKihwdXJjaGFzZXxvcmRlcnxidXl8Y2hlYXB8dmlhZ3JhfGxpc2lub3ByaWx8amFudXZpYXxmbHVveGV0aW5lfHBpbGxzfGNhc2htZXJlW1xcc19cXC1dKnNjYXJmfG9ubGluZXxvdXRsZXQpW148XSo8XFxcL2E",
+                "class": "database"
+            },
+            "OCQ5J": {
+                "severity": "severe",
+                "query": "IiVldmFsKFN0cmluZy5mcm9tQ2hhckNvZGUoJSI,",
+                "signature": "IlwvZXZhbFxcKFtcXHNhLXpfMC05XFwuXFwoXSpmcm9tQ2hhckNvZGVcXChbMC05LFxcc10rW1xcKVxcc10rO1xccypcL2ki",
+                "class": "database"
+            },
+            "n711J": {
+                "severity": "severe",
+                "query": "IiU8YSAlY2lhbGlzJSI,",
+                "signature": "IlwvPGFbXj5dKig-fD5bXjxdKltcXHNfXFwtXFwuXSspY2lhbGlzKFtcXHNfXFwtXFwuXStbXjxdKjx8PClcXFwvYT5cL2lzIg,,",
+                "class": "database"
+            }
+        }
+    },
+    "v": "G764J"
+}

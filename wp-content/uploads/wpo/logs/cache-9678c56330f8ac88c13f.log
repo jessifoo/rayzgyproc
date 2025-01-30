@@ -1,0 +1,5 @@
+[2025-01-28 02:22:59 : INFO] - Full Cache Purge triggered by: plugin activation/deactivation 
+[2025-01-28 17:06:04 : INFO] - Full Cache Purge triggered by: plugin activation/deactivation 
+[2025-01-28 17:11:09 : INFO] - Cache for URL: https://rayzgyproc.com/?p=4200 has been purged, triggered by action: save_post 
+[2025-01-28 17:11:09 : INFO] - Cache for all archives page associated with post_type: post and Title: "Auto Draft" have been purged, triggered by action: save_post 
+[2025-01-30 04:32:40 : INFO] - Full Cache Purge triggered by: plugin activation/deactivation 

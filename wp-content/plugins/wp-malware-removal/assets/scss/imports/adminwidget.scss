@@ -1,0 +1,26 @@
+$mred: hsl(350, 65%, 50%);
+
+#malcure.postbox {
+
+    .brandname {
+        color: $mred;
+        display: inline-block;
+        padding-left: 2em;
+        background-size: 1.618em;
+        background: url(icon-light-trans.svg);
+        background-repeat: no-repeat;
+        background-position: left center;
+    }
+
+    .infected {
+        background-color: $mred;
+        color: white;
+        padding: 1em;
+
+        :link,
+        :visited {
+            color: white;
+            text-decoration: underline;
+        }
+    }
+}
